@@ -13,14 +13,14 @@ namespace BaseStation
         [StructLayout(LayoutKind.Sequential)]
         private struct MotorControlPacket
         {
-            public double LeftDriveThrottle;  /* Value from -1 -> 1 (-100% to 100%) */
-            public double RightDriveThrottle; /* Value from -1 -> 1 (-100% to 100%) */
+            public float LeftDriveThrottle;  /* Value from -1 -> 1 (-100% to 100%) */
+            public float RightDriveThrottle; /* Value from -1 -> 1 (-100% to 100%) */
             public bool ApatureOpen;
             public bool LowerArm;
         }
 
-        public double LeftDriveThrottle {get; private set;}   /* Value from -1 -> 1 (-100% to 100%) */
-        public double RightDriveThrottle {get; private set;}  /* Value from -1 -> 1 (-100% to 100%) */
+        public float LeftDriveThrottle {get; private set;}   /* Value from -1 -> 1 (-100% to 100%) */
+        public float RightDriveThrottle {get; private set;}  /* Value from -1 -> 1 (-100% to 100%) */
         private bool apatureOpen;
         private bool lowerArm;
 
@@ -28,18 +28,18 @@ namespace BaseStation
         {
             apatureOpen = commands.open;
             lowerArm = commands.lower;
-            LeftDriveThrottle = 0.0;
-            RightDriveThrottle = 0.0;
+            LeftDriveThrottle = 0.0f;
+            RightDriveThrottle = 0.0f;
 
             if(commands.forward)
             {
-                LeftDriveThrottle = 0.5;
-                RightDriveThrottle = 0.5;
+                LeftDriveThrottle = 0.5f;
+                RightDriveThrottle = 0.5f;
             }
             else if (commands.reverse)
             {
-                LeftDriveThrottle = -0.5;
-                RightDriveThrottle = -0.5;
+                LeftDriveThrottle = -0.5f;
+                RightDriveThrottle = -0.5f;
             }
 
             if(commands.left)
@@ -50,8 +50,8 @@ namespace BaseStation
                 }
                 else
                 {
-                    LeftDriveThrottle = -0.5;
-                    RightDriveThrottle = 0.5;
+                    LeftDriveThrottle = -0.5f;
+                    RightDriveThrottle = 0.5f;
                 }
             }
 
@@ -63,15 +63,15 @@ namespace BaseStation
                 }
                 else
                 {
-                    RightDriveThrottle = -0.5;
-                    LeftDriveThrottle = 0.5;
+                    RightDriveThrottle = -0.5f;
+                    LeftDriveThrottle = 0.5f;
                 }
             }
 
             if (commands.sprint)
             {
-                LeftDriveThrottle *= 2;
-                RightDriveThrottle *= 2;
+                LeftDriveThrottle *= 2.0f;
+                RightDriveThrottle *= 2.0f;
             }
 
         }

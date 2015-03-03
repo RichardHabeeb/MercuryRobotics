@@ -11,14 +11,13 @@ using System.Threading;
 using System.Net.Sockets;
 using System.Net;
 using System.Runtime.InteropServices;
+using DeviceManagement;
 
 namespace BaseStation
 {
     public partial class BaseStationGui : Form
     {
-        delegate void UpdateGUI(double left, double right);
         KeyCommand commands;
-        //BackgroundWorker networkWorker;
         UdpClient robotConnection; 
 
         public BaseStationGui()
@@ -27,14 +26,7 @@ namespace BaseStation
 
             commands = new KeyCommand();
             robotConnection = new UdpClient(4444);
-            robotConnection.Connect(IPAddress.Parse("127.0.0.1"), 4445);
-
-            //networkWorker = new BackgroundWorker();
-            //networkWorker.DoWork += new DoWorkEventHandler(NetworkBackgroundThread);
-            //networkWorker.WorkerSupportsCancellation = true;
-            //networkWorker.RunWorkerAsync();
-
-
+            robotConnection.Connect(IPAddress.Parse("129.130.46.58"), 4444);
         }
 
         private void BaseStationGui_KeyDown(object sender, KeyEventArgs e)
@@ -130,35 +122,6 @@ namespace BaseStation
         }
 
 
-        //private void NetworkBackgroundThread(object sender, DoWorkEventArgs e)
-        //{
-        //    while(!networkWorker.CancellationPending)
-        //    {
-        //        MotorControl controller = new MotorControl(commands);
-        //        byte[] dataBuffer = controller.ToArray();
-
-        //        if (robotConnection.Send(dataBuffer, dataBuffer.Length) == 0)
-        //        {
-        //            throw new Exception();
-        //        }
-
-        //        try
-        //        {
-        //            Invoke(new UpdateGUI(UpdateMotorLabels), new Object[] { controller.LeftDriveThrottle, controller.RightDriveThrottle });
-        //        }
-        //        catch (ObjectDisposedException)
-        //        {
-        //            break;
-        //        }
-
-        //        Thread.Sleep(10);
-        //    }
-
-        //    e.Cancel = true;
-        //}
-
-
-
         private void ProcessKeyBoardUpdate()
         {
             MotorControl controller = new MotorControl(commands);
@@ -179,7 +142,6 @@ namespace BaseStation
 
         private void BaseStationGui_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //networkWorker.CancelAsync();
             robotConnection.Close();
         }
     }
