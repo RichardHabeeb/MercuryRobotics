@@ -1,5 +1,6 @@
+
 #include <Servo.h>
-#include "RobotControl.h"
+#include "Robot_Control.h"
 
 typedef struct 
 {
@@ -9,12 +10,12 @@ typedef struct
 	long 	lower_arm;
 } motor_control_packet_t;
 
-RobotControl rc;
+Robot_Control* rc;
 
 void setup() 
 {
-  Serial.begin(9600);
-  rc.initialize();
+  Serial.begin(9600);  
+  rc = new Robot_Control();
 }
 
 void loop() 
@@ -32,12 +33,12 @@ void loop()
     memcpy((void*)&packet, buff, sizeof(motor_control_packet_t));
     if(packet.aperature_open == 1)
     {
-      rc.toggleIris();
+      rc->toggleIris();
     }
     
     if(packet.lower_arm == 1)
     {
-      rc.toggleAperature();
+      rc->toggleAperature();
     }
   }
 }
