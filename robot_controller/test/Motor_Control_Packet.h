@@ -49,15 +49,18 @@
 *------------------------------------------------------------------------------------*/
 class Motor_Control_Packet
 {
-	private:
+        public:  /* Methods */
+                void set_vals(float, float, long, long);
+                motor_control_packet(void);
+	private: /* Methods */
 		//TODO separate fields and methods, adjust case
-	public:
-                void SetVals(float, float, long, long);
+	public:  /* Fields */
 	  	float  left_drive_throttle;
                 float  right_drive_throttle;
                 long   aperature_open;
                 long   lower_arm;
-                Motor_Control_Packet(void);
+                
+        private: /* Fields */
 };
 
 

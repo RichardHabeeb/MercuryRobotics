@@ -20,7 +20,13 @@
 
 
 //TODO Add descriptions and change case
-void Motor_Control_Packet::SetVals(float l, float r, long a, long i)
+
+/*-----------------------------------------------------------------------------------
+* Function: set_vals
+*
+* Description: Sets the values for each motor and servo.
+*------------------------------------------------------------------------------------*/
+void Motor_Control_Packet::set_vals(float l, float r, long a, long i)
 {
   left_drive_throttle = l;
   right_drive_throttle = r;
@@ -28,7 +34,12 @@ void Motor_Control_Packet::SetVals(float l, float r, long a, long i)
   lower_arm = i;
 }
 
-Motor_Control_Packet::Motor_Control_Packet()
+/*-----------------------------------------------------------------------------------
+* Function: motor_control_packet
+*
+* Description: Constructor for motor_control_packet, initializes all fields to 0
+*------------------------------------------------------------------------------------*/
+Motor_Control_Packet::motor_control_packet()
 {
   left_drive_throttle = 0.0;
   right_drive_throttle = 0.0;
