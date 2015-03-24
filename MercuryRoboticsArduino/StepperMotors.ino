@@ -67,11 +67,13 @@ step_function_t step_function_wrapper
 	left_time_remaining_us  = getNextInterruptTimeUS(left_velocity);
 	right_time_remaining_us = getNextInterruptTimeUS(right_velocity);
 	interrupt_time_us		= min(left_time_remaining_us, right_time_remaining_us);
+	
+
 
 	pinMode(right_step_pin, OUTPUT);
 	pinMode(left_step_pin, OUTPUT);
-	pinMode(left_direction_pin, OUTPUT);
-	pinMode(right_direction_pin, OUTPUT);
+	//pinMode(left_direction_pin, OUTPUT);
+	//pinMode(right_direction_pin, OUTPUT);
 	digitalWrite(right_step_pin, right_signal_state);
 	digitalWrite(left_step_pin, left_signal_state);
 
@@ -124,6 +126,8 @@ void StepperMotors::step()
 	}
 
 	interrupt_time_us = min(right_time_remaining_us, left_time_remaining_us);
+	Serial.println(left_time_remaining_us);
+	Serial.println(right_time_remaining_us);
 
 	Timer1.pwm(timer_pin, 512, interrupt_time_us);
 }
@@ -154,12 +158,22 @@ unsigned long StepperMotors::handleLeftStep(void)
 		right_velocity += ACCELERATION * (interrupt_time_us);
 		right_velocity = min(right_target_velocity, right_velocity);
 		right_velocity = min(MAX_VELOCITY, right_velocity);
+		if (right_velocity >= right_target_velocity)
+		{
+			Serial.println("peaked");
+			right_target_velocity = 0.0f;
+		}
 	}
 	else if (right_target_velocity < right_velocity)
 	{
 		right_velocity -= ACCELERATION * (interrupt_time_us);
 		right_velocity = max(right_target_velocity, right_velocity);
 		right_velocity = max(MIN_VELOCITY, right_velocity);
+		if (right_velocity >= right_target_velocity)
+		{
+			Serial.println("valleyed");
+			right_target_velocity = 0.1f;
+		}
 	}
 }
 

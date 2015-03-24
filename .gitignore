@@ -1,5 +1,7 @@
 .suo
 .pdb
 .exe
+.sdf
+.opensdf
 BaseStation/BaseStation/bin
 BaseStation/BaseStation/obj

@@ -2,12 +2,12 @@
 * Kansas State University Robotic Competition Team
 * File: RobotControl.ino
 *
-* Description: 
+* Description:
 *
 * Created: 3/9/2015, by Richard Habeeb
 ***************************************************************************************************/
 
- 
+
 /*-------------------------------------------------------------------------------------------------
 *                                            Includes
 *------------------------------------------------------------------------------------------------*/
@@ -33,7 +33,7 @@ RobotControl* RobotControl::instance = NULL;
 /*-----------------------------------------------------------------------------------
 * Function: RobotControl
 *
-* Description: 
+* Description:
 *------------------------------------------------------------------------------------*/
 RobotControl::RobotControl()
 {
@@ -44,7 +44,7 @@ RobotControl::RobotControl()
 	arm.attach(3);
 	arm.write(IRIS_CLOSED_ANGLE_DEG);
 
-    comm = new Communication();
+	comm = new Communication();
 	motors = new StepperMotors(
 		9,
 		6,
@@ -61,7 +61,7 @@ RobotControl::RobotControl()
 /*-----------------------------------------------------------------------------------
 * Function: ~RobotControl
 *
-* Description: 
+* Description:
 *------------------------------------------------------------------------------------*/
 RobotControl::~RobotControl()
 {
@@ -84,7 +84,7 @@ RobotControl* RobotControl::getInstance()
 /*-----------------------------------------------------------------------------------
 * Function: runRobot
 *
-* Description: 
+* Description:
 *------------------------------------------------------------------------------------*/
 void RobotControl::runRobot()
 {
