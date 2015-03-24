@@ -20,6 +20,7 @@
 /*-------------------------------------------------------------------------------------------------
 *                                           Variables
 *------------------------------------------------------------------------------------------------*/
+RobotControl* RobotControl::instance = NULL;
 
 /*-------------------------------------------------------------------------------------------------
 *                                            Functions
@@ -36,23 +37,47 @@
 *------------------------------------------------------------------------------------*/
 RobotControl::RobotControl()
 {
-	openPos = 180;
-	closedPos = 0;
+
 	iris.attach(2);
-	aperature.attach(3);
-	aperatureCurrPos = aperature.read();
-	irisCurrPos = iris.read();
+	iris.write(ARM_CLOSED_ANGLE_DEG);
+
+	arm.attach(3);
+	arm.write(IRIS_CLOSED_ANGLE_DEG);
 
     comm = new Communication();
+	motors = new StepperMotors(
+		9,
+		6,
+		7,
+		0, //TODO
+		0,
+		0,
+		0,
+		0,
+		StepperMotorStepWrapper
+		);
 }
 
 /*-----------------------------------------------------------------------------------
-* Function: runRobot
+* Function: ~RobotControl
 *
 * Description: 
 *------------------------------------------------------------------------------------*/
 RobotControl::~RobotControl()
 {
+}
+
+
+/*-----------------------------------------------------------------------------------
+* Function: getInstance
+*
+* Description:
+*------------------------------------------------------------------------------------*/
+RobotControl* RobotControl::getInstance()
+{
+	if (instance == NULL) instance = new RobotControl();
+
+	return instance;
 }
 
 
@@ -63,43 +88,30 @@ RobotControl::~RobotControl()
 *------------------------------------------------------------------------------------*/
 void RobotControl::runRobot()
 {
-	//TODO
-	while (1);
-}
+	motor_control_packet_t packet;
 
-/*-----------------------------------------------------------------------------------
-* Function: toggleAperature
-*
-* Description: 
-*------------------------------------------------------------------------------------*/
-void RobotControl::toggleAperature()
-{
-	aperatureCurrPos = aperature.read();
-	if (aperatureCurrPos == openPos)
+	while (1)
 	{
-		aperature.write(closedPos);
-	}
-	else if (aperatureCurrPos == closedPos)
-	{
-		aperature.write(openPos);
+		comm->waitForNextPacket(packet);
+
+		arm.write(packet.arm_angle_deg);
+		iris.write(packet.iris_angle_deg);
+
+		motors->set_left_target_velocity(fabs(packet.left_drive_throttle));
+		motors->set_right_target_velocity(fabs(packet.right_drive_throttle));
+
+		motors->set_left_rotation_direction(signbit(packet.left_drive_throttle) ? REVERSE : FORWARD);
+		motors->set_right_rotation_direction(signbit(packet.right_drive_throttle) ? REVERSE : FORWARD);
+
 	}
 }
 
 /*-----------------------------------------------------------------------------------
-* Function: toggleIris
+* Function: StepperMotorStepWrapper
 *
-* Description: 
+* Description:
 *------------------------------------------------------------------------------------*/
-void RobotControl::toggleIris()
+void StepperMotorStepWrapper(void)
 {
-	irisCurrPos = iris.read();
-	if (irisCurrPos == openPos)
-	{
-		iris.write(closedPos);
-	}
-	else if (irisCurrPos == closedPos)
-	{
-		iris.write(openPos);
-	}
+	RobotControl::getInstance()->motors->step();
 }
-

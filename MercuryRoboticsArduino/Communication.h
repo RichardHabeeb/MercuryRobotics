@@ -30,8 +30,8 @@ typedef struct
 {
 	float 	left_drive_throttle;  	/* Value from -1 -> 1 (-100% to 100%) */
 	float 	right_drive_throttle; 	/* Value from -1 -> 1 (-100% to 100%) */
-	long 	aperature_open;
-	long 	lower_arm;
+	float 	iris_angle_deg;
+	float 	arm_angle_deg;
 } motor_control_packet_t;
 
 /*-------------------------------------------------------------------------------------------------

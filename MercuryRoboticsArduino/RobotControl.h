@@ -3,14 +3,14 @@
 * Kansas State University Robotic Competition Team
 * File: RobotControl.h
 *
-* Description: 
+* Description:
 *
 * Created: 3/9/2015, by Richard Habeeb, Brandon Dunn, Daniel Marts
 **************************************************************************************************/
-  
+
 #ifndef ROBOTTCONTROL_INCLUDED_H
 #define ROBOTTCONTROL_INCLUDED_H
- 
+
 /*-------------------------------------------------------------------------------------------------
 *                                            Includes
 *------------------------------------------------------------------------------------------------*/
@@ -21,6 +21,10 @@
 /*-------------------------------------------------------------------------------------------------
 *                                       Literal Definitions
 *------------------------------------------------------------------------------------------------*/
+#define ARM_OPEN_ANGLE_DEG		(160)
+#define ARM_CLOSED_ANGLE_DEG	(0)
+#define IRIS_OPEN_ANGLE_DEG		(180)
+#define IRIS_CLOSED_ANGLE_DEG	(0)
 
 /*-------------------------------------------------------------------------------------------------
 *                                           Constants
@@ -37,26 +41,27 @@
 /*-----------------------------------------------------------------------------------
 * Class: RobotControl
 *
-* Description: 
+* Description:
 *------------------------------------------------------------------------------------*/
 class RobotControl
 {
-  public:  /* Methods */
-    RobotControl();
-    ~RobotControl();
-    void runRobot();
-    void toggleAperature(void);
-    void toggleIris(void);
-    void rightMotorStepWrapper(void);
-    void leftMotorStepWrapper(void);
-    
-  private: /* Methods */
-  public:  /* Fields */
-  private: /* Fields */
-    Communication *comm;
-    int closedPos, openPos, aperatureCurrPos, irisCurrPos;
-    Servo iris, aperature;
-    StepperMotors *motors;
+public:  /* Methods */
+	static RobotControl* getInstance();
+	void runRobot();
+
+private: /* Methods */
+	RobotControl();
+	~RobotControl();
+
+public:  /* Fields */
+	StepperMotors *motors;
+
+private: /* Fields */
+
+	static RobotControl* instance;
+	Communication *comm;
+	Servo iris, arm;
+	
 
 };
 

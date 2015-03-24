@@ -35,7 +35,7 @@
 *                                             Types
 *------------------------------------------------------------------------------------------------*/
 /* TODO */
-typedef void(*step_fuction_t)(void);
+typedef void(*step_function_t)(void);
 
 /* TODO */
 typedef uint8_t motor_direction_t;
@@ -67,7 +67,7 @@ public:  /* Methods */
 		uint8_t micro_select_1_pin,
 		uint8_t micro_select_2_pin,
 		uint8_t micro_select_3_pin,
-		step_fuction_t step_function_wrapper
+		step_function_t step_function_wrapper
 		);
 	~StepperMotors(void);
 	void start(void);
@@ -79,7 +79,7 @@ public:  /* Methods */
 	void step(void);
 
 private: /* Methods */
-	unsigned long getNextInterruptTimeUS(void);
+	unsigned long getNextInterruptTimeUS(float v);
 	unsigned long handleLeftStep(void);
 	unsigned long handleRightStep(void);
 
@@ -100,12 +100,12 @@ private: /* Fields */
 	volatile float left_target_velocity;
 	volatile float right_velocity;
 	volatile float right_target_velocity;
-	unsigned long left_period_us;
-	unsigned long right_period_us;
+	unsigned long left_time_remaining_us;
+	unsigned long right_time_remaining_us;
 	unsigned long interrupt_time_us;
 	motor_direction_t left_rotation_direction;
 	motor_direction_t right_rotation_direction;
-	step_fuction_t step_function_wrapper;
+	step_function_t step_function_wrapper;
 };
 
 #endif /* STEPPERMOTORS_INCLUDED_H */

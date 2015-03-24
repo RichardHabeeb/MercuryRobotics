@@ -45,7 +45,7 @@ uint8_t right_direction_pin,
 uint8_t micro_select_1_pin,
 uint8_t micro_select_2_pin,
 uint8_t micro_select_3_pin,
-step_fuction_t step_function_wrapper
+step_function_t step_function_wrapper
 )
 {
 	this->timer_pin = timer_pin;
@@ -64,6 +64,9 @@ step_fuction_t step_function_wrapper
 	right_velocity			= 0.0;
 	left_target_velocity	= 0.1;
 	right_target_velocity	= 0.1;
+	left_time_remaining_us  = getNextInterruptTimeUS(left_velocity);
+	right_time_remaining_us = getNextInterruptTimeUS(right_velocity);
+	interrupt_time_us		= min(left_time_remaining_us, right_time_remaining_us);
 
 	pinMode(right_step_pin, OUTPUT);
 	pinMode(left_step_pin, OUTPUT);
@@ -73,9 +76,8 @@ step_fuction_t step_function_wrapper
 	digitalWrite(left_step_pin, left_signal_state);
 
 	Timer1.initialize();
-	Timer1.pwm(timer_pin, 512, getNextInterruptTimeUS());
+	Timer1.pwm(timer_pin, 512, interrupt_time_us);
 	Timer1.attachInterrupt(step_function_wrapper);
-
 }
 
 /*-----------------------------------------------------------------------------------
@@ -95,7 +97,7 @@ StepperMotors::~StepperMotors()
 *------------------------------------------------------------------------------------*/
 void StepperMotors::start(void)
 {
-
+	//TODO
 }
 
 /*-----------------------------------------------------------------------------------
@@ -105,45 +107,25 @@ void StepperMotors::start(void)
 *------------------------------------------------------------------------------------*/
 void StepperMotors::step()
 {
-	//motor_signal_state = !motor_signal_state;
-	//digitalWrite(step_pin, motor_signal_state);
+	left_time_remaining_us -= interrupt_time_us;
+	if (left_time_remaining_us <= 0)
+	{
+		handleLeftStep();
 
-	//float time_since_last_interrupt = getNextInterruptTimeUS() * .000001f;
+		left_time_remaining_us = getNextInterruptTimeUS(left_velocity);
+	}
 
-	//if (target_velocity > velocity)
-	//{
-	//	velocity += ACCELERATION * (time_since_last_interrupt);
+	right_time_remaining_us -= interrupt_time_us;
+	if (right_time_remaining_us <= 0)
+	{
+		handleRightStep();
 
-	//	velocity = min(target_velocity, velocity);
-	//	velocity = min(MAX_VELOCITY, velocity);
+		right_time_remaining_us = getNextInterruptTimeUS(right_velocity);
+	}
 
-	//	/* for testing only */
-	//	if (velocity >= target_velocity) {
-	//		target_velocity = 0.0f;
-	//	}
+	interrupt_time_us = min(right_time_remaining_us, left_time_remaining_us);
 
-
-	//	Timer1.pwm(timer_pin, 512, getNextInterruptTimeUS());
-
-	//}
-
-	//if (target_velocity < velocity)
-	//{
-	//	velocity -= ACCELERATION * (time_since_last_interrupt);
-
-	//	velocity = max(target_velocity, velocity);
-	//	velocity = max(MIN_VELOCITY, velocity);
-
-	//	/* for testing only */
-	//	if (velocity <= target_velocity)
-	//	{
-	//		target_velocity = 0.1f;
-	//	}
-
-
-	//	Timer1.pwm(timer_pin, 512, getNextInterruptTimeUS());
-
-	//}
+	Timer1.pwm(timer_pin, 512, interrupt_time_us);
 }
 
 /*-----------------------------------------------------------------------------------
@@ -151,9 +133,9 @@ void StepperMotors::step()
 *
 * Description:
 *------------------------------------------------------------------------------------*/
-unsigned long StepperMotors::getNextInterruptTimeUS()
+unsigned long StepperMotors::getNextInterruptTimeUS(float v)
 { 
-	//return min(MAX_STEP_PERIOD_US, (100000.0f * WHEEL_CIRCUMFERENCE / (TICKS_PER_REVOLUTION * velocity))); 
+	return min(MAX_STEP_PERIOD_US, (100000.0f * WHEEL_CIRCUMFERENCE / (TICKS_PER_REVOLUTION * v)));
 }
 
 
@@ -164,14 +146,21 @@ unsigned long StepperMotors::getNextInterruptTimeUS()
 *------------------------------------------------------------------------------------*/
 unsigned long StepperMotors::handleLeftStep(void)
 {
-	if (interrupt_time_us >= left_period_us)
+	left_signal_state = !left_signal_state;
+	digitalWrite(left_step_pin, left_signal_state);
+
+	if (right_target_velocity > right_velocity)
 	{
-		left_signal_state = !left_signal_state;
-		digitalWrite(left_step_pin, left_signal_state);
+		right_velocity += ACCELERATION * (interrupt_time_us);
+		right_velocity = min(right_target_velocity, right_velocity);
+		right_velocity = min(MAX_VELOCITY, right_velocity);
 	}
-
-	//TODO
-
+	else if (right_target_velocity < right_velocity)
+	{
+		right_velocity -= ACCELERATION * (interrupt_time_us);
+		right_velocity = max(right_target_velocity, right_velocity);
+		right_velocity = max(MIN_VELOCITY, right_velocity);
+	}
 }
 
 /*-----------------------------------------------------------------------------------
@@ -181,11 +170,19 @@ unsigned long StepperMotors::handleLeftStep(void)
 *------------------------------------------------------------------------------------*/
 unsigned long StepperMotors::handleRightStep(void)
 {
-	if (interrupt_time_us >= right_period_us)
-	{
-		right_signal_state = !right_signal_state;
-		digitalWrite(right_step_pin, right_signal_state);
-	}
+	right_signal_state = !right_signal_state;
+	digitalWrite(right_step_pin, right_signal_state);
 
-	//TODO
+	if (right_target_velocity > right_velocity)
+	{
+		right_velocity += ACCELERATION * (interrupt_time_us);
+		right_velocity = min(right_target_velocity, right_velocity);
+		right_velocity = min(MAX_VELOCITY, right_velocity);
+	}
+	else if (right_target_velocity < right_velocity)
+	{
+		right_velocity -= ACCELERATION * (interrupt_time_us);
+		right_velocity = max(right_target_velocity, right_velocity);
+		right_velocity = max(MIN_VELOCITY, right_velocity);
+	}
 }

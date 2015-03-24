@@ -195,7 +195,7 @@ void stepper_motor::step()
     /* for testing only */
     if(velocity <= target_velocity) {
       target_velocity = 0.1f;
-       Serial.println("valleyed");
+       Serial.rintln("valleyed");
        Serial.println(get_step_period());
     }
     
