@@ -13,7 +13,6 @@
 *------------------------------------------------------------------------------------------------*/
 #include "StepperMotors.h"
 
-
 /*-------------------------------------------------------------------------------------------------
 *                                           Prototypes
 *------------------------------------------------------------------------------------------------*/
@@ -62,13 +61,11 @@ step_function_t step_function_wrapper
 	right_signal_state		= HIGH;
 	left_velocity			= 0.0;
 	right_velocity			= 0.0;
-	left_target_velocity	= 0.1;
-	right_target_velocity	= 0.1;
+	set_left_target_velocity(1.0);
+	set_right_target_velocity(1.0);
 	left_time_remaining_us  = getNextInterruptTimeUS(left_velocity);
 	right_time_remaining_us = getNextInterruptTimeUS(right_velocity);
 	interrupt_time_us		= min(left_time_remaining_us, right_time_remaining_us);
-	
-
 
 	pinMode(right_step_pin, OUTPUT);
 	pinMode(left_step_pin, OUTPUT);
@@ -123,11 +120,10 @@ void StepperMotors::step()
 		handleRightStep();
 
 		right_time_remaining_us = getNextInterruptTimeUS(right_velocity);
+
 	}
 
-	interrupt_time_us = min(right_time_remaining_us, left_time_remaining_us);
-	Serial.println(left_time_remaining_us);
-	Serial.println(right_time_remaining_us);
+	interrupt_time_us = 20; /* Constant interrupt time works pretty well. */
 
 	Timer1.pwm(timer_pin, 512, interrupt_time_us);
 }
@@ -137,7 +133,7 @@ void StepperMotors::step()
 *
 * Description:
 *------------------------------------------------------------------------------------*/
-unsigned long StepperMotors::getNextInterruptTimeUS(float v)
+long StepperMotors::getNextInterruptTimeUS(float v)
 { 
 	return min(MAX_STEP_PERIOD_US, (100000.0f * WHEEL_CIRCUMFERENCE / (TICKS_PER_REVOLUTION * v)));
 }
@@ -148,55 +144,49 @@ unsigned long StepperMotors::getNextInterruptTimeUS(float v)
 *
 * Description:
 *------------------------------------------------------------------------------------*/
-unsigned long StepperMotors::handleLeftStep(void)
+void StepperMotors::handleLeftStep(void)
 {
 	left_signal_state = !left_signal_state;
 	digitalWrite(left_step_pin, left_signal_state);
 
-	if (right_target_velocity > right_velocity)
+	if (left_target_velocity > left_velocity)
 	{
-		right_velocity += ACCELERATION * (interrupt_time_us);
-		right_velocity = min(right_target_velocity, right_velocity);
-		right_velocity = min(MAX_VELOCITY, right_velocity);
-		if (right_velocity >= right_target_velocity)
-		{
-			Serial.println("peaked");
-			right_target_velocity = 0.0f;
-		}
+		left_velocity += ACCELERATION * (interrupt_time_us * .000001f);
+		left_velocity = min(left_target_velocity, left_velocity);
 	}
-	else if (right_target_velocity < right_velocity)
+	else if (left_target_velocity < left_velocity)
 	{
-		right_velocity -= ACCELERATION * (interrupt_time_us);
-		right_velocity = max(right_target_velocity, right_velocity);
-		right_velocity = max(MIN_VELOCITY, right_velocity);
-		if (right_velocity >= right_target_velocity)
+		left_velocity -= ACCELERATION * (interrupt_time_us * .000001f);
+		left_velocity = max(left_target_velocity, left_velocity);
+		if (left_velocity <= left_target_velocity)
 		{
-			Serial.println("valleyed");
-			right_target_velocity = 0.1f;
+			left_target_velocity = 0.1f;
 		}
 	}
 }
 
 /*-----------------------------------------------------------------------------------
-* Function: getNextInterruptTimeUS
+* Function: handleRightStep
 *
 * Description:
 *------------------------------------------------------------------------------------*/
-unsigned long StepperMotors::handleRightStep(void)
+void StepperMotors::handleRightStep(void)
 {
 	right_signal_state = !right_signal_state;
 	digitalWrite(right_step_pin, right_signal_state);
 
 	if (right_target_velocity > right_velocity)
 	{
-		right_velocity += ACCELERATION * (interrupt_time_us);
+		right_velocity += ACCELERATION * (interrupt_time_us * .000001f);
 		right_velocity = min(right_target_velocity, right_velocity);
-		right_velocity = min(MAX_VELOCITY, right_velocity);
 	}
 	else if (right_target_velocity < right_velocity)
 	{
-		right_velocity -= ACCELERATION * (interrupt_time_us);
+		right_velocity -= ACCELERATION * (interrupt_time_us * .000001f);
 		right_velocity = max(right_target_velocity, right_velocity);
-		right_velocity = max(MIN_VELOCITY, right_velocity);
+		if (right_velocity <= right_target_velocity)
+		{
+			right_target_velocity = 0.1f;
+		}
 	}
 }

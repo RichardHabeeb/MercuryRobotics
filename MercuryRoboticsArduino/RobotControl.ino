@@ -47,8 +47,8 @@ RobotControl::RobotControl()
 	comm = new Communication();
 	motors = new StepperMotors(
 		9,
+		22,
 		6,
-		7,
 		0, //TODO
 		0,
 		0,
