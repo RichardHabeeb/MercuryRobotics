@@ -61,11 +61,11 @@ step_function_t step_function_wrapper
 	right_signal_state		= HIGH;
 	left_velocity			= 0.0;
 	right_velocity			= 0.0;
-	set_left_target_velocity(1.0);
-	set_right_target_velocity(1.0);
+	set_left_target_velocity(1.0f);
+	set_right_target_velocity(1.5f);
 	left_time_remaining_us  = getNextInterruptTimeUS(left_velocity);
 	right_time_remaining_us = getNextInterruptTimeUS(right_velocity);
-	interrupt_time_us		= min(left_time_remaining_us, right_time_remaining_us);
+	interrupt_time_us = 20; /* Constant interrupt time works pretty well. */
 
 	pinMode(right_step_pin, OUTPUT);
 	pinMode(left_step_pin, OUTPUT);
@@ -89,6 +89,7 @@ StepperMotors::~StepperMotors()
 	//TODO
 }
 
+
 /*-----------------------------------------------------------------------------------
 * Function: stepper_motor
 *
@@ -99,6 +100,7 @@ void StepperMotors::start(void)
 	//TODO
 }
 
+
 /*-----------------------------------------------------------------------------------
 * Function: ~stepper_motor
 *
@@ -106,27 +108,11 @@ void StepperMotors::start(void)
 *------------------------------------------------------------------------------------*/
 void StepperMotors::step()
 {
-	left_time_remaining_us -= interrupt_time_us;
-	if (left_time_remaining_us <= 0)
-	{
-		handleLeftStep();
-
-		left_time_remaining_us = getNextInterruptTimeUS(left_velocity);
-	}
-
-	right_time_remaining_us -= interrupt_time_us;
-	if (right_time_remaining_us <= 0)
-	{
-		handleRightStep();
-
-		right_time_remaining_us = getNextInterruptTimeUS(right_velocity);
-
-	}
-
-	interrupt_time_us = 20; /* Constant interrupt time works pretty well. */
-
-	Timer1.pwm(timer_pin, 512, interrupt_time_us);
+	updateAcceleration();
+	handleLeftStep();
+	handleRightStep();
 }
+
 
 /*-----------------------------------------------------------------------------------
 * Function: getNextInterruptTimeUS
@@ -146,24 +132,15 @@ long StepperMotors::getNextInterruptTimeUS(float v)
 *------------------------------------------------------------------------------------*/
 void StepperMotors::handleLeftStep(void)
 {
-	left_signal_state = !left_signal_state;
-	digitalWrite(left_step_pin, left_signal_state);
-
-	if (left_target_velocity > left_velocity)
+	left_time_remaining_us -= interrupt_time_us;
+	if (left_time_remaining_us <= 0)
 	{
-		left_velocity += ACCELERATION * (interrupt_time_us * .000001f);
-		left_velocity = min(left_target_velocity, left_velocity);
-	}
-	else if (left_target_velocity < left_velocity)
-	{
-		left_velocity -= ACCELERATION * (interrupt_time_us * .000001f);
-		left_velocity = max(left_target_velocity, left_velocity);
-		if (left_velocity <= left_target_velocity)
-		{
-			left_target_velocity = 0.1f;
-		}
+		left_signal_state = !left_signal_state;
+		digitalWrite(left_step_pin, left_signal_state);
+		left_time_remaining_us = getNextInterruptTimeUS(left_velocity);
 	}
 }
+
 
 /*-----------------------------------------------------------------------------------
 * Function: handleRightStep
@@ -172,9 +149,37 @@ void StepperMotors::handleLeftStep(void)
 *------------------------------------------------------------------------------------*/
 void StepperMotors::handleRightStep(void)
 {
-	right_signal_state = !right_signal_state;
-	digitalWrite(right_step_pin, right_signal_state);
+	right_time_remaining_us -= interrupt_time_us;
+	if (right_time_remaining_us <= 0)
+	{
+		right_signal_state = !right_signal_state;
+		digitalWrite(right_step_pin, right_signal_state);
+		right_time_remaining_us = getNextInterruptTimeUS(right_velocity);
+	}
+}
 
+
+/*-----------------------------------------------------------------------------------
+* Function: updateAcceleration
+*
+* Description:
+*------------------------------------------------------------------------------------*/
+void StepperMotors::updateAcceleration(void)
+{
+	/* Left side */
+	if (left_target_velocity > left_velocity)
+	{
+		left_velocity += ACCELERATION * (interrupt_time_us * .000001f);
+
+		left_velocity = min(left_target_velocity, left_velocity);
+	}
+	else if (left_target_velocity < left_velocity)
+	{
+		left_velocity -= ACCELERATION * (interrupt_time_us * .000001f);
+		left_velocity = max(left_target_velocity, left_velocity);
+	}
+
+	/* Right side */
 	if (right_target_velocity > right_velocity)
 	{
 		right_velocity += ACCELERATION * (interrupt_time_us * .000001f);
@@ -184,9 +189,5 @@ void StepperMotors::handleRightStep(void)
 	{
 		right_velocity -= ACCELERATION * (interrupt_time_us * .000001f);
 		right_velocity = max(right_target_velocity, right_velocity);
-		if (right_velocity <= right_target_velocity)
-		{
-			right_target_velocity = 0.1f;
-		}
 	}
 }

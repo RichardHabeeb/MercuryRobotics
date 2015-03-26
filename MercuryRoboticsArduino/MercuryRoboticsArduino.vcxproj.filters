@@ -33,5 +33,13 @@
     <ClInclude Include="StepperMotors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ServoTimer2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ServoTimer2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

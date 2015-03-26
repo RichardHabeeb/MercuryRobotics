@@ -25,8 +25,8 @@
 #define TICKS_PER_REVOLUTION           (STEPS_PER_REVOLUTION * TICKS_PER_STEP)
 #define WHEEL_CIRCUMFERENCE            (2.0f * PI * WHEEL_RADIUS)
 #define MIN_VELOCITY                   (0.0f)  /* Forward velocity (not angular). */
-#define MAX_VELOCITY                   (1.0f)  /* Forward velocity (not angular). */
-#define ACCELERATION                   (10.0f) /* arbitrary TODO */
+#define MAX_VELOCITY                   (1.5f)  /* Forward velocity (not angular). */
+#define ACCELERATION                   (1.0f) /* arbitrary TODO */
 
 /*-------------------------------------------------------------------------------------------------
 *                                           Constants
@@ -83,6 +83,7 @@ private: /* Methods */
 	long getNextInterruptTimeUS(float v);
 	void handleLeftStep(void);
 	void handleRightStep(void);
+	void updateAcceleration(void);
 
 public:  /* Fields */
 
