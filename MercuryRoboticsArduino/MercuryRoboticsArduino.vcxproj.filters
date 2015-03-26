@@ -19,6 +19,7 @@
     <None Include="Communication.ino" />
     <None Include="RobotControl.ino" />
     <None Include="StepperMotors.ino" />
+    <None Include="CommunicationTesting.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visual Micro\.MercuryRoboticsArduino.vsarduino.h">
@@ -31,6 +32,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StepperMotors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ICommunication.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommunicationTesting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -14,6 +14,7 @@
 *                                            Includes
 *------------------------------------------------------------------------------------------------*/
 #include "Arduino.h"
+#include "ICommunication.h"
 
 /*-------------------------------------------------------------------------------------------------
 *                                       Literal Definitions
@@ -26,13 +27,7 @@
 /*-------------------------------------------------------------------------------------------------
 *                                             Types
 *------------------------------------------------------------------------------------------------*/
-typedef struct 
-{
-	float 	left_drive_throttle;  	/* Value from -1 -> 1 (-100% to 100%) */
-	float 	right_drive_throttle; 	/* Value from -1 -> 1 (-100% to 100%) */
-	float 	iris_angle_deg;
-	float 	arm_angle_deg;
-} motor_control_packet_t;
+
 
 /*-------------------------------------------------------------------------------------------------
 *                                            Classes
@@ -43,7 +38,7 @@ typedef struct
 *
 * Description: 
 *------------------------------------------------------------------------------------*/
-class Communication
+class Communication : public ICommunication
 {
   public:  /* Methods */
     Communication();

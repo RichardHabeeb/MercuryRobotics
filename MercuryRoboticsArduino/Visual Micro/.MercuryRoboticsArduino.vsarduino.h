@@ -12,7 +12,7 @@
 #define _VSARDUINO_H_
 #define __AVR_ATmega328p__
 #define __AVR_ATmega328P__
-#define ARDUINO 160
+#define ARDUINO 161
 #define ARDUINO_MAIN
 #define __AVR__
 #define __avr__
@@ -82,6 +82,9 @@ extern "C" void __cxa_pure_virtual() {;}
 #include <MercuryRoboticsArduino.ino>
 #include <Communication.h>
 #include <Communication.ino>
+#include <CommunicationTesting.h>
+#include <CommunicationTesting.ino>
+#include <ICommunication.h>
 #include <RobotControl.h>
 #include <RobotControl.ino>
 #include <StepperMotors.h>
