@@ -15,19 +15,19 @@ namespace BaseStation
         {
             public float LeftDriveThrottle;  /* Value from -1 -> 1 (-100% to 100%) */
             public float RightDriveThrottle; /* Value from -1 -> 1 (-100% to 100%) */
-            public bool ApatureOpen;
-            public bool LowerArm;
+            public float IrisAngle;
+            public float ArmAngle;
         }
 
         public float LeftDriveThrottle {get; private set;}   /* Value from -1 -> 1 (-100% to 100%) */
         public float RightDriveThrottle {get; private set;}  /* Value from -1 -> 1 (-100% to 100%) */
-        private bool apatureOpen;
-        private bool lowerArm;
+        public float irisAngle {get; private set;}
+        public float armAngle {get; private set;}
 
         public MotorControl(KeyCommand commands)
         {
-            apatureOpen = commands.open;
-            lowerArm = commands.lower;
+            irisAngle = commands.open ? 180.0f : 0.0f;
+            armAngle = commands.lower ? 180.0f : 0.0f;
             LeftDriveThrottle = 0.0f;
             RightDriveThrottle = 0.0f;
 
@@ -76,14 +76,22 @@ namespace BaseStation
 
         }
 
+        public MotorControl(float left, float right, float arm, float iris)
+        {
+            irisAngle = iris;
+            armAngle = arm;
+            LeftDriveThrottle = left;
+            RightDriveThrottle = right;
+        }
+
         public byte[] ToArray()
         {
             MotorControlPacket packet = new MotorControlPacket()
             {
                 LeftDriveThrottle = this.LeftDriveThrottle,
                 RightDriveThrottle = this.RightDriveThrottle,
-                ApatureOpen = this.apatureOpen,
-                LowerArm = this.lowerArm
+                IrisAngle = this.irisAngle,
+                ArmAngle = this.armAngle
             };
 
             int controllerSize = Marshal.SizeOf(packet);

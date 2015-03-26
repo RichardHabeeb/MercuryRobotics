@@ -32,7 +32,9 @@
 *------------------------------------------------------------------------------------*/
 Communication::Communication()
 {
-  Serial.begin(115200);
+  	Serial.begin(115200);
+	Serial.println("Kansas State University Robotics Competition Team");
+	Serial.println("Mercury Robot (2015)");
 }
 
 /*-----------------------------------------------------------------------------------

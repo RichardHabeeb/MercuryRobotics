@@ -87,6 +87,8 @@ extern "C" void __cxa_pure_virtual() {;}
 #include <ICommunication.h>
 #include <RobotControl.h>
 #include <RobotControl.ino>
+#include <ServoTimer2.cpp>
+#include <ServoTimer2.h>
 #include <StepperMotors.h>
 #include <StepperMotors.ino>
 #endif

@@ -13,7 +13,7 @@ import thread
 #-----------------------------------------------
 # Parameters
 #-----------------------------------------------
-arduino = serial.Serial('/dev/ttyACM99', 9600)
+arduino = serial.Serial('/dev/ttyACM99', 115200)
 
 #-----------------------------------------------
 # Functions
@@ -26,7 +26,7 @@ def network_reader():
 	while (True):
 		raw_packet = raw_input()
 		if (len(raw_packet) > 0):
-			print "##Sending serial packet", str(struct.unpack("ffII", raw_packet))
+			print "##Sending serial packet", str(struct.unpack("ffff", raw_packet))
 			arduino.write(raw_packet)
 
 #-----------------------------------------------
