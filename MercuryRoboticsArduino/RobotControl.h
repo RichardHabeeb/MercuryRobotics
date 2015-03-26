@@ -17,6 +17,7 @@
 #include "Arduino.h"
 #include "StepperMotors.h"
 #include "Communication.h"
+#include "ServoTimer2.h"
 
 /*-------------------------------------------------------------------------------------------------
 *                                       Literal Definitions
@@ -60,7 +61,7 @@ private: /* Fields */
 
 	static RobotControl* instance;
 	Communication *comm;
-	Servo iris, arm;
+	ServoTimer2 iris, arm;
 	
 
 };
