@@ -57,6 +57,12 @@
     <Compile Include="MotorControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VerticalProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="VerticalProgressBar.Designer.cs">
+      <DependentUpon>VerticalProgressBar.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="BaseStationGui.resx">
       <DependentUpon>BaseStationGui.cs</DependentUpon>
     </EmbeddedResource>

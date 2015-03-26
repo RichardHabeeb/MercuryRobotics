@@ -18,7 +18,9 @@ namespace BaseStation
     public partial class BaseStationGui : Form
     {
         KeyCommand commands;
-        UdpClient robotConnection; 
+        UdpClient robotConnection;
+        float armAngle = 0.0f;
+        bool armAngleLock = false;
 
         public BaseStationGui()
         {
@@ -126,23 +128,41 @@ namespace BaseStation
         {
             MotorControl controller = new MotorControl(commands);
 
+            SendMotorControllerPacket(controller);
+
+            UpdateGui(controller.LeftDriveThrottle, controller.RightDriveThrottle, controller.armAngle, controller.irisAngle);
+        }
+
+        private void SendMotorControllerPacket(MotorControl controller)
+        {
             byte[] dataBuffer = controller.ToArray();
             robotConnection.Send(dataBuffer, dataBuffer.Length);
-
-            UpdateMotorLabels(controller.LeftDriveThrottle, controller.RightDriveThrottle);
         }
 
 
-        private void UpdateMotorLabels(double left, double right)
+        private void UpdateGui(double left, double right, double arm, double iris)
         {
             rightMotorLabel.Text = right.ToString();
             leftMotorLabel.Text = left.ToString();
+            verticalProgressBarLeft.Value = (int)Math.Floor(left * 50) + 50;
+            verticalProgressBarRight.Value = (int)Math.Floor(right * 50) + 50;
+            verticalProgressBarArm.Value = (int)arm;
         }
 
 
         private void BaseStationGui_FormClosing(object sender, FormClosingEventArgs e)
         {
             robotConnection.Close();
+        }
+
+        private void verticalProgressBarArm_MouseClick(object sender, MouseEventArgs e)
+        {
+            double ratio = 1.0 - Math.Abs(e.Location.Y) / (float)verticalProgressBarArm.Height;
+            verticalProgressBarArm.Value = (int)(ratio * verticalProgressBarArm.Maximum);
+
+            //MotorControl controller = new MotorControl();
+
+            //SendMotorControllerPacket(controller);
         }
     }
 }

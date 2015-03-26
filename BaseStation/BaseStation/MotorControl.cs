@@ -21,8 +21,8 @@ namespace BaseStation
 
         public float LeftDriveThrottle {get; private set;}   /* Value from -1 -> 1 (-100% to 100%) */
         public float RightDriveThrottle {get; private set;}  /* Value from -1 -> 1 (-100% to 100%) */
-        private float irisAngle;
-        private float armAngle;
+        public float irisAngle {get; private set;}
+        public float armAngle {get; private set;}
 
         public MotorControl(KeyCommand commands)
         {
@@ -74,6 +74,14 @@ namespace BaseStation
                 RightDriveThrottle *= 2.0f;
             }
 
+        }
+
+        public MotorControl(float left, float right, float arm, float iris)
+        {
+            irisAngle = iris;
+            armAngle = arm;
+            LeftDriveThrottle = left;
+            RightDriveThrottle = right;
         }
 
         public byte[] ToArray()
