@@ -22,6 +22,9 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="MercuryRoboticsArduino.ino" />
+    <None Include="CommunicationTesting.ino">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visual Micro\.MercuryRoboticsArduino.vsarduino.h">
@@ -46,6 +49,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MotorTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommunicationTesting.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ICommunication.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

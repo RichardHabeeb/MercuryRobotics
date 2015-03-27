@@ -71,6 +71,9 @@
     <None Include="Communication.ino">
       <FileType>CppCode</FileType>
     </None>
+    <None Include="CommunicationTesting.ino">
+      <FileType>CppCode</FileType>
+    </None>
     <None Include="MercuryRoboticsArduino.ino">
       <FileType>CppCode</FileType>
     </None>
@@ -82,7 +85,13 @@
     <ClInclude Include="Communication.h">
       <FileType>CppHeader</FileType>
     </ClInclude>
+    <ClInclude Include="CommunicationTesting.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
     <ClInclude Include="Config.h" />
+    <ClInclude Include="ICommunication.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
     <ClInclude Include="MotorTimer.h" />
     <ClInclude Include="Pin.h" />
     <ClInclude Include="RobotControl.h">
