@@ -1,31 +1,24 @@
 /**************************************************************************************************
 * Kansas State University Robotic Competition Team
-* File: RobotControl.h
+* File: CommunicationTesting.h
 *
 * Description:
 *
-* Created: 3/9/2015, by Richard Habeeb, Brandon Dunn, Daniel Marts
+* Created: 3/9/2015, by Richard Habeeb
 **************************************************************************************************/
 
-#ifndef ROBOTTCONTROL_INCLUDED_H
-#define ROBOTTCONTROL_INCLUDED_H
+#ifndef COMMUNICATIONTESTING_INCLUDED_H
+#define COMMUNICATIONTESTING_INCLUDED_H
 
 /*-------------------------------------------------------------------------------------------------
 *                                            Includes
 *------------------------------------------------------------------------------------------------*/
 #include "Arduino.h"
-#include "MotorTimer.h"
-#include "StepperMotor.h"
-#include "Communication.h"
-#include "ServoTimer2.h"
+#include "ICommunication.h"
 
 /*-------------------------------------------------------------------------------------------------
 *                                       Literal Definitions
 *------------------------------------------------------------------------------------------------*/
-#define ARM_OPEN_ANGLE_DEG		(160)
-#define ARM_CLOSED_ANGLE_DEG	(0)
-#define IRIS_OPEN_ANGLE_DEG		(180)
-#define IRIS_CLOSED_ANGLE_DEG	(0)
 
 /*-------------------------------------------------------------------------------------------------
 *                                           Constants
@@ -35,37 +28,29 @@
 *                                             Types
 *------------------------------------------------------------------------------------------------*/
 
+
 /*-------------------------------------------------------------------------------------------------
 *                                            Classes
 *------------------------------------------------------------------------------------------------*/
 
 /*-----------------------------------------------------------------------------------
-* Class: RobotControl
+* Class: Communication
 *
 * Description:
 *------------------------------------------------------------------------------------*/
-class RobotControl
+class CommunicationTesting : public ICommunication
 {
 public:  /* Methods */
-	static RobotControl* getInstance();
-	void runRobot();
+	CommunicationTesting();
+	~CommunicationTesting();
+	void waitForNextPacket(motor_control_packet_t &packet);
 
 private: /* Methods */
-	RobotControl();
-	~RobotControl();
-
 public:  /* Fields */
-
 private: /* Fields */
-
-	static RobotControl* instance;
-	ICommunication *comm;
-	StepperMotor *left;
-	StepperMotor *right;
-	MotorTimer *timer;
-	ServoTimer2 iris, arm;
-	
-
+	int i;
+	motor_control_packet_t test[12];
 };
 
-#endif /* ROBOTTCONTROL_INCLUDED_H */
+
+#endif /* COMMUNICATION_INCLUDED_H */
