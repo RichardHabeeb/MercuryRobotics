@@ -1,71 +1,47 @@
+
 /**************************************************************************************************
 * Kansas State University Robotic Competition Team
-* File: RobotControl.h
+* File: Pin.h
 *
 * Description:
 *
 * Created: 3/9/2015, by Richard Habeeb, Brandon Dunn, Daniel Marts
 **************************************************************************************************/
 
-#ifndef ROBOTTCONTROL_INCLUDED_H
-#define ROBOTTCONTROL_INCLUDED_H
+#ifndef PIN_INCLUDED_H
+#define PIN_INCLUDED_H
 
 /*-------------------------------------------------------------------------------------------------
 *                                            Includes
 *------------------------------------------------------------------------------------------------*/
 #include "Arduino.h"
-#include "MotorTimer.h"
-#include "StepperMotor.h"
-#include "Communication.h"
-#include "ServoTimer2.h"
 
 /*-------------------------------------------------------------------------------------------------
 *                                       Literal Definitions
 *------------------------------------------------------------------------------------------------*/
-#define ARM_OPEN_ANGLE_DEG		(160)
-#define ARM_CLOSED_ANGLE_DEG	(0)
-#define IRIS_OPEN_ANGLE_DEG		(180)
-#define IRIS_CLOSED_ANGLE_DEG	(0)
+#define RIGHT_MOTOR_PIN					(6)
+#define LEFT_MOTOR_PIN					(7)
+#define RIGHT_MOTOR_DIRECTION_PIN		(0)
+#define LEFT_MOTOR_DIRECTION_PIN		(0)
+#define MOTOR_MICROSTEP_1_PIN			(0)
+#define MOTOR_MICROSTEP_2_PIN			(0)
+#define MOTOR_MICROSTEP_3_PIN			(0)
+
+/*-------------------------------------------------------------------------------------------------
+*                                             Types
+*------------------------------------------------------------------------------------------------*/
+typedef uint8_t pin_t;
 
 /*-------------------------------------------------------------------------------------------------
 *                                           Constants
 *------------------------------------------------------------------------------------------------*/
 
 /*-------------------------------------------------------------------------------------------------
-*                                             Types
-*------------------------------------------------------------------------------------------------*/
-
-/*-------------------------------------------------------------------------------------------------
 *                                            Classes
 *------------------------------------------------------------------------------------------------*/
 
-/*-----------------------------------------------------------------------------------
-* Class: RobotControl
-*
-* Description:
-*------------------------------------------------------------------------------------*/
-class RobotControl
-{
-public:  /* Methods */
-	static RobotControl* getInstance();
-	void runRobot();
+/*-------------------------------------------------------------------------------------------------
+*                                           Functions
+*------------------------------------------------------------------------------------------------*/
 
-private: /* Methods */
-	RobotControl();
-	~RobotControl();
-
-public:  /* Fields */
-
-private: /* Fields */
-
-	static RobotControl* instance;
-	Communication *comm;
-	StepperMotor *left;
-	StepperMotor *right;
-	MotorTimer *timer;
-	ServoTimer2 iris, arm;
-	
-
-};
-
-#endif /* ROBOTTCONTROL_INCLUDED_H */
+#endif /* PIN_INCLUDED_H */

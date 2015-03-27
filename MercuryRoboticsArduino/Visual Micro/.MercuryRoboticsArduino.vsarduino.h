@@ -82,10 +82,14 @@ extern "C" void __cxa_pure_virtual() {;}
 #include <MercuryRoboticsArduino.ino>
 #include <Communication.h>
 #include <Communication.ino>
+#include <Config.h>
+#include <MotorTimer.cpp>
+#include <MotorTimer.h>
+#include <Pin.h>
 #include <RobotControl.h>
 #include <RobotControl.ino>
 #include <ServoTimer2.cpp>
 #include <ServoTimer2.h>
-#include <StepperMotors.h>
-#include <StepperMotors.ino>
+#include <StepperMotor.cpp>
+#include <StepperMotor.h>
 #endif

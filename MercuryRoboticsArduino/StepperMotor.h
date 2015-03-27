@@ -7,13 +7,14 @@
 * Created: 3/9/2015, by Richard Habeeb
 **************************************************************************************************/
 
-#ifndef STEPPERMOTORS_INCLUDED_H
-#define STEPPERMOTORS_INCLUDED_H
+#ifndef STEPPERMOTOR_INCLUDED_H
+#define STEPPERMOTOR_INCLUDED_H
 
 /*-------------------------------------------------------------------------------------------------
 *                                            Includes
 *------------------------------------------------------------------------------------------------*/
 #include "Arduino.h"
+#include "Pin.h"
 
 /*-------------------------------------------------------------------------------------------------
 *                                       Literal Definitions
@@ -46,6 +47,8 @@ enum
 	REVERSE
 };
 
+
+
 /*-------------------------------------------------------------------------------------------------
 *                                            Classes
 *------------------------------------------------------------------------------------------------*/
@@ -55,59 +58,36 @@ enum
 *
 * Description: TODO update to camelcase, get start and stop working,
 *------------------------------------------------------------------------------------*/
-class StepperMotors
+class StepperMotor
 {
 public:  /* Methods */
-	StepperMotors
+	StepperMotor
 		(
-		uint8_t timer_pin,
-		uint8_t left_step_pin,
-		uint8_t right_step_pin,
-		uint8_t left_direction_pin,
-		uint8_t right_direction_pin,
-		uint8_t micro_select_1_pin,
-		uint8_t micro_select_2_pin,
-		uint8_t micro_select_3_pin,
-		step_function_t step_function_wrapper
+		pin_t step_pin,
+		pin_t direction_pin,
+		pin_t micro_select_1_pin,
+		pin_t micro_select_2_pin,
+		pin_t micro_select_3_pin
 		);
-	~StepperMotors(void);
-	void start(void);
-	void stop(void);
-	void set_left_target_velocity(float v) { left_target_velocity = min(MAX_VELOCITY, max(MIN_VELOCITY, v)); }
-	void set_right_target_velocity(float v) { right_target_velocity = min(MAX_VELOCITY, max(MIN_VELOCITY, v)); }
-	void set_left_rotation_direction(motor_direction_t d) { left_rotation_direction = d; }
-	void set_right_rotation_direction(motor_direction_t d) { right_rotation_direction = d; }
+	~StepperMotor(void);
+	void set_target_velocity(float v) { target_velocity = min(MAX_VELOCITY, max(MIN_VELOCITY, v)); }
+	void set_rotation_direction(motor_direction_t d) { rotation_direction = d; }
 	void step(void);
 
 private: /* Methods */
-	long getNextInterruptTimeUS(float v);
-	void handleLeftStep(void);
-	void handleRightStep(void);
-	void updateAcceleration(void);
 
 public:  /* Fields */
 
 private: /* Fields */
-	uint8_t timer_pin;
-	uint8_t left_step_pin;
-	uint8_t right_step_pin;
-	uint8_t left_direction_pin;
-	uint8_t right_direction_pin;
-	uint8_t micro_select_1_pin;
-	uint8_t micro_select_2_pin;
-	uint8_t micro_select_3_pin;
-	volatile uint8_t left_signal_state;
-	volatile uint8_t right_signal_state;
-	volatile float left_velocity;
-	volatile float left_target_velocity;
-	volatile float right_velocity;
-	volatile float right_target_velocity;
-	volatile long left_time_remaining_us;
-	volatile long right_time_remaining_us;
+	pin_t step_pin;
+	pin_t direction_pin;
+	pin_t micro_select_1_pin;
+	pin_t micro_select_2_pin;
+	pin_t micro_select_3_pin;
+	volatile float velocity;
+	volatile float target_velocity;
 	volatile long interrupt_time_us;
-	motor_direction_t left_rotation_direction;
-	motor_direction_t right_rotation_direction;
-	step_function_t step_function_wrapper;
+	motor_direction_t rotation_direction;
 };
 
 #endif /* STEPPERMOTORS_INCLUDED_H */

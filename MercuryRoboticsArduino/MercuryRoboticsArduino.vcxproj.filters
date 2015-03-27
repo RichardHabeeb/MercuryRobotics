@@ -15,10 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Communication.ino">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="RobotControl.ino">
+      <Filter>Source Files</Filter>
+    </None>
     <None Include="MercuryRoboticsArduino.ino" />
-    <None Include="Communication.ino" />
-    <None Include="RobotControl.ino" />
-    <None Include="StepperMotors.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visual Micro\.MercuryRoboticsArduino.vsarduino.h">
@@ -30,15 +33,30 @@
     <ClInclude Include="RobotControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StepperMotors.h">
+    <ClInclude Include="ServoTimer2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ServoTimer2.h">
+    <ClInclude Include="StepperMotor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MotorTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ServoTimer2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StepperMotor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MotorTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard;C:\Users\Richard\Documents\MercuryRobotics\MercuryRoboticsArduino;C:\Program Files (x86)\Arduino\libraries\TimerOne;C:\Program Files (x86)\Arduino\libraries\TimerOne\utility;C:\Program Files (x86)\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers;C:\Users\Richard\Documents\Arduino\libraries;c:\program files (x86)\arduino\hardware\tools\avr\avr\include\;c:\program files (x86)\arduino\hardware\tools\avr\avr\include\avr\;c:\program files (x86)\arduino\hardware\tools\avr\avr\;c:\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\4.8.1\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard;C:\Users\Richard\Documents\MercuryRobotics\MercuryRoboticsArduino;C:\Program Files (x86)\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers;C:\Users\Richard\Documents\Arduino\libraries;c:\program files (x86)\arduino\hardware\tools\avr\avr\include\;c:\program files (x86)\arduino\hardware\tools\avr\avr\include\avr\;c:\program files (x86)\arduino\hardware\tools\avr\avr\;c:\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\4.8.1\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>C:\Users\Richard\Documents\MercuryRobotics\MercuryRoboticsArduino\Visual Micro\.MercuryRoboticsArduino.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
       <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;ARDUINO=160;ARDUINO_MAIN;__AVR__;__avr__;F_CPU=16000000L;__cplusplus;GCC_VERSION=40801;ARDUINO_ARCH_AVR;ARDUINO_AVR_UNO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -77,25 +77,25 @@
     <None Include="RobotControl.ino">
       <FileType>CppCode</FileType>
     </None>
-    <None Include="StepperMotors.ino">
-      <FileType>CppCode</FileType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Communication.h">
-      <FileType>CppCode</FileType>
+      <FileType>CppHeader</FileType>
     </ClInclude>
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="MotorTimer.h" />
+    <ClInclude Include="Pin.h" />
     <ClInclude Include="RobotControl.h">
-      <FileType>CppCode</FileType>
+      <FileType>CppHeader</FileType>
     </ClInclude>
     <ClInclude Include="ServoTimer2.h" />
-    <ClInclude Include="StepperMotors.h">
-      <FileType>CppCode</FileType>
-    </ClInclude>
+    <ClInclude Include="StepperMotor.h" />
     <ClInclude Include="Visual Micro\.MercuryRoboticsArduino.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MotorTimer.cpp" />
     <ClCompile Include="ServoTimer2.cpp" />
+    <ClCompile Include="StepperMotor.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,31 +1,27 @@
+
 /**************************************************************************************************
 * Kansas State University Robotic Competition Team
-* File: RobotControl.h
+* File: MotorTimer.h
 *
 * Description:
 *
-* Created: 3/9/2015, by Richard Habeeb, Brandon Dunn, Daniel Marts
+* Created: 3/26/2015, by Richard Habeeb
 **************************************************************************************************/
 
-#ifndef ROBOTTCONTROL_INCLUDED_H
-#define ROBOTTCONTROL_INCLUDED_H
+#ifndef MOTORTIMER_INCLUDED_H
+#define MOTORTIMER_INCLUDED_H
 
 /*-------------------------------------------------------------------------------------------------
 *                                            Includes
 *------------------------------------------------------------------------------------------------*/
 #include "Arduino.h"
-#include "MotorTimer.h"
+#include "Pin.h"
 #include "StepperMotor.h"
-#include "Communication.h"
-#include "ServoTimer2.h"
+
 
 /*-------------------------------------------------------------------------------------------------
 *                                       Literal Definitions
 *------------------------------------------------------------------------------------------------*/
-#define ARM_OPEN_ANGLE_DEG		(160)
-#define ARM_CLOSED_ANGLE_DEG	(0)
-#define IRIS_OPEN_ANGLE_DEG		(180)
-#define IRIS_CLOSED_ANGLE_DEG	(0)
 
 /*-------------------------------------------------------------------------------------------------
 *                                           Constants
@@ -40,32 +36,33 @@
 *------------------------------------------------------------------------------------------------*/
 
 /*-----------------------------------------------------------------------------------
-* Class: RobotControl
+* Class: MotorTimer
 *
 * Description:
 *------------------------------------------------------------------------------------*/
-class RobotControl
+class MotorTimer
 {
 public:  /* Methods */
-	static RobotControl* getInstance();
-	void runRobot();
+	static MotorTimer* getInstance(void);
+	void setup(StepperMotor *leftMotor, StepperMotor *rightMotor);
+	void interruptLeft(void);
+	void interruptRight(void);
 
 private: /* Methods */
-	RobotControl();
-	~RobotControl();
+	MotorTimer();
+	~MotorTimer();
 
 public:  /* Fields */
 
-private: /* Fields */
 
-	static RobotControl* instance;
-	Communication *comm;
-	StepperMotor *left;
-	StepperMotor *right;
-	MotorTimer *timer;
-	ServoTimer2 iris, arm;
-	
+
+private: /* Fields */
+	static MotorTimer* instance;
+	StepperMotor *leftMotor; /* These could be public to improve performance */
+	StepperMotor *rightMotor;
 
 };
 
-#endif /* ROBOTTCONTROL_INCLUDED_H */
+
+#endif /* MOTORTIMER_INCLUDED_H */
+

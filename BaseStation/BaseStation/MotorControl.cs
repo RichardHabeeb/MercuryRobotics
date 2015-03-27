@@ -19,10 +19,10 @@ namespace BaseStation
             public float ArmAngle;
         }
 
-        public float LeftDriveThrottle {get; private set;}   /* Value from -1 -> 1 (-100% to 100%) */
-        public float RightDriveThrottle {get; private set;}  /* Value from -1 -> 1 (-100% to 100%) */
-        public float irisAngle {get; private set;}
-        public float armAngle {get; private set;}
+        public float LeftDriveThrottle {get; set;}   /* Value from -1 -> 1 (-100% to 100%) */
+        public float RightDriveThrottle {get; set;}  /* Value from -1 -> 1 (-100% to 100%) */
+        public float irisAngle {get; set;}
+        public float armAngle {get; set;}
 
         public MotorControl(KeyCommand commands)
         {

@@ -11,7 +11,8 @@
 /*-------------------------------------------------------------------------------------------------
 *                                            Includes
 *------------------------------------------------------------------------------------------------*/
-#include "RobotControl.h"
+#include "MotorTimer.h"
+
 
 /*-------------------------------------------------------------------------------------------------
 *                                           Prototypes
@@ -20,120 +21,89 @@
 /*-------------------------------------------------------------------------------------------------
 *                                           Variables
 *------------------------------------------------------------------------------------------------*/
-RobotControl* RobotControl::instance = NULL;
+MotorTimer *MotorTimer::instance = NULL;
 
 /*-------------------------------------------------------------------------------------------------
 *                                            Functions
 *------------------------------------------------------------------------------------------------*/
+ISR(TIMER1_COMPA_vect)
+{
+	MotorTimer::getInstance()->interruptLeft();
+}
+
+ISR(TIMER1_COMPB_vect)
+{
+	MotorTimer::getInstance()->interruptRight();
+}
 
 /*-------------------------------------------------------------------------------------------------
 *                                            Methods
 *------------------------------------------------------------------------------------------------*/
 
+
+
 /*-----------------------------------------------------------------------------------
-* Function: RobotControl
+* Function: MotorTimer
 *
 * Description:
 *------------------------------------------------------------------------------------*/
-RobotControl::RobotControl()
-{
-
-	iris.attach(2);
-	iris.write(MIN_PULSE_WIDTH);
-
-	arm.attach(3);
-	arm.write(MIN_PULSE_WIDTH);
-
-	comm = new Communication();
-
-	left = new StepperMotor
-		(
-		LEFT_MOTOR_PIN,
-		LEFT_MOTOR_DIRECTION_PIN,
-		MOTOR_MICROSTEP_1_PIN,
-		MOTOR_MICROSTEP_2_PIN,
-		MOTOR_MICROSTEP_3_PIN
-		);
-
-	right = new StepperMotor
-		(
-		RIGHT_MOTOR_PIN,
-		RIGHT_MOTOR_DIRECTION_PIN,
-		MOTOR_MICROSTEP_1_PIN,
-		MOTOR_MICROSTEP_2_PIN,
-		MOTOR_MICROSTEP_3_PIN
-		);
-	
-	timer = MotorTimer::getInstance();
-	timer->setup(left, right);
-
-//	motors = new StepperMotors(
-//		9,
-//		22,
-//		6,
-//		0, //TODO
-//		0,
-//		0,
-//		0,
-//		0,
-//		StepperMotorStepWrapper
-//		);
-}
-
-/*-----------------------------------------------------------------------------------
-* Function: ~RobotControl
-*
-* Description:
-*------------------------------------------------------------------------------------*/
-RobotControl::~RobotControl()
+MotorTimer::MotorTimer()
 {
 }
 
 
+
+MotorTimer::~MotorTimer()
+{
+}
+
 /*-----------------------------------------------------------------------------------
-* Function: getInstance
+* Function: MotorTimer
 *
 * Description:
 *------------------------------------------------------------------------------------*/
-RobotControl* RobotControl::getInstance()
+MotorTimer* MotorTimer::getInstance(void)
 {
-	if (instance == NULL) instance = new RobotControl();
+	if (!instance) instance = new MotorTimer();
 
 	return instance;
 }
 
-
 /*-----------------------------------------------------------------------------------
-* Function: runRobot
+* Function: setup
 *
 * Description:
 *------------------------------------------------------------------------------------*/
-void RobotControl::runRobot()
+void MotorTimer::setup(StepperMotor *leftMotor, StepperMotor *rightMotor)
 {
-	motor_control_packet_t packet;
+	this->leftMotor = leftMotor;
+	this->rightMotor = rightMotor;
 
-	while (1)
-	{
-        Serial.println("Waiting...");
-		comm->waitForNextPacket(packet);
-        Serial.print("Recieved packet: ");
-        Serial.print(packet.left_drive_throttle);
-        Serial.print(", ");
-        Serial.print(packet.right_drive_throttle);
-        Serial.print(", ");
-        Serial.println(packet.iris_angle_deg);
-        Serial.print(", ");
-        Serial.print(packet.arm_angle_deg);
+	TCCR1B = _BV(WGM13) | _BV(CS10);
+	ICR1 = 0x0ffff;
 
-                
-		arm.write(map(packet.arm_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
-		iris.write(map(packet.iris_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
+	OCR1A = 0x08fff;
+	OCR1B = 0x04fff;
+	TIMSK1 = _BV(OCIE1A) | _BV(OCIE1B);
 
-//		motors->set_left_target_velocity(fabs(packet.left_drive_throttle));
-//		motors->set_right_target_velocity(fabs(packet.right_drive_throttle));
-//
-//		motors->set_left_rotation_direction(signbit(packet.left_drive_throttle) ? REVERSE : FORWARD);
-//		motors->set_right_rotation_direction(signbit(packet.right_drive_throttle) ? REVERSE : FORWARD);
+}
 
-	}
+/*-----------------------------------------------------------------------------------
+* Function: interruptLeft
+*
+* Description:
+*------------------------------------------------------------------------------------*/
+void MotorTimer::interruptLeft()
+{
+	leftMotor->step();
+}
+
+/*-----------------------------------------------------------------------------------
+* Function: interruptLeft
+*
+* Description:
+*------------------------------------------------------------------------------------*/
+void MotorTimer::interruptRight()
+{
+	rightMotor->step();
 }

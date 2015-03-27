@@ -19,8 +19,6 @@ namespace BaseStation
     {
         KeyCommand commands;
         UdpClient robotConnection;
-        float armAngle = 0.0f;
-        bool armAngleLock = false;
 
         public BaseStationGui()
         {
@@ -33,94 +31,17 @@ namespace BaseStation
 
         private void BaseStationGui_KeyDown(object sender, KeyEventArgs e)
         {
-            bool commandChanged = false;
-
-            switch(e.KeyCode)
-            {
-                case Keys.Up:
-                case Keys.W:
-                    commandChanged = !commands.forward;
-                    commands.forward = true;
-                    break;
-
-                case Keys.Left:
-                case Keys.A:
-                    commandChanged = !commands.left;
-                    commands.left = true;
-                    break;
-
-                case Keys.Right:
-                case Keys.D:
-                    commandChanged = !commands.right;
-                    commands.right = true;
-                    break;
-
-                case Keys.Down:
-                case Keys.S:
-                    commandChanged = !commands.reverse;
-                    commands.reverse = true;
-                    break;
-
-                case Keys.ShiftKey:
-                    commandChanged = !commands.sprint;
-                    commands.sprint = true;
-                    break;
-
-                case Keys.E:
-                    commandChanged = !commands.lower;
-                    commands.lower = true;
-                    break;
-
-                case Keys.Q:
-                    commandChanged = !commands.open;
-                    commands.open = true;
-                    break;
-            }
+            bool commandChanged = commands.HandleKeyPress(e.KeyCode, true);
 
             if(commandChanged) ProcessKeyBoardUpdate();
-
             
         }
 
         private void BaseStationGui_KeyUp(object sender, KeyEventArgs e)
         {
-            switch (e.KeyCode)
-            {
-                case Keys.Up:
-                case Keys.W:
-                    commands.forward = false;
-                    break;
-
-                case Keys.Left:
-                case Keys.A:
-                    commands.left = false;
-                    break;
-
-                case Keys.Right:
-                case Keys.D:
-                    commands.right = false;
-                    break;
-
-                case Keys.Down:
-                case Keys.S:
-                    commands.reverse = false;
-                    break;
-
-                case Keys.ShiftKey:
-                    commands.sprint = false;
-                    break;
-
-                case Keys.E:
-                    commands.lower = false;
-                    break;
-
-                case Keys.Q:
-                    commands.open = false;
-                    break;
-            }
+            commands.HandleKeyPress(e.KeyCode, false);
 
             ProcessKeyBoardUpdate();
-
         }
 
 
@@ -147,6 +68,7 @@ namespace BaseStation
             verticalProgressBarLeft.Value = (int)Math.Floor(left * 50) + 50;
             verticalProgressBarRight.Value = (int)Math.Floor(right * 50) + 50;
             verticalProgressBarArm.Value = (int)arm;
+            verticalProgressBarIris.Value = (int)iris;
         }
 
 
@@ -157,12 +79,26 @@ namespace BaseStation
 
         private void verticalProgressBarArm_MouseClick(object sender, MouseEventArgs e)
         {
-            double ratio = 1.0 - Math.Abs(e.Location.Y) / (float)verticalProgressBarArm.Height;
-            verticalProgressBarArm.Value = (int)(ratio * verticalProgressBarArm.Maximum);
+            if(!checkBoxLock.Checked)
+            {
+                double ratio = 1.0 - Math.Abs(e.Location.Y) / (float)verticalProgressBarArm.Height;
+                verticalProgressBarArm.Value = (int)(ratio * verticalProgressBarArm.Maximum);
 
-            //MotorControl controller = new MotorControl();
+                MotorControl controller = new MotorControl(commands);
+                controller.armAngle = 180 * (float)ratio;
+                SendMotorControllerPacket(controller);
+            }
+        }
 
-            //SendMotorControllerPacket(controller);
+        private void buttonSetTo90_Click(object sender, EventArgs e)
+        {
+            verticalProgressBarArm.Value = (int)(.5 * verticalProgressBarArm.Maximum);
+
+            MotorControl controller = new MotorControl(commands);
+            controller.armAngle = 90;
+            SendMotorControllerPacket(controller);
+
+            checkBoxLock.Checked = true;
         }
     }
 }
