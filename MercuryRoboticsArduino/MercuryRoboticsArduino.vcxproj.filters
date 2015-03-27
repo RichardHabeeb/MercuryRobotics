@@ -34,13 +34,13 @@
     <ClInclude Include="StepperMotors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ICommunication.h">
+    <ClInclude Include="ServoTimer2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CommunicationTesting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ServoTimer2.h">
+    <ClInclude Include="ICommunication.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

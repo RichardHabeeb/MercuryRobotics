@@ -60,7 +60,7 @@ public:  /* Fields */
 private: /* Fields */
 
 	static RobotControl* instance;
-	Communication *comm;
+	ICommunication *comm;
 	ServoTimer2 iris, arm;
 	
 

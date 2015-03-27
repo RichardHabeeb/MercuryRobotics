@@ -48,6 +48,8 @@ public:  /* Methods */
 private: /* Methods */
 public:  /* Fields */
 private: /* Fields */
+	int i;
+	motor_control_packet_t test[12];
 };
 
 
