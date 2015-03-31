@@ -84,6 +84,20 @@ namespace BaseStation
             RightDriveThrottle = right;
         }
 
+        public MotorControl(GamepadState xboxController)
+        {
+            LeftDriveThrottle = Math.Max(-1.0f, Math.Min(1.0f, (xboxController.LeftStick.Clicked ? 1.0f : 0.5f) *
+                        (0.5f * xboxController.LeftStick.Position.X + xboxController.LeftStick.Position.Y) +
+                0.1f *  (0.5f * xboxController.RightStick.Position.X + xboxController.RightStick.Position.Y)));
+
+            RightDriveThrottle = Math.Max(-1.0f, Math.Min(1.0f, (xboxController.LeftStick.Clicked ? 1.0f : 0.5f) *
+                        (-0.5f * xboxController.LeftStick.Position.X + xboxController.LeftStick.Position.Y) +
+                0.1f *  (-0.5f * xboxController.RightStick.Position.X + xboxController.RightStick.Position.Y)));
+
+            armAngle = xboxController.LeftTrigger * 180.0f;
+            irisAngle = xboxController.RightTrigger * 180.0f;
+        }
+
         public byte[] ToArray()
         {
             MotorControlPacket packet = new MotorControlPacket()

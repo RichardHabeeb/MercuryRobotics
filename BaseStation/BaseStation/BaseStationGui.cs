@@ -20,14 +20,29 @@ namespace BaseStation
         KeyCommand commands;
         UdpClient robotConnection;
 
+
+        GamepadState xboxController;
+
         public BaseStationGui()
         {
             InitializeComponent();
 
             commands = new KeyCommand();
             robotConnection = new UdpClient(4444);
-            robotConnection.Connect(IPAddress.Parse("129.130.46.58"), 4444);
+            robotConnection.Connect(IPAddress.Parse("129.130.46.183"), 4444);
+            xboxController = new GamepadState(SlimDX.XInput.UserIndex.One);
+            xboxController.ControllerUpdate += xboxController_ControllerUpdate;
         }
+
+        private void xboxController_ControllerUpdate(object sender, EventArgs e)
+        {
+            MotorControl controller = new MotorControl(xboxController);
+
+            SendMotorControllerPacket(controller);
+
+            UpdateGui(controller.LeftDriveThrottle, controller.RightDriveThrottle, controller.armAngle, controller.irisAngle);
+        }
+
 
         private void BaseStationGui_KeyDown(object sender, KeyEventArgs e)
         {
@@ -60,9 +75,14 @@ namespace BaseStation
             robotConnection.Send(dataBuffer, dataBuffer.Length);
         }
 
-
+        delegate void threadSafeGuiUpdate(double left, double right, double arm, double iris);
         private void UpdateGui(double left, double right, double arm, double iris)
         {
+            if (rightMotorLabel.InvokeRequired)
+            {
+                rightMotorLabel.Invoke(new threadSafeGuiUpdate(UpdateGui), new object[] { left, right, arm, iris });
+                return;
+            }
             rightMotorLabel.Text = right.ToString();
             leftMotorLabel.Text = left.ToString();
             verticalProgressBarLeft.Value = (int)Math.Floor(left * 50) + 50;
@@ -79,26 +99,7 @@ namespace BaseStation
 
         private void verticalProgressBarArm_MouseClick(object sender, MouseEventArgs e)
         {
-            if(!checkBoxLock.Checked)
-            {
-                double ratio = 1.0 - Math.Abs(e.Location.Y) / (float)verticalProgressBarArm.Height;
-                verticalProgressBarArm.Value = (int)(ratio * verticalProgressBarArm.Maximum);
 
-                MotorControl controller = new MotorControl(commands);
-                controller.armAngle = 180 * (float)ratio;
-                SendMotorControllerPacket(controller);
-            }
-        }
-
-        private void buttonSetTo90_Click(object sender, EventArgs e)
-        {
-            verticalProgressBarArm.Value = (int)(.5 * verticalProgressBarArm.Maximum);
-
-            MotorControl controller = new MotorControl(commands);
-            controller.armAngle = 90;
-            SendMotorControllerPacket(controller);
-
-            checkBoxLock.Checked = true;
         }
     }
 }

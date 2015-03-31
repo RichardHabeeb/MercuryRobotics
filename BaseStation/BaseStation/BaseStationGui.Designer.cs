@@ -38,8 +38,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.checkBoxLock = new System.Windows.Forms.CheckBox();
-            this.buttonSetTo90 = new System.Windows.Forms.Button();
             this.verticalProgressBarIris = new BaseStation.VerticalProgressBar();
             this.verticalProgressBarArm = new BaseStation.VerticalProgressBar();
             this.verticalProgressBarRight = new BaseStation.VerticalProgressBar();
@@ -146,26 +144,6 @@
             this.label8.TabIndex = 16;
             this.label8.Text = "Closed";
             // 
-            // checkBoxLock
-            // 
-            this.checkBoxLock.AutoSize = true;
-            this.checkBoxLock.Location = new System.Drawing.Point(185, 307);
-            this.checkBoxLock.Name = "checkBoxLock";
-            this.checkBoxLock.Size = new System.Drawing.Size(50, 17);
-            this.checkBoxLock.TabIndex = 17;
-            this.checkBoxLock.Text = "Lock";
-            this.checkBoxLock.UseVisualStyleBackColor = true;
-            // 
-            // buttonSetTo90
-            // 
-            this.buttonSetTo90.Location = new System.Drawing.Point(164, 346);
-            this.buttonSetTo90.Name = "buttonSetTo90";
-            this.buttonSetTo90.Size = new System.Drawing.Size(75, 23);
-            this.buttonSetTo90.TabIndex = 18;
-            this.buttonSetTo90.Text = "Set to 90˚";
-            this.buttonSetTo90.UseVisualStyleBackColor = true;
-            this.buttonSetTo90.Click += new System.EventHandler(this.buttonSetTo90_Click);
-            // 
             // verticalProgressBarIris
             // 
             this.verticalProgressBarIris.Location = new System.Drawing.Point(291, 52);
@@ -203,9 +181,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(429, 411);
-            this.Controls.Add(this.buttonSetTo90);
-            this.Controls.Add(this.checkBoxLock);
+            this.ClientSize = new System.Drawing.Size(429, 333);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.verticalProgressBarIris);
@@ -246,7 +222,5 @@
         private VerticalProgressBar verticalProgressBarIris;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.CheckBox checkBoxLock;
-        private System.Windows.Forms.Button buttonSetTo90;
     }
 }
