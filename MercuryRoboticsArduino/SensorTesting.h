@@ -43,7 +43,7 @@ class SensorTesting : public ISensor
 public:  /* Methods */
 	SensorTesting();
 	~SensorTesting();
-	void SendSensorData();
+	float GetSensorData();
 
 private: /* Methods */
 public:  /* Fields */

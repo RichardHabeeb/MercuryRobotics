@@ -45,7 +45,7 @@ class Sensor : public ISensor
 public:  /* Methods */
 	Sensor(pin_t);
 	~Sensor();
-	void SendSensorData();
+	float GetSensorData();
 
 private: /* Methods */
 public:  /* Fields */

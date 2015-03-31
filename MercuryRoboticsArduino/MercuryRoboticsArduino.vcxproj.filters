@@ -21,10 +21,10 @@
     <None Include="RobotControl.ino">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="MercuryRoboticsArduino.ino" />
     <None Include="CommunicationTesting.ino">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="Sensor.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visual Micro\.MercuryRoboticsArduino.vsarduino.h">
@@ -55,6 +55,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ICommunication.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ISensor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sensor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SensorTesting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -12,7 +12,7 @@
 #define _VSARDUINO_H_
 #define __AVR_ATmega328p__
 #define __AVR_ATmega328P__
-#define ARDUINO 160
+#define ARDUINO 161
 #define ARDUINO_MAIN
 #define __AVR__
 #define __avr__
@@ -86,11 +86,15 @@ extern "C" void __cxa_pure_virtual() {;}
 #include <CommunicationTesting.ino>
 #include <Config.h>
 #include <ICommunication.h>
+#include <ISensor.h>
 #include <MotorTimer.cpp>
 #include <MotorTimer.h>
 #include <Pin.h>
 #include <RobotControl.h>
 #include <RobotControl.ino>
+#include <Sensor.h>
+#include <Sensor.ino>
+#include <SensorTesting.h>
 #include <ServoTimer2.cpp>
 #include <ServoTimer2.h>
 #include <StepperMotor.cpp>

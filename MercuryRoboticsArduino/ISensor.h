@@ -42,7 +42,7 @@
 class ISensor
 {
 public:  /* Methods */
-	virtual void SendSensorData() = 0;
+	virtual float GetSensorData() = 0;
 
 private: /* Methods */
 public:  /* Fields */
