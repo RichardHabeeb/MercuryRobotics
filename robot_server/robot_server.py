@@ -7,6 +7,7 @@ from socket import socket, AF_INET, SOCK_DGRAM
 
 class BaseConn(object):
 	packet_format = None
+	_lock = thread.allocate_lock()
 
 	def __init__(self):
 		self.conn = self.create_conn()
@@ -33,7 +34,8 @@ class BaseConn(object):
 			data = self.readline()
 			data_unpacked = struct.unpack(self.packet_format, data)
 			for calbk in self.callbacks:
-				calbk(data_unpacked)
+				with self._lock:
+					calbk(data_unpacked)
 
 	def bind(self, func):
 		self.callbacks.append(func)
@@ -62,21 +64,24 @@ class ArduinoConn(BaseConn):
 	def writeline(self, data):
 		self.conn.write(data)
 
-def _print(stuff):
-	print stuff
+def _a_print(stuff):
+	print "Arduino: ", stuff
 
+
+def _n_print(stuff):
+	print "Network: ", stuff
 
 
 nconn = NetworkConn()
-nconn.bind(_print)
+nconn.bind(_n_print)
 nconn.start()
 
 aconn = ArduinoConn()
-aconn.bind(_print)
+aconn.bind(_a_print)
 def _write_a_data(data):
 	aconn.writeline(struct.pack('ffff', *data))
-aconn.bind(_write_a_data)
-nconn.start()
+nconn.bind(_write_a_data)
+aconn.start()
 
 print "Enter to quit."
 raw_input()
