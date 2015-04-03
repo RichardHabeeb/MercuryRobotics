@@ -75,6 +75,7 @@ aconn = ArduinoConn()
 aconn.bind(_print)
 def _write_a_data(data):
 	aconn.writeline(struct.pack('ffff', *data))
+aconn.bind(_write_a_data)
 nconn.start()
 
 print "Enter to quit."
