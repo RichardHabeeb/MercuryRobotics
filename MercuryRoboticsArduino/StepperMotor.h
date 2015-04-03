@@ -32,6 +32,7 @@
 /*-------------------------------------------------------------------------------------------------
 *                                           Constants
 *------------------------------------------------------------------------------------------------*/
+const volatile float PERIOD_CONVERSION_RATIO = (100000.0f * 2.0f * PI * WHEEL_RADIUS) / TICKS_PER_REVOLUTION;
 
 /*-------------------------------------------------------------------------------------------------
 *                                             Types
@@ -70,7 +71,8 @@ public:  /* Methods */
 		pin_t micro_select_3_pin
 		);
 	~StepperMotor(void);
-	void set_target_velocity(float v) { target_velocity = min(MAX_VELOCITY, max(MIN_VELOCITY, v)); }
+	void set_target_velocity(float v) { target_velocity = min(MAX_VELOCITY, max(MIN_VELOCITY, v)); interrupt_time_us = PERIOD_CONVERSION_RATIO / target_velocity; }
+	unsigned long get_step_period_us() const { return (unsigned long)(interrupt_time_us); }
 	void set_rotation_direction(motor_direction_t d) { rotation_direction = d; }
 	void step(void);
 

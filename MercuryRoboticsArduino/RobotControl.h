@@ -22,7 +22,7 @@
 /*-------------------------------------------------------------------------------------------------
 *                                       Literal Definitions
 *------------------------------------------------------------------------------------------------*/
-#define ARM_OPEN_ANGLE_DEG		(160)
+#define ARM_OPEN_ANGLE_DEG		(180)
 #define ARM_CLOSED_ANGLE_DEG	(0)
 #define IRIS_OPEN_ANGLE_DEG		(180)
 #define IRIS_CLOSED_ANGLE_DEG	(0)

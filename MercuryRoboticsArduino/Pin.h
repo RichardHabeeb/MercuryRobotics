@@ -19,7 +19,7 @@
 /*-------------------------------------------------------------------------------------------------
 *                                       Literal Definitions
 *------------------------------------------------------------------------------------------------*/
-#define RIGHT_MOTOR_PIN					(6)
+#define RIGHT_MOTOR_PIN					(6) //Hard coded in ISR
 #define LEFT_MOTOR_PIN					(7)
 #define RIGHT_MOTOR_DIRECTION_PIN		(0)
 #define LEFT_MOTOR_DIRECTION_PIN		(0)

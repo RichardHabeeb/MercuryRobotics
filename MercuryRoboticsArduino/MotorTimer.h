@@ -45,8 +45,9 @@ class MotorTimer
 public:  /* Methods */
 	static MotorTimer* getInstance(void);
 	void setup(StepperMotor *leftMotor, StepperMotor *rightMotor);
-	void interruptLeft(void);
-	void interruptRight(void);
+	void interruptA(void);
+	void interruptB(void);
+	volatile void updateInterruptTimers();
 
 private: /* Methods */
 	MotorTimer();
@@ -58,8 +59,8 @@ public:  /* Fields */
 
 private: /* Fields */
 	static MotorTimer* instance;
-	StepperMotor *leftMotor; /* These could be public to improve performance */
-	StepperMotor *rightMotor;
+	StepperMotor *motorA;
+	StepperMotor *motorB;
 
 };
 

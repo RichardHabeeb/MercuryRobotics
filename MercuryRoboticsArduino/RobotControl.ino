@@ -63,21 +63,13 @@ RobotControl::RobotControl()
 		MOTOR_MICROSTEP_2_PIN,
 		MOTOR_MICROSTEP_3_PIN
 		);
+
+	left->set_target_velocity(0.5);
+	right->set_target_velocity(1.0);
 	
 	timer = MotorTimer::getInstance();
 	timer->setup(left, right);
 
-//	motors = new StepperMotors(
-//		9,
-//		22,
-//		6,
-//		0, //TODO
-//		0,
-//		0,
-//		0,
-//		0,
-//		StepperMotorStepWrapper
-//		);
 }
 
 /*-----------------------------------------------------------------------------------
@@ -129,8 +121,8 @@ void RobotControl::runRobot()
 		arm.write(map(packet.arm_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
 		iris.write(map(packet.iris_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
 
-//		motors->set_left_target_velocity(fabs(packet.left_drive_throttle));
-//		motors->set_right_target_velocity(fabs(packet.right_drive_throttle));
+		left->set_target_velocity(fabs(packet.left_drive_throttle));
+		right->set_target_velocity(fabs(packet.right_drive_throttle));
 //
 //		motors->set_left_rotation_direction(signbit(packet.left_drive_throttle) ? REVERSE : FORWARD);
 //		motors->set_right_rotation_direction(signbit(packet.right_drive_throttle) ? REVERSE : FORWARD);

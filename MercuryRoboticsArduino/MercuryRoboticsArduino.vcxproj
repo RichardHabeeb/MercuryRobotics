@@ -80,6 +80,9 @@
     <None Include="RobotControl.ino">
       <FileType>CppCode</FileType>
     </None>
+    <None Include="Sensor.ino">
+      <FileType>CppCode</FileType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Communication.h">
@@ -92,10 +95,19 @@
     <ClInclude Include="ICommunication.h">
       <FileType>CppCode</FileType>
     </ClInclude>
+    <ClInclude Include="ISensor.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
     <ClInclude Include="MotorTimer.h" />
     <ClInclude Include="Pin.h" />
     <ClInclude Include="RobotControl.h">
       <FileType>CppHeader</FileType>
+    </ClInclude>
+    <ClInclude Include="Sensor.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="SensorTesting.h">
+      <FileType>CppCode</FileType>
     </ClInclude>
     <ClInclude Include="ServoTimer2.h" />
     <ClInclude Include="StepperMotor.h" />
