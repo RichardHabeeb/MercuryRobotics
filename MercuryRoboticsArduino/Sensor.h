@@ -26,6 +26,11 @@
 *                                           Constants
 *------------------------------------------------------------------------------------------------*/
 
+#define a  -.00000020356		// Values used convert sensor
+#define b  .00029411			// reading into distance
+#define c  -.152859				// measured in centimeters
+#define d  33.29				//
+
 /*-------------------------------------------------------------------------------------------------
 *                                             Types
 *------------------------------------------------------------------------------------------------*/
@@ -45,7 +50,7 @@ class Sensor : public ISensor
 public:  /* Methods */
 	Sensor(pin_t);
 	~Sensor();
-	void SendSensorData();
+	float GetSensorData();
 
 private: /* Methods */
 public:  /* Fields */

@@ -21,11 +21,12 @@
     <None Include="RobotControl.ino">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="MercuryRoboticsArduino.ino" />
     <None Include="CommunicationTesting.ino">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="Sensor.ino" />
+    <None Include="Sensor.ino">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visual Micro\.MercuryRoboticsArduino.vsarduino.h">
