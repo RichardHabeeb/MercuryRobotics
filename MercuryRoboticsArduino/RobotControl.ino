@@ -40,6 +40,10 @@ RobotControl::RobotControl()
 
 	iris.attach(2);
 	iris.write(MIN_PULSE_WIDTH);
+	pinMode(13, OUTPUT);
+	pinMode(12, OUTPUT);
+	pinMode(11, OUTPUT);
+	pinMode(10, OUTPUT);
 
 	arm.attach(3);
 	arm.write(MIN_PULSE_WIDTH);
@@ -117,7 +121,13 @@ void RobotControl::runRobot()
         Serial.print(", ");
         Serial.print(packet.arm_angle_deg);
 
-                
+		if (led_on_off)
+		{
+			digitalWrite(13, HIGH);
+			digitalwrite(12, HIGH);
+			digitalWrite(11, HIGH);
+			digitalwrite(10, HIGH);
+		}
 		arm.write(map(packet.arm_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
 		iris.write(map(packet.iris_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
 

@@ -63,7 +63,7 @@ private: /* Fields */
 	StepperMotor *left;
 	StepperMotor *right;
 	MotorTimer *timer;
-	ServoTimer2 iris, arm;
+	ServoTimer2 iris, arm, led1, led2, led3, led4;
 	
 
 };
