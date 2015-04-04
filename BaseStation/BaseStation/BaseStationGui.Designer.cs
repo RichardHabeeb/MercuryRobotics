@@ -38,6 +38,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();  //Labels 9 - 12 are for the sensors
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.verticalProgressBarIris = new BaseStation.VerticalProgressBar();
             this.verticalProgressBarArm = new BaseStation.VerticalProgressBar();
             this.verticalProgressBarRight = new BaseStation.VerticalProgressBar();
@@ -143,6 +147,46 @@
             this.label8.Size = new System.Drawing.Size(39, 13);
             this.label8.TabIndex = 16;
             this.label8.Text = "Closed";
+            //
+            // label9
+            //
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(33, 350);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(111, 19);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Front Sensor";
+            //
+            // label10
+            //
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(160, 350);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(111, 19);
+            this.label10.TabIndex = 18;
+            this.label10.Text = "Back Sensor";
+            //
+            // label11
+            //
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(33, 425);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(111, 19);
+            this.label11.TabIndex = 19;
+            this.label11.Text = "Left Sensor";
+            //
+            // label12
+            //
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(160, 425);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(111, 19);
+            this.label12.TabIndex = 20;
+            this.label12.Text = "Right Sensor";
             // 
             // verticalProgressBarIris
             // 
@@ -181,7 +225,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(429, 333);
+            this.ClientSize = new System.Drawing.Size(429, 536);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.verticalProgressBarIris);
@@ -222,5 +270,9 @@
         private VerticalProgressBar verticalProgressBarIris;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
     }
 }
