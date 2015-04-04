@@ -11,7 +11,6 @@ using System.Threading;
 using System.Net.Sockets;
 using System.Net;
 using System.Runtime.InteropServices;
-using DeviceManagement;
 
 namespace BaseStation
 {
@@ -29,7 +28,7 @@ namespace BaseStation
 
             commands = new KeyCommand();
             robotConnection = new UdpClient(4444);
-            robotConnection.Connect(IPAddress.Parse("129.130.46.183"), 4444);
+            robotConnection.Connect(IPAddress.Parse("10.131.190.214"), 4444);
             xboxController = new GamepadState(SlimDX.XInput.UserIndex.One);
             xboxController.ControllerUpdate += xboxController_ControllerUpdate;
         }
