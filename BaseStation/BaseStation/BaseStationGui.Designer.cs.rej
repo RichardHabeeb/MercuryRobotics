@@ -1,0 +1,12 @@
+diff a/BaseStation/BaseStation/BaseStationGui.Designer.cs b/BaseStation/BaseStation/BaseStationGui.Designer.cs	(rejected hunks)
+@@ -38,6 +38,10 @@
+             this.label6 = new System.Windows.Forms.Label();
+             this.label7 = new System.Windows.Forms.Label();
+             this.label8 = new System.Windows.Forms.Label();
++            this.label8 = new System.Windows.Forms.Label();
++            this.label8 = new System.Windows.Forms.Label();
++            this.label8 = new System.Windows.Forms.Label();
++            this.label8 = new System.Windows.Forms.Label();
+             this.verticalProgressBarIris = new BaseStation.VerticalProgressBar();
+             this.verticalProgressBarArm = new BaseStation.VerticalProgressBar();
+             this.verticalProgressBarRight = new BaseStation.VerticalProgressBar();

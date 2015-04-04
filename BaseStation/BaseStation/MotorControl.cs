@@ -17,12 +17,14 @@ namespace BaseStation
             public float RightDriveThrottle; /* Value from -1 -> 1 (-100% to 100%) */
             public float IrisAngle;
             public float ArmAngle;
+            public byte Led_toggle;
         }
 
         public float LeftDriveThrottle {get; set;}   /* Value from -1 -> 1 (-100% to 100%) */
         public float RightDriveThrottle {get; set;}  /* Value from -1 -> 1 (-100% to 100%) */
         public float irisAngle {get; set;}
         public float armAngle {get; set;}
+        public byte Led_toggle {get; set;}  /* Holds a 0 or 1 for disable/enable LED */
 
         public MotorControl(KeyCommand commands)
         {
@@ -73,6 +75,8 @@ namespace BaseStation
                 LeftDriveThrottle *= 2.0f;
                 RightDriveThrottle *= 2.0f;
             }
+
+            
 
         }
 
