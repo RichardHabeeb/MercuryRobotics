@@ -120,14 +120,10 @@ void RobotControl::runRobot()
         Serial.println(packet.iris_angle_deg);
         Serial.print(", ");
         Serial.print(packet.arm_angle_deg);
+		
+		led1->SetState(packet.led_on);
+		led2->SetState(packet.led_on);
 
-		if (led_on_off)
-		{
-			digitalWrite(13, HIGH);
-			digitalwrite(12, HIGH);
-			digitalWrite(11, HIGH);
-			digitalwrite(10, HIGH);
-		}
 		arm.write(map(packet.arm_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
 		iris.write(map(packet.iris_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
 

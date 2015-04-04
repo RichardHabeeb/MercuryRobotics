@@ -98,6 +98,7 @@
     <ClInclude Include="ISensor.h">
       <FileType>CppCode</FileType>
     </ClInclude>
+    <ClInclude Include="Led.h" />
     <ClInclude Include="MotorTimer.h" />
     <ClInclude Include="Pin.h" />
     <ClInclude Include="RobotControl.h">
@@ -114,6 +115,7 @@
     <ClInclude Include="Visual Micro\.MercuryRoboticsArduino.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Led.cpp" />
     <ClCompile Include="MotorTimer.cpp" />
     <ClCompile Include="ServoTimer2.cpp" />
     <ClCompile Include="StepperMotor.cpp" />
