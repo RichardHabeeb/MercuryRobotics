@@ -44,6 +44,9 @@ RobotControl::RobotControl()
 	arm.attach(3);
 	arm.write(ARM_CLOSED_ANGLE_DEG);
 
+	led1 = new Led(LED_PIN_1);
+	led2 = new Led(LED_PIN_2);
+
 	comm = new Communication();
 
 	left = new StepperMotor
@@ -69,7 +72,6 @@ RobotControl::RobotControl()
 	
 	timer = MotorTimer::getInstance();
 	timer->setup(left, right);
-
 }
 
 /*-----------------------------------------------------------------------------------
@@ -117,8 +119,8 @@ void RobotControl::runRobot()
         Serial.print(", ");
         Serial.print(packet.arm_angle_deg);
 		
-		led1->SetState(packet.led_on);
-		led2->SetState(packet.led_on);
+		led1->setState(packet.led_on);
+		led2->setState(packet.led_on);
 
 		arm.write(map(packet.arm_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
 		iris.write(map(packet.iris_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));

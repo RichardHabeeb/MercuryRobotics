@@ -75,6 +75,8 @@ extern "C" void __cxa_pure_virtual() {;}
 #include <Config.h>
 #include <ICommunication.h>
 #include <ISensor.h>
+#include <Led.cpp>
+#include <Led.h>
 #include <MotorTimer.cpp>
 #include <MotorTimer.h>
 #include <Pin.h>

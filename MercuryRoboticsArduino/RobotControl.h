@@ -21,8 +21,6 @@
 #include "Communication.h"
 #include "Led.h"
 
->>>>>>> Updated to due
-
 /*-------------------------------------------------------------------------------------------------
 *                                       Literal Definitions
 *------------------------------------------------------------------------------------------------*/
@@ -61,21 +59,13 @@ private: /* Methods */
 public:  /* Fields */
 
 private: /* Fields */
-
 	static RobotControl* instance;
 	ICommunication *comm;
 	StepperMotor *left;
 	StepperMotor *right;
 	MotorTimer *timer;
-<<<<<<< HEAD
-	ServoTimer2 iris, arm;
 	Led *led1, *led2;
-	
-	
-
-=======
 	Servo iris, arm;
->>>>>>> Updated to due
 };
 
 #endif /* ROBOTTCONTROL_INCLUDED_H */
