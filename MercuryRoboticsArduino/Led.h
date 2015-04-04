@@ -14,6 +14,7 @@
 *                                            Includes
 *------------------------------------------------------------------------------------------------*/
 #include "Arduino.h"
+#include "Pin.h"
 
 /*-------------------------------------------------------------------------------------------------
 *                                       Literal Definitions
@@ -47,11 +48,12 @@ class Led
 public:  /* Methods */
 	Led(uint8_t);
 	~Led();
-	void SetState(LedState);
+	void setState(LedState);
 
 private: /* Methods */
 public:  /* Fields */
 private: /* Fields */
+	pin_t pin;
 };
 
 

@@ -32,6 +32,10 @@
 #define IR_SENSOR_4_PIN					(A3)
 #define IR_SENSOR_5_PIN					(A4)
 #define IR_SENSOR_6_PIN					(A5)
+#define LED_PIN_1						(0)
+#define LED_PIN_2						(0)
+#define LED_PIN_3						(0)
+#define LED_PIN_4						(0)
 
 /*-------------------------------------------------------------------------------------------------
 *                                             Types
