@@ -19,7 +19,7 @@
 /*-------------------------------------------------------------------------------------------------
 *                                       Literal Definitions
 *------------------------------------------------------------------------------------------------*/
-#define MAX_STEP_PERIOD_US             (10000) /* period here is refering to 1/2 T (we count a toggle as a period) */
+#define MAX_STEP_PERIOD_US             (8191) /* period here is refering to 1/2 T (we count a toggle as a period) */
 #define WHEEL_RADIUS                   (3.0f*.0254f) /*3 inches*/
 #define STEPS_PER_REVOLUTION           (200.0f)
 #define TICKS_PER_STEP                 (2.0f) 
@@ -32,7 +32,8 @@
 /*-------------------------------------------------------------------------------------------------
 *                                           Constants
 *------------------------------------------------------------------------------------------------*/
-const volatile float PERIOD_CONVERSION_RATIO = (100000.0f * 2.0f * PI * WHEEL_RADIUS) / TICKS_PER_REVOLUTION;
+const volatile float PERIOD_CONVERSION_RATIO = (100000.0f * 2.f * PI * WHEEL_RADIUS) / TICKS_PER_REVOLUTION;
+const unsigned long a = (0x0ffffL * 2000000L / F_CPU);
 
 /*-------------------------------------------------------------------------------------------------
 *                                             Types
@@ -71,7 +72,7 @@ public:  /* Methods */
 		pin_t micro_select_3_pin
 		);
 	~StepperMotor(void);
-	void set_target_velocity(float v) { target_velocity = min(MAX_VELOCITY, max(MIN_VELOCITY, v)); interrupt_time_us = PERIOD_CONVERSION_RATIO / target_velocity; }
+	void set_target_velocity(float v);
 	unsigned long get_step_period_us() const { return (unsigned long)(interrupt_time_us); }
 	void set_rotation_direction(motor_direction_t d) { rotation_direction = d; }
 	void step(void);

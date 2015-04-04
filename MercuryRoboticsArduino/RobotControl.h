@@ -14,11 +14,14 @@
 *                                            Includes
 *------------------------------------------------------------------------------------------------*/
 #include "Arduino.h"
+#include <Servo.h>
+
 #include "MotorTimer.h"
 #include "StepperMotor.h"
 #include "Communication.h"
-#include "ServoTimer2.h"
 #include "Led.h"
+
+>>>>>>> Updated to due
 
 /*-------------------------------------------------------------------------------------------------
 *                                       Literal Definitions
@@ -64,11 +67,15 @@ private: /* Fields */
 	StepperMotor *left;
 	StepperMotor *right;
 	MotorTimer *timer;
+<<<<<<< HEAD
 	ServoTimer2 iris, arm;
 	Led *led1, *led2;
 	
 	
 
+=======
+	Servo iris, arm;
+>>>>>>> Updated to due
 };
 
 #endif /* ROBOTTCONTROL_INCLUDED_H */

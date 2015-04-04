@@ -39,14 +39,10 @@ RobotControl::RobotControl()
 {
 
 	iris.attach(2);
-	iris.write(MIN_PULSE_WIDTH);
-	pinMode(13, OUTPUT);
-	pinMode(12, OUTPUT);
-	pinMode(11, OUTPUT);
-	pinMode(10, OUTPUT);
+	iris.write(IRIS_CLOSED_ANGLE_DEG);
 
 	arm.attach(3);
-	arm.write(MIN_PULSE_WIDTH);
+	arm.write(ARM_CLOSED_ANGLE_DEG);
 
 	comm = new Communication();
 
@@ -68,7 +64,7 @@ RobotControl::RobotControl()
 		MOTOR_MICROSTEP_3_PIN
 		);
 
-	left->set_target_velocity(0.5);
+	left->set_target_velocity(1.0);
 	right->set_target_velocity(1.0);
 	
 	timer = MotorTimer::getInstance();
@@ -110,7 +106,7 @@ void RobotControl::runRobot()
 
 	while (1)
 	{
-        Serial.println("Waiting...");
+		Serial.println("Waiting...");
 		comm->waitForNextPacket(packet);
         Serial.print("Recieved packet: ");
         Serial.print(packet.left_drive_throttle);
@@ -129,9 +125,9 @@ void RobotControl::runRobot()
 
 		left->set_target_velocity(fabs(packet.left_drive_throttle));
 		right->set_target_velocity(fabs(packet.right_drive_throttle));
-//
-//		motors->set_left_rotation_direction(signbit(packet.left_drive_throttle) ? REVERSE : FORWARD);
-//		motors->set_right_rotation_direction(signbit(packet.right_drive_throttle) ? REVERSE : FORWARD);
+
+		left->set_rotation_direction(signbit(packet.left_drive_throttle) ? REVERSE : FORWARD);
+		right->set_rotation_direction(signbit(packet.right_drive_throttle) ? REVERSE : FORWARD);
 
 	}
 }

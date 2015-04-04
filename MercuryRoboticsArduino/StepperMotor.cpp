@@ -33,3 +33,10 @@ void StepperMotor::step(void)
 	//digitalWrite(step_pin, !digitalRead(step_pin));
 
 }
+
+void StepperMotor::set_target_velocity(float v)
+{
+	target_velocity = min(MAX_VELOCITY, max(MIN_VELOCITY, v));
+
+	interrupt_time_us = min(MAX_STEP_PERIOD_US, PERIOD_CONVERSION_RATIO / target_velocity);
+}

@@ -15,6 +15,8 @@
 *                                            Includes
 *------------------------------------------------------------------------------------------------*/
 #include "Arduino.h"
+#include <DueTimer.h>
+
 #include "Pin.h"
 #include "StepperMotor.h"
 
@@ -47,7 +49,6 @@ public:  /* Methods */
 	void setup(StepperMotor *leftMotor, StepperMotor *rightMotor);
 	void interruptA(void);
 	void interruptB(void);
-	volatile void updateInterruptTimers();
 
 private: /* Methods */
 	MotorTimer();
@@ -61,7 +62,8 @@ private: /* Fields */
 	static MotorTimer* instance;
 	StepperMotor *motorA;
 	StepperMotor *motorB;
-
+	DueTimer *left;
+	DueTimer *right;
 };
 
 

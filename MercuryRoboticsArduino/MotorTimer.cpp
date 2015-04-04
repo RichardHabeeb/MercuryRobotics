@@ -26,17 +26,6 @@ MotorTimer *MotorTimer::instance = NULL;
 /*-------------------------------------------------------------------------------------------------
 *                                            Functions
 *------------------------------------------------------------------------------------------------*/
-ISR(TIMER1_COMPA_vect)
-{
-	PORTD ^= _BV(PORTD6);
-	MotorTimer::getInstance()->interruptA();
-}
-
-ISR(TIMER1_COMPB_vect)
-{
-	PORTD ^= _BV(PORTD7);
-	MotorTimer::getInstance()->interruptB();
-}
 
 /*-------------------------------------------------------------------------------------------------
 *                                            Methods
@@ -81,14 +70,6 @@ void MotorTimer::setup(StepperMotor *leftMotor, StepperMotor *rightMotor)
 	this->motorA = leftMotor;
 	this->motorB = rightMotor;
 
-	TCCR1B = _BV(WGM13) | _BV(CS10);
-	ICR1 = 0x0ffff;
-
-
-	updateInterruptTimers();
-
-	TIMSK1 = _BV(OCIE1A) | _BV(OCIE1B);
-
 }
 
 /*-----------------------------------------------------------------------------------
@@ -99,7 +80,6 @@ void MotorTimer::setup(StepperMotor *leftMotor, StepperMotor *rightMotor)
 void MotorTimer::interruptA()
 {
 	motorA->step();
-	updateInterruptTimers();
 }
 
 /*-----------------------------------------------------------------------------------
@@ -110,25 +90,4 @@ void MotorTimer::interruptA()
 void MotorTimer::interruptB()
 {
 	motorB->step();
-	updateInterruptTimers();
-}
-
-
-volatile void MotorTimer::updateInterruptTimers()
-{
-	OCR1A = (unsigned int)(F_CPU / 2000000) * motorA->get_step_period_us();
-	OCR1B = (unsigned int)(F_CPU / 2000000) * motorB->get_step_period_us();
-
-	/* interrupt A needs to be longer than B */
-	if (OCR1B > OCR1A)
-	{
-		StepperMotor* temp = motorA;
-		motorA = motorB;
-		motorB = temp;
-
-		unsigned int temp_reg = OCR1A;
-		OCR1A = OCR1B;
-		OCR1B = temp_reg;
-
-	}
 }

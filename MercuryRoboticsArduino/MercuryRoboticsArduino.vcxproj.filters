@@ -24,6 +24,7 @@
     <None Include="CommunicationTesting.ino">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="MercuryRoboticsArduino.ino" />
     <None Include="Sensor.ino">
       <Filter>Source Files</Filter>
     </None>
@@ -37,9 +38,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RobotControl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ServoTimer2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StepperMotor.h">
@@ -74,9 +72,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ServoTimer2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="StepperMotor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
