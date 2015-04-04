@@ -198,7 +198,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(33, 369);
-            this.label13.Name = "label12";
+            this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(111, 19);
             this.label13.TabIndex = 21;
             this.label13.Text = "0";
@@ -208,7 +208,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.Location = new System.Drawing.Point(160, 369);
-            this.label14.Name = "label12";
+            this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(111, 19);
             this.label14.TabIndex = 22;
             this.label14.Text = "0";
@@ -218,7 +218,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.Location = new System.Drawing.Point(33, 444);
-            this.label15.Name = "label12";
+            this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(111, 19);
             this.label15.TabIndex = 23;
             this.label15.Text = "0";
@@ -228,20 +228,20 @@
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.Location = new System.Drawing.Point(160, 444);
-            this.label16.Name = "label12";
+            this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(111, 19);
             this.label16.TabIndex = 24;
             this.label16.Text = "0";
             //
             // label17
             //
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(33, 500);
-            this.label16.Name = "label12";
-            this.label16.Size = new System.Drawing.Size(111, 19);
-            this.label16.TabIndex = 24;
-            this.label16.Text = "0";
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(33, 500);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(111, 19);
+            this.label17.TabIndex = 24;
+            this.label17.Text = "0";
             // 
             // verticalProgressBarIris
             // 

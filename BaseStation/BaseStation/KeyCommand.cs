@@ -18,6 +18,7 @@ namespace BaseStation
         public bool lower = false;
         public bool led_on = false;
         public bool led_off = false;
+        public int counter = 0;
 
         public bool HandleKeyPress(Keys key, bool upDown)
         {
@@ -65,15 +66,21 @@ namespace BaseStation
                     break;
                 
                 case Keys.L:
-                    commandChanged = !this.led_on;
-                    this.led_on = upDown;
-                    break;
+                    if (counter != 1)
+                    {
+                        commandChanged = !this.led_on;
+                        counter = 1;
+                        this.led_on = upDown;
+                        break;
+                    }
 
-                case Keys.O:
-                    commandChanged = !this.led_off;
-                    this.led_off = upDown;
-                    break;
-
+                    else
+                    {
+                        commandChanged = !this.led_off;
+                        counter = 0;
+                        this.led_off = upDown;
+                        break;
+                    }
             }
 
             return commandChanged;

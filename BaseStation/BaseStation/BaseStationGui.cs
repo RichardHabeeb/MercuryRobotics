@@ -39,7 +39,7 @@ namespace BaseStation
 
             SendMotorControllerPacket(controller);
 
-            UpdateGui(controller.LeftDriveThrottle, controller.RightDriveThrottle, controller.armAngle, controller.irisAngle);
+            UpdateGui(controller.LeftDriveThrottle, controller.RightDriveThrottle, controller.armAngle, controller.irisAngle,  controller.Led_toggle);
         }
 
 
@@ -65,7 +65,7 @@ namespace BaseStation
 
             SendMotorControllerPacket(controller);
 
-            UpdateGui(controller.LeftDriveThrottle, controller.RightDriveThrottle, controller.armAngle, controller.irisAngle);
+            UpdateGui(controller.LeftDriveThrottle, controller.RightDriveThrottle, controller.armAngle, controller.irisAngle, controller.Led_toggle);
         }
 
         private void SendMotorControllerPacket(MotorControl controller)
@@ -74,12 +74,12 @@ namespace BaseStation
             robotConnection.Send(dataBuffer, dataBuffer.Length);
         }
 
-        delegate void threadSafeGuiUpdate(double left, double right, double arm, double iris);
-        private void UpdateGui(double left, double right, double arm, double iris)
+        delegate void threadSafeGuiUpdate(double left, double right, double arm, double iris, byte led);
+        private void UpdateGui(double left, double right, double arm, double iris, byte led)
         {
             if (rightMotorLabel.InvokeRequired)
             {
-                rightMotorLabel.Invoke(new threadSafeGuiUpdate(UpdateGui), new object[] { left, right, arm, iris });
+                rightMotorLabel.Invoke(new threadSafeGuiUpdate(UpdateGui), new object[] { left, right, arm, iris, led });
                 return;
             }
             rightMotorLabel.Text = right.ToString();
@@ -88,6 +88,7 @@ namespace BaseStation
             verticalProgressBarRight.Value = (int)Math.Floor(right * 50) + 50;
             verticalProgressBarArm.Value = (int)arm;
             verticalProgressBarIris.Value = (int)iris;
+            label17.Text = led.ToString();
         }
 
 

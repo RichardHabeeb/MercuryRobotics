@@ -32,6 +32,7 @@ namespace BaseStation
             armAngle = commands.lower ? 180.0f : 0.0f;
             LeftDriveThrottle = 0.0f;
             RightDriveThrottle = 0.0f;
+            Led_toggle = 0;
 
             if(commands.forward)
             {
@@ -76,16 +77,26 @@ namespace BaseStation
                 RightDriveThrottle *= 2.0f;
             }
 
-            
+            if (commands.led_on)
+            {
+                Led_toggle = 1;
+            }
+
+            if (commands.led_off)
+            {
+                Led_toggle = 0;
+            }
+            //Add Sensor functionality
 
         }
 
-        public MotorControl(float left, float right, float arm, float iris)
+        public MotorControl(float left, float right, float arm, float iris, byte led)
         {
             irisAngle = iris;
             armAngle = arm;
             LeftDriveThrottle = left;
             RightDriveThrottle = right;
+            Led_toggle = led;
         }
 
         public MotorControl(GamepadState xboxController)
@@ -100,6 +111,7 @@ namespace BaseStation
 
             armAngle = xboxController.LeftTrigger * 180.0f;
             irisAngle = xboxController.RightTrigger * 180.0f;
+            Led_toggle = Convert.ToByte(xboxController.A);
         }
 
         public byte[] ToArray()
@@ -109,7 +121,8 @@ namespace BaseStation
                 LeftDriveThrottle = this.LeftDriveThrottle,
                 RightDriveThrottle = this.RightDriveThrottle,
                 IrisAngle = this.irisAngle,
-                ArmAngle = this.armAngle
+                ArmAngle = this.armAngle,
+                Led_toggle = this.Led_toggle
             };
 
             int controllerSize = Marshal.SizeOf(packet);
