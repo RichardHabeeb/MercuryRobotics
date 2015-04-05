@@ -30,7 +30,7 @@ StepperMotor::~StepperMotor(void)
 
 void StepperMotor::step(void)
 {
-	//digitalWrite(step_pin, !digitalRead(step_pin));
+	*(portOutputRegister(digitalPinToPort(step_pin))) ^= digitalPinToBitMask(step_pin);
 
 }
 

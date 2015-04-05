@@ -19,7 +19,7 @@
 /*-------------------------------------------------------------------------------------------------
 *                                       Literal Definitions
 *------------------------------------------------------------------------------------------------*/
-#define MAX_STEP_PERIOD_US             (8191) /* period here is refering to 1/2 T (we count a toggle as a period) */
+#define MAX_STEP_PERIOD_US             (10000) /* period here is refering to 1/2 T (we count a toggle as a period) */
 #define WHEEL_RADIUS                   (3.0f*.0254f) /*3 inches*/
 #define STEPS_PER_REVOLUTION           (200.0f)
 #define TICKS_PER_STEP                 (2.0f) 
@@ -33,7 +33,6 @@
 *                                           Constants
 *------------------------------------------------------------------------------------------------*/
 const volatile float PERIOD_CONVERSION_RATIO = (100000.0f * 2.f * PI * WHEEL_RADIUS) / TICKS_PER_REVOLUTION;
-const unsigned long a = (0x0ffffL * 2000000L / F_CPU);
 
 /*-------------------------------------------------------------------------------------------------
 *                                             Types

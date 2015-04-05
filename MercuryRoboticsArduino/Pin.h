@@ -19,8 +19,8 @@
 /*-------------------------------------------------------------------------------------------------
 *                                       Literal Definitions
 *------------------------------------------------------------------------------------------------*/
-#define RIGHT_MOTOR_PIN					(6) //Hard coded in ISR
-#define LEFT_MOTOR_PIN					(7)
+#define RIGHT_MOTOR_PIN					(23) 
+#define LEFT_MOTOR_PIN					(33)
 #define RIGHT_MOTOR_DIRECTION_PIN		(0)
 #define LEFT_MOTOR_DIRECTION_PIN		(0)
 #define MOTOR_MICROSTEP_1_PIN			(0)
@@ -36,6 +36,8 @@
 #define LED_PIN_2						(0)
 #define LED_PIN_3						(0)
 #define LED_PIN_4						(0)
+#define ARM_SERVO_PIN					(2)
+#define IRIS_SERVO_PIN					(3)
 
 /*-------------------------------------------------------------------------------------------------
 *                                             Types

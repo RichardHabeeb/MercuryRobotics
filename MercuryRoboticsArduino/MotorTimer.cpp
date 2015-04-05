@@ -67,9 +67,22 @@ MotorTimer* MotorTimer::getInstance(void)
 *------------------------------------------------------------------------------------*/
 void MotorTimer::setup(StepperMotor *leftMotor, StepperMotor *rightMotor)
 {
-	this->motorA = leftMotor;
-	this->motorB = rightMotor;
+	this->leftMotor = leftMotor;
+	this->rightMotor = rightMotor;
 
+	leftTimer = &Timer6;
+	rightTimer = &Timer7;
+
+
+	leftTimer->attachInterrupt(MotorTimer::interruptLeft);
+	rightTimer->attachInterrupt(MotorTimer::interruptRight);
+
+	leftTimer->setPeriod(rightMotor->get_step_period_us());
+	rightTimer->setPeriod(rightMotor->get_step_period_us());
+
+
+	leftTimer->start();
+	rightTimer->start();
 }
 
 /*-----------------------------------------------------------------------------------
@@ -77,9 +90,9 @@ void MotorTimer::setup(StepperMotor *leftMotor, StepperMotor *rightMotor)
 *
 * Description:
 *------------------------------------------------------------------------------------*/
-void MotorTimer::interruptA()
+void MotorTimer::interruptLeft()
 {
-	motorA->step();
+	getInstance()->leftMotor->step();
 }
 
 /*-----------------------------------------------------------------------------------
@@ -87,7 +100,7 @@ void MotorTimer::interruptA()
 *
 * Description:
 *------------------------------------------------------------------------------------*/
-void MotorTimer::interruptB()
+void MotorTimer::interruptRight()
 {
-	motorB->step();
+	getInstance()->rightMotor->step();
 }

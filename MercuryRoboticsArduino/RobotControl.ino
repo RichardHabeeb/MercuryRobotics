@@ -37,17 +37,16 @@ RobotControl* RobotControl::instance = NULL;
 *------------------------------------------------------------------------------------*/
 RobotControl::RobotControl()
 {
+	comm = new Communication();
 
-	iris.attach(2);
+	iris.attach(IRIS_SERVO_PIN);
 	iris.write(IRIS_CLOSED_ANGLE_DEG);
 
-	arm.attach(3);
+	arm.attach(ARM_SERVO_PIN);
 	arm.write(ARM_CLOSED_ANGLE_DEG);
 
 	led1 = new Led(LED_PIN_1);
 	led2 = new Led(LED_PIN_2);
-
-	comm = new Communication();
 
 	left = new StepperMotor
 		(
