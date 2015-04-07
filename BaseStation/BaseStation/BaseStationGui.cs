@@ -18,7 +18,8 @@ namespace BaseStation
     {
         KeyCommand commands;
         UdpClient robotConnection;
-
+        MotorControl xcontroller;
+        MotorControl kcontroller;
 
         GamepadState xboxController;
 
@@ -31,15 +32,17 @@ namespace BaseStation
             robotConnection.Connect(IPAddress.Parse("10.131.190.214"), 4444);
             xboxController = new GamepadState(SlimDX.XInput.UserIndex.One);
             xboxController.ControllerUpdate += xboxController_ControllerUpdate;
+            xcontroller = new MotorControl();
+            kcontroller = new MotorControl();
         }
 
         private void xboxController_ControllerUpdate(object sender, EventArgs e)
         {
-            MotorControl controller = new MotorControl(xboxController);
+            xcontroller.Update(xboxController);
 
-            SendMotorControllerPacket(controller);
+            SendMotorControllerPacket(xcontroller);
 
-            UpdateGui(controller.LeftDriveThrottle, controller.RightDriveThrottle, controller.armAngle, controller.irisAngle,  controller.Led_toggle);
+            UpdateGui(xcontroller.LeftDriveThrottle, xcontroller.RightDriveThrottle, xcontroller.armAngle, xcontroller.irisAngle,  xcontroller.Led_toggle);
         }
 
 
@@ -61,11 +64,11 @@ namespace BaseStation
 
         private void ProcessKeyBoardUpdate()
         {
-            MotorControl controller = new MotorControl(commands);
+            kcontroller.Update(commands);
+            
+            SendMotorControllerPacket(kcontroller);
 
-            SendMotorControllerPacket(controller);
-
-            UpdateGui(controller.LeftDriveThrottle, controller.RightDriveThrottle, controller.armAngle, controller.irisAngle, controller.Led_toggle);
+            UpdateGui(kcontroller.LeftDriveThrottle, kcontroller.RightDriveThrottle, kcontroller.armAngle, kcontroller.irisAngle, kcontroller.Led_toggle);
         }
 
         private void SendMotorControllerPacket(MotorControl controller)
@@ -88,7 +91,8 @@ namespace BaseStation
             verticalProgressBarRight.Value = (int)Math.Floor(right * 50) + 50;
             verticalProgressBarArm.Value = (int)arm;
             verticalProgressBarIris.Value = (int)iris;
-            label17.Text = led.ToString();
+            if (led.ToString().Equals("1")) label17.Text = "LED ON";
+            else label17.Text = "LED OFF";
         }
 
 

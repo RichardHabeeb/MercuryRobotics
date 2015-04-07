@@ -17,7 +17,7 @@ namespace BaseStation
             public float RightDriveThrottle; /* Value from -1 -> 1 (-100% to 100%) */
             public float IrisAngle;
             public float ArmAngle;
-            public byte Led_toggle;
+            public byte Led_toggle;          /* Holds a 0 or 1 for disable/enable Led*/
         }
 
         public float LeftDriveThrottle {get; set;}   /* Value from -1 -> 1 (-100% to 100%) */
@@ -25,8 +25,19 @@ namespace BaseStation
         public float irisAngle {get; set;}
         public float armAngle {get; set;}
         public byte Led_toggle {get; set;}  /* Holds a 0 or 1 for disable/enable LED */
+        private bool isLedOn;               /* Holds true is leds are on false otherwise*/
 
-        public MotorControl(KeyCommand commands)
+        public MotorControl()
+        {
+            irisAngle = 0;
+            armAngle = 0;
+            LeftDriveThrottle = 0;
+            RightDriveThrottle = 0;
+            Led_toggle = 0;
+            isLedOn = false;
+        }
+        
+        public void Update(KeyCommand commands)
         {
             irisAngle = commands.open ? 180.0f : 0.0f;
             armAngle = commands.lower ? 180.0f : 0.0f;
@@ -34,7 +45,9 @@ namespace BaseStation
             RightDriveThrottle = 0.0f;
             Led_toggle = 0;
 
-            if(commands.forward)
+            isLedOn = (commands.led ^ isLedOn);
+            Led_toggle = Convert.ToByte(isLedOn);
+            if (commands.forward)
             {
                 LeftDriveThrottle = 0.5f;
                 RightDriveThrottle = 0.5f;
@@ -45,7 +58,7 @@ namespace BaseStation
                 RightDriveThrottle = -0.5f;
             }
 
-            if(commands.left)
+            if (commands.left)
             {
                 if (commands.forward || commands.reverse)
                 {
@@ -76,43 +89,35 @@ namespace BaseStation
                 LeftDriveThrottle *= 2.0f;
                 RightDriveThrottle *= 2.0f;
             }
-
-            if (commands.led_on)
-            {
-                Led_toggle = 1;
-            }
-
-            if (commands.led_off)
-            {
-                Led_toggle = 0;
-            }
+            
+         
             //Add Sensor functionality
-
         }
 
-        public MotorControl(float left, float right, float arm, float iris, byte led)
-        {
-            irisAngle = iris;
-            armAngle = arm;
-            LeftDriveThrottle = left;
-            RightDriveThrottle = right;
-            Led_toggle = led;
-        }
-
-        public MotorControl(GamepadState xboxController)
+        public void Update(GamepadState xboxController)
         {
             LeftDriveThrottle = Math.Max(-1.0f, Math.Min(1.0f, (xboxController.LeftStick.Clicked ? 1.0f : 0.5f) *
-                        (0.5f * xboxController.LeftStick.Position.X + xboxController.LeftStick.Position.Y) +
-                0.1f *  (0.5f * xboxController.RightStick.Position.X + xboxController.RightStick.Position.Y)));
+                       (0.5f * xboxController.LeftStick.Position.X + xboxController.LeftStick.Position.Y) +
+               0.1f * (0.5f * xboxController.RightStick.Position.X + xboxController.RightStick.Position.Y)));
 
             RightDriveThrottle = Math.Max(-1.0f, Math.Min(1.0f, (xboxController.LeftStick.Clicked ? 1.0f : 0.5f) *
                         (-0.5f * xboxController.LeftStick.Position.X + xboxController.LeftStick.Position.Y) +
-                0.1f *  (-0.5f * xboxController.RightStick.Position.X + xboxController.RightStick.Position.Y)));
+                0.1f * (-0.5f * xboxController.RightStick.Position.X + xboxController.RightStick.Position.Y)));
 
             armAngle = xboxController.LeftTrigger * 180.0f;
             irisAngle = xboxController.RightTrigger * 180.0f;
-            Led_toggle = Convert.ToByte(xboxController.A);
-        }
+
+           if(xboxController.A)
+           {
+               Led_toggle = 1;
+           }
+           else
+           {
+               Led_toggle = 0;
+           }
+            
+            
+        } 
 
         public byte[] ToArray()
         {
@@ -137,5 +142,6 @@ namespace BaseStation
 
             return dataBuffer;
         }
+
     }
 }

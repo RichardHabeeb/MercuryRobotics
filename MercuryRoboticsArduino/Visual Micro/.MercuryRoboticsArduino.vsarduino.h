@@ -16,7 +16,7 @@
 #define USBCON
 #define USB_MANUFACTURER "\"Unknown\""
 #define USB_PRODUCT "\"Arduino Due\""
-#define ARDUINO 160
+#define ARDUINO 161
 #define ARDUINO_MAIN
 #define printf iprintf
 #define __SAM__
