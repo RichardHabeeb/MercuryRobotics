@@ -42,7 +42,7 @@ namespace BaseStation
 
             SendMotorControllerPacket(xcontroller);
 
-            UpdateGui(xcontroller.LeftDriveThrottle, xcontroller.RightDriveThrottle, xcontroller.armAngle, xcontroller.irisAngle,  xcontroller.Led_toggle);
+            UpdateGui(xcontroller.LeftDriveThrottle, xcontroller.RightDriveThrottle, xcontroller.armAngle, xcontroller.irisAngle,  xcontroller.Led_State);
         }
 
 
@@ -68,7 +68,7 @@ namespace BaseStation
             
             SendMotorControllerPacket(kcontroller);
 
-            UpdateGui(kcontroller.LeftDriveThrottle, kcontroller.RightDriveThrottle, kcontroller.armAngle, kcontroller.irisAngle, kcontroller.Led_toggle);
+            UpdateGui(kcontroller.LeftDriveThrottle, kcontroller.RightDriveThrottle, kcontroller.armAngle, kcontroller.irisAngle, kcontroller.Led_State);
         }
 
         private void SendMotorControllerPacket(MotorControl controller)

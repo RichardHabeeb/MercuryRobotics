@@ -24,7 +24,7 @@ namespace BaseStation
         public float RightDriveThrottle {get; set;}  /* Value from -1 -> 1 (-100% to 100%) */
         public float irisAngle {get; set;}
         public float armAngle {get; set;}
-        public byte Led_toggle {get; set;}  /* Holds a 0 or 1 for disable/enable LED */
+        public byte Led_State {get; set;}  /* Holds a 0 or 1 for disable/enable LED */
         private bool isLedOn;               /* Holds true is leds are on false otherwise*/
 
         public MotorControl()
@@ -33,7 +33,7 @@ namespace BaseStation
             armAngle = 0;
             LeftDriveThrottle = 0;
             RightDriveThrottle = 0;
-            Led_toggle = 0;
+            Led_State = 0;
             isLedOn = false;
         }
         
@@ -43,10 +43,11 @@ namespace BaseStation
             armAngle = commands.lower ? 180.0f : 0.0f;
             LeftDriveThrottle = 0.0f;
             RightDriveThrottle = 0.0f;
-            Led_toggle = 0;
+            Led_State = 0;
 
             isLedOn = (commands.led ^ isLedOn);
-            Led_toggle = Convert.ToByte(isLedOn);
+            Led_State = Convert.ToByte(isLedOn);
+
             if (commands.forward)
             {
                 LeftDriveThrottle = 0.5f;
@@ -107,16 +108,9 @@ namespace BaseStation
             armAngle = xboxController.LeftTrigger * 180.0f;
             irisAngle = xboxController.RightTrigger * 180.0f;
 
-           if(xboxController.A)
-           {
-               Led_toggle = 1;
-           }
-           else
-           {
-               Led_toggle = 0;
-           }
-            
-            
+            isLedOn = (xboxController.A ^ isLedOn);
+            Led_State = Convert.ToByte(isLedOn);
+
         } 
 
         public byte[] ToArray()
@@ -127,7 +121,7 @@ namespace BaseStation
                 RightDriveThrottle = this.RightDriveThrottle,
                 IrisAngle = this.irisAngle,
                 ArmAngle = this.armAngle,
-                Led_toggle = this.Led_toggle
+                Led_toggle = this.Led_State
             };
 
             int controllerSize = Marshal.SizeOf(packet);
