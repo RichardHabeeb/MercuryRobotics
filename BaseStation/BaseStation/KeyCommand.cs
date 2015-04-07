@@ -18,7 +18,7 @@ namespace BaseStation
         public bool lower = false;
         public bool led = false;
 
-        public bool HandleKeyPress(Keys key, bool upDown)
+        public bool HandleKeyPress(Keys key, bool KeyPressed)
         {
             bool commandChanged = false;
 
@@ -27,45 +27,45 @@ namespace BaseStation
                 case Keys.Up:
                 case Keys.W:
                     commandChanged = !this.forward;
-                    this.forward = upDown;
+                    this.forward = KeyPressed;
                     break;
 
                 case Keys.Left:
                 case Keys.A:
                     commandChanged = !this.left;
-                    this.left = upDown;
+                    this.left = KeyPressed;
                     break;
 
                 case Keys.Right:
                 case Keys.D:
                     commandChanged = !this.right;
-                    this.right = upDown;
+                    this.right = KeyPressed;
                     break;
 
                 case Keys.Down:
                 case Keys.S:
                     commandChanged = !this.reverse;
-                    this.reverse = upDown;
+                    this.reverse = KeyPressed;
                     break;
 
                 case Keys.ShiftKey:
                     commandChanged = !this.sprint;
-                    this.sprint = upDown;
+                    this.sprint = KeyPressed;
                     break;
 
                 case Keys.E:
                     commandChanged = !this.lower;
-                    this.lower = upDown;
+                    this.lower = KeyPressed;
                     break;
 
                 case Keys.Q:
                     commandChanged = !this.open;
-                    this.open = upDown;
+                    this.open = KeyPressed;
                     break;
 
                 case Keys.L:
                     commandChanged = !this.led;
-                    this.led = upDown;
+                    this.led = KeyPressed;
                     break;
             }
 
