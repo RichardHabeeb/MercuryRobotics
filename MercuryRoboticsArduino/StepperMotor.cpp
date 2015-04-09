@@ -1,42 +1,87 @@
+/**************************************************************************************************
+* Kansas State University Robotic Competition Team
+* File: StepperMotor.cpp
+*
+* Description:
+*
+* Created: 3/9/2015, by Richard Habeeb
+***************************************************************************************************/
+
+/*-------------------------------------------------------------------------------------------------
+*                                            Includes
+*------------------------------------------------------------------------------------------------*/
 #include "StepperMotor.h"
 
+/*-------------------------------------------------------------------------------------------------
+*                                           Prototypes
+*------------------------------------------------------------------------------------------------*/
 
+/*-------------------------------------------------------------------------------------------------
+*                                           Variables
+*------------------------------------------------------------------------------------------------*/
+
+/*-------------------------------------------------------------------------------------------------
+*                                            Functions
+*------------------------------------------------------------------------------------------------*/
+
+/*-------------------------------------------------------------------------------------------------
+*                                            Methods
+*------------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------
+* Function: StepperMotor
+*
+* Description:
+*------------------------------------------------------------------------------------*/
 StepperMotor::StepperMotor
 (
-	pin_t step_pin,
+	pin_t stepPin,
 	pin_t direction_pin,
-	pin_t micro_select_1_pin,
-	pin_t micro_select_2_pin,
-	pin_t micro_select_3_pin
-)
-{
-	this->step_pin = step_pin;
-	this->direction_pin = direction_pin;
-	this->micro_select_1_pin = micro_select_1_pin;
-	this->micro_select_2_pin = micro_select_2_pin;
-	this->micro_select_3_pin = micro_select_3_pin;
+	pin_t microSelect1Pin,
+	pin_t microSelect2Pin,
+	pin_t microSelect3Pin
 
-	pinMode(step_pin, OUTPUT);
-	//pinMode(direction_pin, OUTPUT);
-	//pinMode(micro_select_1_pin, OUTPUT);
-	///pinMode(micro_select_2_pin, OUTPUT);
-	//pinMode(micro_select_3_pin, OUTPUT);
+	)
+{
+	this->stepPin = stepPin;
+	this->directionPin = direction_pin;
+
+	pinMode(stepPin, OUTPUT);
+	pinMode(direction_pin, OUTPUT);
+	pinMode(microSelect1Pin, OUTPUT);
+	pinMode(microSelect2Pin, OUTPUT);
+	pinMode(microSelect3Pin, OUTPUT);
 }
 
-
+/*-----------------------------------------------------------------------------------
+* Function: ~StepperMotor
+*
+* Description:
+*------------------------------------------------------------------------------------*/
 StepperMotor::~StepperMotor(void)
 {
 }
 
+/*-----------------------------------------------------------------------------------
+* Function: step
+*
+* Description:
+*------------------------------------------------------------------------------------*/
 void StepperMotor::step(void)
 {
-	*(portOutputRegister(digitalPinToPort(step_pin))) ^= digitalPinToBitMask(step_pin);
+	*(portOutputRegister(digitalPinToPort(stepPin))) ^= digitalPinToBitMask(stepPin);
 
 }
 
-void StepperMotor::set_target_velocity(float v)
+/*-----------------------------------------------------------------------------------
+* Function: setTargetVelocity
+*
+* Description:
+*------------------------------------------------------------------------------------*/
+void StepperMotor::setTargetVelocity(float v)
 {
-	target_velocity = min(MAX_VELOCITY, max(MIN_VELOCITY, v));
+	targetVelocity = min(MAX_VELOCITY, max(0.0f, v));
 
-	interrupt_time_us = min(MAX_STEP_PERIOD_US, PERIOD_CONVERSION_RATIO / target_velocity);
+	interruptTimeMicroSeconds = min(MAX_STEP_PERIOD_US, PERIOD_CONVERSION_RATIO / targetVelocity);
 }
+

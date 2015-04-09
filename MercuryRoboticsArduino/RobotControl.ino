@@ -12,6 +12,7 @@
 *                                            Includes
 *------------------------------------------------------------------------------------------------*/
 #include "RobotControl.h"
+#include "Config.h"
 
 /*-------------------------------------------------------------------------------------------------
 *                                           Prototypes
@@ -37,7 +38,11 @@ RobotControl* RobotControl::instance = NULL;
 *------------------------------------------------------------------------------------*/
 RobotControl::RobotControl()
 {
-	comm = new Communication();
+	#ifdef COMMUNICATION_DEBUG
+		comm = new CommunicationTesting();
+	#else
+		comm = new Communication();
+	#endif
 
 	iris.attach(IRIS_SERVO_PIN);
 	iris.write(IRIS_CLOSED_ANGLE_DEG);
@@ -52,22 +57,22 @@ RobotControl::RobotControl()
 		(
 		LEFT_MOTOR_PIN,
 		LEFT_MOTOR_DIRECTION_PIN,
-		MOTOR_MICROSTEP_1_PIN,
-		MOTOR_MICROSTEP_2_PIN,
-		MOTOR_MICROSTEP_3_PIN
+		LEFT_MOTOR_MICROSTEP_1_PIN,
+		LEFT_MOTOR_MICROSTEP_2_PIN,
+		LEFT_MOTOR_MICROSTEP_3_PIN
 		);
 
 	right = new StepperMotor
 		(
 		RIGHT_MOTOR_PIN,
 		RIGHT_MOTOR_DIRECTION_PIN,
-		MOTOR_MICROSTEP_1_PIN,
-		MOTOR_MICROSTEP_2_PIN,
-		MOTOR_MICROSTEP_3_PIN
+		RIGHT_MOTOR_MICROSTEP_1_PIN,
+		RIGHT_MOTOR_MICROSTEP_2_PIN,
+		RIGHT_MOTOR_MICROSTEP_3_PIN
 		);
 
-	left->set_target_velocity(1.0);
-	right->set_target_velocity(1.0);
+	left->setTargetVelocity(0.0f);
+	right->setTargetVelocity(0.0f);
 	
 	timer = MotorTimer::getInstance();
 	timer->setup(left, right);
@@ -107,8 +112,10 @@ void RobotControl::runRobot()
 
 	while (1)
 	{
-		Serial.println("Waiting...");
-		comm->waitForNextPacket(packet);
+        Serial.println("Waiting...");
+        
+        comm->waitForNextPacket(packet);
+        
         Serial.print("Recieved packet: ");
         Serial.print(packet.left_drive_throttle);
         Serial.print(", ");
@@ -117,18 +124,18 @@ void RobotControl::runRobot()
         Serial.println(packet.iris_angle_deg);
         Serial.print(", ");
         Serial.print(packet.arm_angle_deg);
-		
-		led1->setState(packet.led_on);
-		led2->setState(packet.led_on);
-
-		arm.write(map(packet.arm_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
-		iris.write(map(packet.iris_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
-
-		left->set_target_velocity(fabs(packet.left_drive_throttle));
-		right->set_target_velocity(fabs(packet.right_drive_throttle));
-
-		left->set_rotation_direction(signbit(packet.left_drive_throttle) ? REVERSE : FORWARD);
-		right->set_rotation_direction(signbit(packet.right_drive_throttle) ? REVERSE : FORWARD);
+        
+        led1->setState(packet.led_on);
+        led2->setState(packet.led_on);
+        
+        arm.write(map(packet.arm_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
+        iris.write(map(packet.iris_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
+        
+		left->setTargetVelocity(fabs(packet.left_drive_throttle));
+		right->setTargetVelocity(fabs(packet.right_drive_throttle));
+        left->setRotationDirection(signbit(packet.left_drive_throttle) ? REVERSE : FORWARD);
+		right->setRotationDirection(signbit(packet.right_drive_throttle) ? REVERSE : FORWARD);
+        timer->update();
 
 	}
 }

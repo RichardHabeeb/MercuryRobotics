@@ -77,12 +77,37 @@ void MotorTimer::setup(StepperMotor *leftMotor, StepperMotor *rightMotor)
 	leftTimer->attachInterrupt(MotorTimer::interruptLeft);
 	rightTimer->attachInterrupt(MotorTimer::interruptRight);
 
-	leftTimer->setPeriod(rightMotor->get_step_period_us());
-	rightTimer->setPeriod(rightMotor->get_step_period_us());
+	update();
+}
 
+/*-----------------------------------------------------------------------------------
+* Function: update
+*
+* Description:
+*------------------------------------------------------------------------------------*/
+void MotorTimer::update()
+{
 
-	leftTimer->start();
-	rightTimer->start();
+	if (leftMotor->isStopped())
+	{
+		leftTimer->stop();
+	}
+	else
+	{
+		leftTimer->setPeriod(leftMotor->getStepPeriodMicroSeconds());
+		leftTimer->start();
+		Serial.println("Starting!");
+	}
+	
+	if (rightMotor->isStopped())
+	{
+		rightTimer->stop();
+	}
+	else
+	{
+		rightTimer->setPeriod(rightMotor->getStepPeriodMicroSeconds());
+		rightTimer->start();
+	}
 }
 
 /*-----------------------------------------------------------------------------------
@@ -96,7 +121,7 @@ void MotorTimer::interruptLeft()
 }
 
 /*-----------------------------------------------------------------------------------
-* Function: interruptLeft
+* Function: interruptRight
 *
 * Description:
 *------------------------------------------------------------------------------------*/
