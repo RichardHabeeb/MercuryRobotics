@@ -35,6 +35,14 @@ typedef struct
 	uint8_t led_on;
 } motor_control_packet_t;
 
+typedef struct
+{
+	float front_sensor;
+	float rear_sensor;
+	float left_sensor;
+	float right_sensor;
+}SensorData;
+
 /*-------------------------------------------------------------------------------------------------
 *                                            Classes
 *------------------------------------------------------------------------------------------------*/
@@ -49,6 +57,7 @@ class ICommunication
 {
 public:  /* Methods */
 	virtual void waitForNextPacket(motor_control_packet_t &packet) = 0;
+	virtual void sendSensorDataPacket(SensorData *sDataPakect) = 0;
 
 private: /* Methods */
 public:  /* Fields */

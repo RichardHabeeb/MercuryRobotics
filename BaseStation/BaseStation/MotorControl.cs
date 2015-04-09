@@ -90,9 +90,6 @@ namespace BaseStation
                 LeftDriveThrottle *= 2.0f;
                 RightDriveThrottle *= 2.0f;
             }
-            
-         
-            //Add Sensor functionality
         }
 
         public void Update(GamepadState xboxController)

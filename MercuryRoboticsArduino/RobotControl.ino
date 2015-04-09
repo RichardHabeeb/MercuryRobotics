@@ -4,7 +4,7 @@
 *
 * Description:
 *
-* Created: 3/9/2015, by Richard Habeeb
+* Created: 3/9/2015, by Richard Habeeb, Brandon Dunn
 ***************************************************************************************************/
 
 
@@ -44,9 +44,15 @@ RobotControl::RobotControl()
 
 	arm.attach(ARM_SERVO_PIN);
 	arm.write(ARM_CLOSED_ANGLE_DEG);
-
+	
 	led1 = new Led(LED_PIN_1);
 	led2 = new Led(LED_PIN_2);
+
+	left_sensor = new Sensor(IR_SENSOR_1_PIN);
+	right_sensor = new Sensor(IR_SENSOR_2_PIN);
+	front_sensor = new Sensor(IR_SENSOR_3_PIN);
+	rear_senor = new Sensor(IR_SENSOR_4_PIN);
+	sdata = new SensorData();
 
 	left = new StepperMotor
 		(
@@ -121,6 +127,12 @@ void RobotControl::runRobot()
 		led1->setState(packet.led_on);
 		led2->setState(packet.led_on);
 
+		sdata->front_sensor = front_sensor->GetSensorData();
+		sdata->rear_sensor = rear_senor->GetSensorData();
+		sdata->left_sensor = left_sensor->GetSensorData();
+		sdata->rear_sensor = right_sensor->GetSensorData();
+		
+		comm->sendSensorDataPacket(sdata);
 		arm.write(map(packet.arm_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
 		iris.write(map(packet.iris_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
 

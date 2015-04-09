@@ -68,3 +68,13 @@ void Communication::waitForNextPacket(motor_control_packet_t &packet)
     memcpy((void*)&packet, buff, sizeof(motor_control_packet_t));
   }
 }
+
+void Communication::sendSensorDataPacket(SensorData *sDataPacket)
+{
+	char buf[sizeof(SensorData)];
+	memcpy(buf, (void*)&sDataPacket,sizeof(SensorData));
+	if (!Serial.available())
+	{
+		Serial.print(buf);
+	}
+}

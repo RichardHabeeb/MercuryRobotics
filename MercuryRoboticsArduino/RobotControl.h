@@ -20,6 +20,7 @@
 #include "StepperMotor.h"
 #include "Communication.h"
 #include "Led.h"
+#include "Sensor.h"
 
 /*-------------------------------------------------------------------------------------------------
 *                                       Literal Definitions
@@ -66,6 +67,8 @@ private: /* Fields */
 	MotorTimer *timer;
 	Led *led1, *led2;
 	Servo iris, arm;
+	Sensor *left_sensor, *right_sensor, *front_sensor, *rear_senor;
+	SensorData *sdata;
 };
 
 #endif /* ROBOTTCONTROL_INCLUDED_H */

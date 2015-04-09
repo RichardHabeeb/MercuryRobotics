@@ -17,6 +17,7 @@
 #include "Arduino.h"
 #include "ISensor.h"
 #include "Pin.h"
+#include "ICommunication.h"
 
 /*-------------------------------------------------------------------------------------------------
 *                                       Literal Definitions
@@ -51,6 +52,7 @@ public:  /* Methods */
 	Sensor(pin_t);
 	~Sensor();
 	float GetSensorData();
+	
 
 private: /* Methods */
 public:  /* Fields */
