@@ -47,6 +47,7 @@ class MotorTimer
 public:  /* Methods */
 	static MotorTimer* getInstance(void);
 	void setup(StepperMotor *leftMotor, StepperMotor *rightMotor);
+        void update(void);
 	static void interruptLeft(void);
 	static void interruptRight(void);
 

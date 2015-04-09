@@ -48,8 +48,6 @@ enum
 	REVERSE
 };
 
-
-
 /*-------------------------------------------------------------------------------------------------
 *                                            Classes
 *------------------------------------------------------------------------------------------------*/
@@ -64,16 +62,19 @@ class StepperMotor
 public:  /* Methods */
 	StepperMotor
 		(
-		pin_t step_pin,
-		pin_t direction_pin,
-		pin_t micro_select_1_pin,
-		pin_t micro_select_2_pin,
-		pin_t micro_select_3_pin
+		pin_t stepPin,
+		pin_t directionPin,
+		pin_t microSelect1Pin,
+		pin_t microSelect2Pin,
+		pin_t microSelect3Pin
 		);
 	~StepperMotor(void);
-	void set_target_velocity(float v);
-	unsigned long get_step_period_us() const { return (unsigned long)(interrupt_time_us); }
-	void set_rotation_direction(motor_direction_t d) { rotation_direction = d; }
+	void setTargetVelocity(float v);
+	unsigned long getStepPeriodMicroSeconds() const { return (unsigned long)(interruptTimeMicroSeconds); }
+	void setRotationDirection(motor_direction_t d) { rotationDirection = d; }
+	bool isStopped(void) const {
+		return MIN_VELOCITY >= fabs(targetVelocity);
+	}
 	void step(void);
 
 private: /* Methods */
@@ -81,15 +82,11 @@ private: /* Methods */
 public:  /* Fields */
 
 private: /* Fields */
-	pin_t step_pin;
-	pin_t direction_pin;
-	pin_t micro_select_1_pin;
-	pin_t micro_select_2_pin;
-	pin_t micro_select_3_pin;
-	volatile float velocity;
-	volatile float target_velocity;
-	volatile long interrupt_time_us;
-	motor_direction_t rotation_direction;
+	pin_t stepPin;
+	pin_t directionPin;
+	volatile float targetVelocity;
+	volatile long interruptTimeMicroSeconds;
+	motor_direction_t rotationDirection;
 };
 
 #endif /* STEPPERMOTORS_INCLUDED_H */
