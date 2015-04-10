@@ -20,16 +20,17 @@ namespace BaseStation
         UdpClient robotConnection;
         MotorControl xcontroller;
         MotorControl kcontroller;
+        GetRobotIP getIP;
 
         GamepadState xboxController;
 
         public BaseStationGUI()
         {
             InitializeComponent();
-
-            commands = new KeyCommand();
             robotConnection = new UdpClient(4444);
-            robotConnection.Connect(IPAddress.Parse("10.131.230.193"), 4444);
+            commands = new KeyCommand(); 
+            getIP = new GetRobotIP(robotConnection);
+            robotConnection.Connect(IPAddress.Parse(getIP.GetIP()), 4444);
             xboxController = new GamepadState(SlimDX.XInput.UserIndex.One);
             xboxController.ControllerUpdate += xboxController_ControllerUpdate;
             xcontroller = new MotorControl();
@@ -101,10 +102,6 @@ namespace BaseStation
             robotConnection.Close();
         }
 
-        private void verticalProgressBarArm_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
 
         private void label1_Click(object sender, EventArgs e)
         {

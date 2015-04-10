@@ -55,6 +55,7 @@
       <DependentUpon>BaseStationGUI.cs</DependentUpon>
     </Compile>
     <Compile Include="GamepadState.cs" />
+    <Compile Include="GetRobotIP.cs" />
     <Compile Include="KeyCommand.cs" />
     <Compile Include="MotorControl.cs" />
     <Compile Include="Program.cs" />
