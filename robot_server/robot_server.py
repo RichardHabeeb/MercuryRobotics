@@ -66,7 +66,7 @@ class NetworkConn(BaseConn):
 class ArduinoConn(BaseConn):
 	packet_format = 's'
 	def create_conn(self):
-		return serial.Serial('/dev/ttyACM99', 115200)
+		return serial.Serial('/dev/ttyACM0', 115200)
 
 	def readline(self):
 	 	return self.conn.readline()
