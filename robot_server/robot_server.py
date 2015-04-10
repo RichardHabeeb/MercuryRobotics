@@ -2,7 +2,7 @@
 import serial
 import struct
 import thread
-
+from base64 import b64encode, b64decode
 from discover_addr import handshake
 
 from socket import socket, AF_INET, SOCK_DGRAM
@@ -69,10 +69,10 @@ class ArduinoConn(BaseConn):
 		return serial.Serial('/dev/ttyACM0', 115200)
 
 	def readline(self):
-	 	return self.conn.readline()
+	 	return b64decode(self.conn.readline())
 
 	def writeline(self, data):
-		self.conn.write(data)
+		self.conn.write(b64encode(data))
 
 def _a_print(stuff):
 	print "Arduino: ", stuff
