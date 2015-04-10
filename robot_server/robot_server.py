@@ -2,6 +2,9 @@
 import serial
 import struct
 import thread
+
+from discover_addr import handshake
+
 from socket import socket, AF_INET, SOCK_DGRAM
 
 
@@ -43,6 +46,10 @@ class BaseConn(object):
 
 class NetworkConn(BaseConn):
 	packet_format = 'ffff'
+	def __init__(self):
+		self.addr = handshake()
+		super(self.__class__, self).__init__()
+
 	def create_conn(self):
 		conn = socket(AF_INET, SOCK_DGRAM)
 		conn.bind(('', 4444))
@@ -51,6 +58,9 @@ class NetworkConn(BaseConn):
 
 	def readline(self):
 		return self.conn.recv(self._size)
+
+	def writeline(self, data):
+		conn.sendto(data, (self.addr, 4444))
 
 
 class ArduinoConn(BaseConn):
@@ -82,6 +92,8 @@ def _write_a_data(data):
 	aconn.writeline(struct.pack('ffff', *data))
 nconn.bind(_write_a_data)
 aconn.start()
+
+nconn.writeline('Foo')
 
 print "Enter to quit."
 raw_input()

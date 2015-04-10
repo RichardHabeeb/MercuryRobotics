@@ -1,4 +1,4 @@
-
+*.pyc
 *.sdf
 *.opensdf
 BaseStation/BaseStation/bin
