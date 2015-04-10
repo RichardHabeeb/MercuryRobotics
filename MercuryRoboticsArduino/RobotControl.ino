@@ -130,10 +130,6 @@ void RobotControl::runRobot()
         Serial.println(packet.iris_angle_deg);
         Serial.print(", ");
         Serial.print(packet.arm_angle_deg);
-<<<<<<< HEAD
-		
-		led1->setState(packet.led_on);
-		led2->setState(packet.led_on);
 
 		sdata->front_sensor = front_sensor->GetSensorData();
 		sdata->rear_sensor = rear_senor->GetSensorData();
@@ -141,16 +137,7 @@ void RobotControl::runRobot()
 		sdata->rear_sensor = right_sensor->GetSensorData();
 		
 		comm->sendSensorDataPacket(sdata);
-		arm.write(map(packet.arm_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
-		iris.write(map(packet.iris_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
 
-		left->set_target_velocity(fabs(packet.left_drive_throttle));
-		right->set_target_velocity(fabs(packet.right_drive_throttle));
-
-		left->set_rotation_direction(signbit(packet.left_drive_throttle) ? REVERSE : FORWARD);
-		right->set_rotation_direction(signbit(packet.right_drive_throttle) ? REVERSE : FORWARD);
-=======
-        
         led1->setState(packet.led_on);
         led2->setState(packet.led_on);
         
@@ -162,7 +149,6 @@ void RobotControl::runRobot()
         left->setRotationDirection(signbit(packet.left_drive_throttle) ? REVERSE : FORWARD);
 		right->setRotationDirection(signbit(packet.right_drive_throttle) ? REVERSE : FORWARD);
         timer->update();
->>>>>>> bdd23c7e7d539f516858e45a74f3bfc2cb069d36
 
 	}
 }
