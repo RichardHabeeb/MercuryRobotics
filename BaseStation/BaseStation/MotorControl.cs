@@ -17,7 +17,7 @@ namespace BaseStation
             public float RightDriveThrottle; /* Value from -1 -> 1 (-100% to 100%) */
             public float IrisAngle;
             public float ArmAngle;
-            public byte Led_toggle;          /* Holds a 0 or 1 for disable/enable Led*/
+            public int Led_toggle;          /* Holds a 0 or 1 for disable/enable Led*/
         }
 
         public float LeftDriveThrottle { get; set; }   /* Value from -1 -> 1 (-100% to 100%) */
@@ -123,13 +123,13 @@ namespace BaseStation
 
             int controllerSize = Marshal.SizeOf(packet);
 
-            byte[] dataBuffer = new byte[controllerSize + 1];
+            byte[] dataBuffer = new byte[controllerSize];
             IntPtr unmanagedPointer = Marshal.AllocHGlobal(controllerSize);
             Marshal.StructureToPtr(packet, unmanagedPointer, false);
             Marshal.Copy(unmanagedPointer, dataBuffer, 0, dataBuffer.Length);
             Marshal.FreeHGlobal(unmanagedPointer);
 
-            dataBuffer[controllerSize] = Encoding.ASCII.GetBytes("\n")[0];
+            //dataBuffer[controllerSize] = Encoding.ASCII.GetBytes("\n")[0];
 
             return dataBuffer;
         }

@@ -28,7 +28,7 @@ namespace BaseStation
         {
             InitializeComponent();
             robotConnection = new UdpClient(4444);
-            commands = new KeyCommand(); 
+            commands = new KeyCommand();
             getIP = new GetRobotIP(robotConnection);
             robotConnection.Connect(IPAddress.Parse(getIP.GetIP()), 4444);
             xboxController = new GamepadState(SlimDX.XInput.UserIndex.One);
@@ -92,8 +92,8 @@ namespace BaseStation
             verticalProgressBarRightMotor.Value = (int)Math.Floor(right * 50) + 50;
             verticalProgressBarArmerature.Value = (int)arm;
             verticalProgressBarIris.Value = (int)iris;
-            if (led.ToString().Equals("1")) HeadLightsState.Text = "LED ON";
-            else HeadLightsState.Text = "LED OFF";
+            if (led.ToString().Equals("1")) HeadLightsState.Text = "ON";
+            else HeadLightsState.Text = "OFF";
         }
 
 

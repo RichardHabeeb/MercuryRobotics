@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.FrontSensor = new System.Windows.Forms.Label();
-            this.RearSensor = new System.Windows.Forms.Label();
-            this.LeftSensor = new System.Windows.Forms.Label();
-            this.RightSensor = new System.Windows.Forms.Label();
+            this.FrontLeftSensor = new System.Windows.Forms.Label();
+            this.FrontRightSensor = new System.Windows.Forms.Label();
+            this.RearLeftSensor = new System.Windows.Forms.Label();
+            this.RearRightSensor = new System.Windows.Forms.Label();
             this.HeadLights = new System.Windows.Forms.Label();
             this.FrontSensorReading = new System.Windows.Forms.Label();
             this.RearSensorReading = new System.Windows.Forms.Label();
@@ -56,41 +56,41 @@
             this.verticalProgressBarLeftMotor = new BaseStation.VerticalProgressBar();
             this.SuspendLayout();
             // 
-            // FrontSensor
+            // FrontLeftSensor
             // 
-            this.FrontSensor.AutoSize = true;
-            this.FrontSensor.Location = new System.Drawing.Point(42, 366);
-            this.FrontSensor.Name = "FrontSensor";
-            this.FrontSensor.Size = new System.Drawing.Size(67, 13);
-            this.FrontSensor.TabIndex = 0;
-            this.FrontSensor.Text = "Front Sensor";
+            this.FrontLeftSensor.AutoSize = true;
+            this.FrontLeftSensor.Location = new System.Drawing.Point(42, 366);
+            this.FrontLeftSensor.Name = "FrontLeftSensor";
+            this.FrontLeftSensor.Size = new System.Drawing.Size(88, 13);
+            this.FrontLeftSensor.TabIndex = 0;
+            this.FrontLeftSensor.Text = "Front Left Sensor";
             // 
-            // RearSensor
+            // FrontRightSensor
             // 
-            this.RearSensor.AutoSize = true;
-            this.RearSensor.Location = new System.Drawing.Point(202, 366);
-            this.RearSensor.Name = "RearSensor";
-            this.RearSensor.Size = new System.Drawing.Size(66, 13);
-            this.RearSensor.TabIndex = 1;
-            this.RearSensor.Text = "Rear Sensor";
+            this.FrontRightSensor.AutoSize = true;
+            this.FrontRightSensor.Location = new System.Drawing.Point(202, 366);
+            this.FrontRightSensor.Name = "FrontRightSensor";
+            this.FrontRightSensor.Size = new System.Drawing.Size(87, 13);
+            this.FrontRightSensor.TabIndex = 1;
+            this.FrontRightSensor.Text = "front right Sensor";
             // 
-            // LeftSensor
+            // RearLeftSensor
             // 
-            this.LeftSensor.AutoSize = true;
-            this.LeftSensor.Location = new System.Drawing.Point(42, 414);
-            this.LeftSensor.Name = "LeftSensor";
-            this.LeftSensor.Size = new System.Drawing.Size(61, 13);
-            this.LeftSensor.TabIndex = 2;
-            this.LeftSensor.Text = "Left Sensor";
+            this.RearLeftSensor.AutoSize = true;
+            this.RearLeftSensor.Location = new System.Drawing.Point(42, 414);
+            this.RearLeftSensor.Name = "RearLeftSensor";
+            this.RearLeftSensor.Size = new System.Drawing.Size(87, 13);
+            this.RearLeftSensor.TabIndex = 2;
+            this.RearLeftSensor.Text = "Rear Left Sensor";
             // 
-            // RightSensor
+            // RearRightSensor
             // 
-            this.RightSensor.AutoSize = true;
-            this.RightSensor.Location = new System.Drawing.Point(202, 414);
-            this.RightSensor.Name = "RightSensor";
-            this.RightSensor.Size = new System.Drawing.Size(68, 13);
-            this.RightSensor.TabIndex = 3;
-            this.RightSensor.Text = "Right Sensor";
+            this.RearRightSensor.AutoSize = true;
+            this.RearRightSensor.Location = new System.Drawing.Point(202, 414);
+            this.RearRightSensor.Name = "RearRightSensor";
+            this.RearRightSensor.Size = new System.Drawing.Size(94, 13);
+            this.RearRightSensor.TabIndex = 3;
+            this.RearRightSensor.Text = "Rear Right Sensor";
             // 
             // HeadLights
             // 
@@ -310,11 +310,12 @@
             this.Controls.Add(this.RearSensorReading);
             this.Controls.Add(this.FrontSensorReading);
             this.Controls.Add(this.HeadLights);
-            this.Controls.Add(this.RightSensor);
-            this.Controls.Add(this.LeftSensor);
-            this.Controls.Add(this.RearSensor);
-            this.Controls.Add(this.FrontSensor);
+            this.Controls.Add(this.RearRightSensor);
+            this.Controls.Add(this.RearLeftSensor);
+            this.Controls.Add(this.FrontRightSensor);
+            this.Controls.Add(this.FrontLeftSensor);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "BaseStationGUI";
             this.Text = "Form1";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BaseStationGUI_KeyDown);
@@ -326,10 +327,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Label FrontSensor;
-        private System.Windows.Forms.Label RearSensor;
-        private System.Windows.Forms.Label LeftSensor;
-        private System.Windows.Forms.Label RightSensor;
+        private System.Windows.Forms.Label FrontLeftSensor;
+        private System.Windows.Forms.Label FrontRightSensor;
+        private System.Windows.Forms.Label RearLeftSensor;
+        private System.Windows.Forms.Label RearRightSensor;
         private System.Windows.Forms.Label HeadLights;
         private System.Windows.Forms.Label FrontSensorReading;
         private System.Windows.Forms.Label RearSensorReading;
