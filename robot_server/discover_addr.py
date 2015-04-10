@@ -26,4 +26,5 @@ def handshake():
     incomming = socket(AF_INET, SOCK_DGRAM)
     incomming.bind(('', 4444))
     conn.sendto(addr, (broadcast, 4444))
+    assert incomming.recv(1024).strip() == addr, "This is my IP."
     return incomming.recv(1024)
