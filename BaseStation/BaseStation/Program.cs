@@ -16,7 +16,7 @@ namespace BaseStation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BaseStationGui());
+            Application.Run(new BaseStationGUI());
         }
     }
 }

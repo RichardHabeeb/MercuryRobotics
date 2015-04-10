@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace BaseStation
 {
-    public class GamepadState
+    class GamepadState
     {
         uint lastPacket;
 
@@ -59,14 +59,14 @@ namespace BaseStation
             {
                 if (xboxControllerLock.WaitOne(0))
                 {
-                    if(CheckControlerState())
+                    if (CheckControlerState())
                     {
                         if (ControllerUpdate != null)
                         {
                             ControllerUpdate.Invoke(this, new EventArgs());
                         }
                     }
-                    
+
 
                     xboxControllerLock.ReleaseMutex();
                 }
@@ -76,7 +76,7 @@ namespace BaseStation
 
         public bool Connected
         {
-            get 
+            get
             {
                 if (xboxControllerLock.WaitOne(30))
                 {
@@ -141,7 +141,7 @@ namespace BaseStation
                 (gamepadState.Buttons & GamepadButtonFlags.RightThumb) != 0);
 
             return true;
-            
+
         }
 
         static Vector2 Normalize(short rawX, short rawY, short threshold)

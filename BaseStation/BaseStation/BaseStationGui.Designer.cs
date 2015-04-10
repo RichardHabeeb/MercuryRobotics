@@ -1,6 +1,6 @@
 ﻿namespace BaseStation
 {
-    partial class BaseStationGui
+    partial class BaseStationGUI
     {
         /// <summary>
         /// Required designer variable.
@@ -28,287 +28,297 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.FrontSensor = new System.Windows.Forms.Label();
+            this.RearSensor = new System.Windows.Forms.Label();
+            this.LeftSensor = new System.Windows.Forms.Label();
+            this.RightSensor = new System.Windows.Forms.Label();
+            this.HeadLights = new System.Windows.Forms.Label();
+            this.FrontSensorReading = new System.Windows.Forms.Label();
+            this.RearSensorReading = new System.Windows.Forms.Label();
+            this.LeftSensorReading = new System.Windows.Forms.Label();
+            this.RightSensorReading = new System.Windows.Forms.Label();
+            this.HeadLightsState = new System.Windows.Forms.Label();
+            this.MaxDegreeArm = new System.Windows.Forms.Label();
+            this.NinetyDegreeArm = new System.Windows.Forms.Label();
+            this.ZeroDegreeArm = new System.Windows.Forms.Label();
+            this.MaxDegreeIris = new System.Windows.Forms.Label();
+            this.NinetyDegreeIris = new System.Windows.Forms.Label();
+            this.ZeroDegreeIris = new System.Windows.Forms.Label();
+            this.Armerature = new System.Windows.Forms.Label();
+            this.Iris = new System.Windows.Forms.Label();
+            this.LeftMotorNameLabel = new System.Windows.Forms.Label();
+            this.RightMotorNameLabel = new System.Windows.Forms.Label();
             this.leftMotorLabel = new System.Windows.Forms.Label();
             this.rightMotorLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();  //Labels 9 - 12 are for the sensors
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label(); //Labels 13 - 16 are sensor readings
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.verticalProgressBarIris = new BaseStation.VerticalProgressBar();
-            this.verticalProgressBarArm = new BaseStation.VerticalProgressBar();
-            this.verticalProgressBarRight = new BaseStation.VerticalProgressBar();
-            this.verticalProgressBarLeft = new BaseStation.VerticalProgressBar();
+            this.verticalProgressBarArmerature = new BaseStation.VerticalProgressBar();
+            this.verticalProgressBarRightMotor = new BaseStation.VerticalProgressBar();
+            this.verticalProgressBarLeftMotor = new BaseStation.VerticalProgressBar();
             this.SuspendLayout();
+            // 
+            // FrontSensor
+            // 
+            this.FrontSensor.AutoSize = true;
+            this.FrontSensor.Location = new System.Drawing.Point(42, 366);
+            this.FrontSensor.Name = "FrontSensor";
+            this.FrontSensor.Size = new System.Drawing.Size(67, 13);
+            this.FrontSensor.TabIndex = 0;
+            this.FrontSensor.Text = "Front Sensor";
+            // 
+            // RearSensor
+            // 
+            this.RearSensor.AutoSize = true;
+            this.RearSensor.Location = new System.Drawing.Point(202, 366);
+            this.RearSensor.Name = "RearSensor";
+            this.RearSensor.Size = new System.Drawing.Size(66, 13);
+            this.RearSensor.TabIndex = 1;
+            this.RearSensor.Text = "Rear Sensor";
+            // 
+            // LeftSensor
+            // 
+            this.LeftSensor.AutoSize = true;
+            this.LeftSensor.Location = new System.Drawing.Point(42, 414);
+            this.LeftSensor.Name = "LeftSensor";
+            this.LeftSensor.Size = new System.Drawing.Size(61, 13);
+            this.LeftSensor.TabIndex = 2;
+            this.LeftSensor.Text = "Left Sensor";
+            // 
+            // RightSensor
+            // 
+            this.RightSensor.AutoSize = true;
+            this.RightSensor.Location = new System.Drawing.Point(202, 414);
+            this.RightSensor.Name = "RightSensor";
+            this.RightSensor.Size = new System.Drawing.Size(68, 13);
+            this.RightSensor.TabIndex = 3;
+            this.RightSensor.Text = "Right Sensor";
+            // 
+            // HeadLights
+            // 
+            this.HeadLights.AutoSize = true;
+            this.HeadLights.Location = new System.Drawing.Point(125, 396);
+            this.HeadLights.Name = "HeadLights";
+            this.HeadLights.Size = new System.Drawing.Size(64, 13);
+            this.HeadLights.TabIndex = 4;
+            this.HeadLights.Text = "Head Lights";
+            // 
+            // FrontSensorReading
+            // 
+            this.FrontSensorReading.AutoSize = true;
+            this.FrontSensorReading.Location = new System.Drawing.Point(42, 379);
+            this.FrontSensorReading.Name = "FrontSensorReading";
+            this.FrontSensorReading.Size = new System.Drawing.Size(58, 13);
+            this.FrontSensorReading.TabIndex = 5;
+            this.FrontSensorReading.Text = "0 cm away";
+            // 
+            // RearSensorReading
+            // 
+            this.RearSensorReading.AutoSize = true;
+            this.RearSensorReading.Location = new System.Drawing.Point(202, 379);
+            this.RearSensorReading.Name = "RearSensorReading";
+            this.RearSensorReading.Size = new System.Drawing.Size(58, 13);
+            this.RearSensorReading.TabIndex = 6;
+            this.RearSensorReading.Text = "0 cm away";
+            // 
+            // LeftSensorReading
+            // 
+            this.LeftSensorReading.AutoSize = true;
+            this.LeftSensorReading.Location = new System.Drawing.Point(42, 427);
+            this.LeftSensorReading.Name = "LeftSensorReading";
+            this.LeftSensorReading.Size = new System.Drawing.Size(58, 13);
+            this.LeftSensorReading.TabIndex = 7;
+            this.LeftSensorReading.Text = "0 cm away";
+            // 
+            // RightSensorReading
+            // 
+            this.RightSensorReading.AutoSize = true;
+            this.RightSensorReading.Location = new System.Drawing.Point(202, 427);
+            this.RightSensorReading.Name = "RightSensorReading";
+            this.RightSensorReading.Size = new System.Drawing.Size(58, 13);
+            this.RightSensorReading.TabIndex = 8;
+            this.RightSensorReading.Text = "0 cm away";
+            // 
+            // HeadLightsState
+            // 
+            this.HeadLightsState.AutoSize = true;
+            this.HeadLightsState.Location = new System.Drawing.Point(137, 409);
+            this.HeadLightsState.Name = "HeadLightsState";
+            this.HeadLightsState.Size = new System.Drawing.Size(27, 13);
+            this.HeadLightsState.TabIndex = 9;
+            this.HeadLightsState.Text = "OFF";
+            // 
+            // MaxDegreeArm
+            // 
+            this.MaxDegreeArm.AutoSize = true;
+            this.MaxDegreeArm.Location = new System.Drawing.Point(203, 47);
+            this.MaxDegreeArm.Name = "MaxDegreeArm";
+            this.MaxDegreeArm.Size = new System.Drawing.Size(29, 13);
+            this.MaxDegreeArm.TabIndex = 14;
+            this.MaxDegreeArm.Text = "180°";
+            // 
+            // NinetyDegreeArm
+            // 
+            this.NinetyDegreeArm.AutoSize = true;
+            this.NinetyDegreeArm.Location = new System.Drawing.Point(203, 177);
+            this.NinetyDegreeArm.Name = "NinetyDegreeArm";
+            this.NinetyDegreeArm.Size = new System.Drawing.Size(23, 13);
+            this.NinetyDegreeArm.TabIndex = 15;
+            this.NinetyDegreeArm.Text = "90°";
+            // 
+            // ZeroDegreeArm
+            // 
+            this.ZeroDegreeArm.AutoSize = true;
+            this.ZeroDegreeArm.Location = new System.Drawing.Point(203, 319);
+            this.ZeroDegreeArm.Name = "ZeroDegreeArm";
+            this.ZeroDegreeArm.Size = new System.Drawing.Size(17, 13);
+            this.ZeroDegreeArm.TabIndex = 16;
+            this.ZeroDegreeArm.Text = "0°";
+            // 
+            // MaxDegreeIris
+            // 
+            this.MaxDegreeIris.AutoSize = true;
+            this.MaxDegreeIris.Location = new System.Drawing.Point(283, 47);
+            this.MaxDegreeIris.Name = "MaxDegreeIris";
+            this.MaxDegreeIris.Size = new System.Drawing.Size(29, 13);
+            this.MaxDegreeIris.TabIndex = 17;
+            this.MaxDegreeIris.Text = "180°";
+            // 
+            // NinetyDegreeIris
+            // 
+            this.NinetyDegreeIris.AutoSize = true;
+            this.NinetyDegreeIris.Location = new System.Drawing.Point(283, 177);
+            this.NinetyDegreeIris.Name = "NinetyDegreeIris";
+            this.NinetyDegreeIris.Size = new System.Drawing.Size(23, 13);
+            this.NinetyDegreeIris.TabIndex = 18;
+            this.NinetyDegreeIris.Text = "90°";
+            // 
+            // ZeroDegreeIris
+            // 
+            this.ZeroDegreeIris.AutoSize = true;
+            this.ZeroDegreeIris.Location = new System.Drawing.Point(283, 319);
+            this.ZeroDegreeIris.Name = "ZeroDegreeIris";
+            this.ZeroDegreeIris.Size = new System.Drawing.Size(17, 13);
+            this.ZeroDegreeIris.TabIndex = 19;
+            this.ZeroDegreeIris.Text = "0°";
+            // 
+            // Armerature
+            // 
+            this.Armerature.AutoSize = true;
+            this.Armerature.Location = new System.Drawing.Point(155, 31);
+            this.Armerature.Name = "Armerature";
+            this.Armerature.Size = new System.Drawing.Size(58, 13);
+            this.Armerature.TabIndex = 20;
+            this.Armerature.Text = "Armerature";
+            // 
+            // Iris
+            // 
+            this.Iris.AutoSize = true;
+            this.Iris.Location = new System.Drawing.Point(254, 31);
+            this.Iris.Name = "Iris";
+            this.Iris.Size = new System.Drawing.Size(20, 13);
+            this.Iris.TabIndex = 21;
+            this.Iris.Text = "Iris";
+            // 
+            // LeftMotorNameLabel
+            // 
+            this.LeftMotorNameLabel.AutoSize = true;
+            this.LeftMotorNameLabel.Location = new System.Drawing.Point(22, 31);
+            this.LeftMotorNameLabel.Name = "LeftMotorNameLabel";
+            this.LeftMotorNameLabel.Size = new System.Drawing.Size(55, 13);
+            this.LeftMotorNameLabel.TabIndex = 22;
+            this.LeftMotorNameLabel.Text = "Left Motor";
+            // 
+            // RightMotorNameLabel
+            // 
+            this.RightMotorNameLabel.AutoSize = true;
+            this.RightMotorNameLabel.Location = new System.Drawing.Point(81, 31);
+            this.RightMotorNameLabel.Name = "RightMotorNameLabel";
+            this.RightMotorNameLabel.Size = new System.Drawing.Size(62, 13);
+            this.RightMotorNameLabel.TabIndex = 23;
+            this.RightMotorNameLabel.Text = "Right Motor";
             // 
             // leftMotorLabel
             // 
             this.leftMotorLabel.AutoSize = true;
-            this.leftMotorLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.leftMotorLabel.Location = new System.Drawing.Point(57, 304);
+            this.leftMotorLabel.Location = new System.Drawing.Point(28, 335);
             this.leftMotorLabel.Name = "leftMotorLabel";
-            this.leftMotorLabel.Size = new System.Drawing.Size(23, 13);
-            this.leftMotorLabel.TabIndex = 2;
-            this.leftMotorLabel.Text = "0.0";
+            this.leftMotorLabel.Size = new System.Drawing.Size(0, 13);
+            this.leftMotorLabel.TabIndex = 24;
+            this.leftMotorLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // rightMotorLabel
             // 
             this.rightMotorLabel.AutoSize = true;
-            this.rightMotorLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rightMotorLabel.Location = new System.Drawing.Point(93, 304);
+            this.rightMotorLabel.Location = new System.Drawing.Point(88, 335);
             this.rightMotorLabel.Name = "rightMotorLabel";
-            this.rightMotorLabel.Size = new System.Drawing.Size(23, 13);
-            this.rightMotorLabel.TabIndex = 3;
-            this.rightMotorLabel.Text = "0.0";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(33, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 19);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Motor Throttle";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(160, 30);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 19);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Arm Angle";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(218, 52);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "180˚";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(218, 171);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(25, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "90˚";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(218, 288);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(19, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "0˚";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(289, 30);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 19);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "Iris";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(327, 52);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(33, 13);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Open";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(327, 288);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(39, 13);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "Closed";
-            //
-            // label9
-            //
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(33, 350);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(111, 19);
-            this.label9.TabIndex = 17;
-            this.label9.Text = "Front Sensor";
-            //
-            // label10
-            //
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(160, 350);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(111, 19);
-            this.label10.TabIndex = 18;
-            this.label10.Text = "Back Sensor";
-            //
-            // label11
-            //
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(33, 425);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(111, 19);
-            this.label11.TabIndex = 19;
-            this.label11.Text = "Left Sensor";
-            //
-            // label12
-            //
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(160, 425);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(111, 19);
-            this.label12.TabIndex = 20;
-            this.label12.Text = "Right Sensor";
-            //
-            // label13
-            //
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(33, 369);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(111, 19);
-            this.label13.TabIndex = 21;
-            this.label13.Text = "0";
-            //
-            // label14
-            //
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(160, 369);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(111, 19);
-            this.label14.TabIndex = 22;
-            this.label14.Text = "0";
-            //
-            // label15
-            //
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(33, 444);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(111, 19);
-            this.label15.TabIndex = 23;
-            this.label15.Text = "0";
-            //
-            // label16
-            //
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(160, 444);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(111, 19);
-            this.label16.TabIndex = 24;
-            this.label16.Text = "0";
-            //
-            // label17
-            //
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(33, 500);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(111, 19);
-            this.label17.TabIndex = 24;
-            this.label17.Text = "0";
+            this.rightMotorLabel.Size = new System.Drawing.Size(0, 13);
+            this.rightMotorLabel.TabIndex = 25;
             // 
             // verticalProgressBarIris
             // 
-            this.verticalProgressBarIris.Location = new System.Drawing.Point(291, 52);
+            this.verticalProgressBarIris.Location = new System.Drawing.Point(243, 47);
             this.verticalProgressBarIris.Maximum = 180;
             this.verticalProgressBarIris.Name = "verticalProgressBarIris";
-            this.verticalProgressBarIris.Size = new System.Drawing.Size(30, 249);
-            this.verticalProgressBarIris.TabIndex = 14;
+            this.verticalProgressBarIris.Size = new System.Drawing.Size(39, 285);
+            this.verticalProgressBarIris.TabIndex = 13;
             // 
-            // verticalProgressBarArm
+            // verticalProgressBarArmerature
             // 
-            this.verticalProgressBarArm.Location = new System.Drawing.Point(185, 52);
-            this.verticalProgressBarArm.Maximum = 180;
-            this.verticalProgressBarArm.Name = "verticalProgressBarArm";
-            this.verticalProgressBarArm.Size = new System.Drawing.Size(30, 249);
-            this.verticalProgressBarArm.TabIndex = 9;
-            this.verticalProgressBarArm.MouseClick += new System.Windows.Forms.MouseEventHandler(this.verticalProgressBarArm_MouseClick);
+            this.verticalProgressBarArmerature.Location = new System.Drawing.Point(158, 47);
+            this.verticalProgressBarArmerature.Maximum = 180;
+            this.verticalProgressBarArmerature.Name = "verticalProgressBarArmerature";
+            this.verticalProgressBarArmerature.Size = new System.Drawing.Size(39, 285);
+            this.verticalProgressBarArmerature.TabIndex = 12;
             // 
-            // verticalProgressBarRight
+            // verticalProgressBarRightMotor
             // 
-            this.verticalProgressBarRight.Location = new System.Drawing.Point(89, 52);
-            this.verticalProgressBarRight.Name = "verticalProgressBarRight";
-            this.verticalProgressBarRight.Size = new System.Drawing.Size(30, 249);
-            this.verticalProgressBarRight.TabIndex = 6;
-            this.verticalProgressBarRight.Value = 50;
+            this.verticalProgressBarRightMotor.Location = new System.Drawing.Point(84, 47);
+            this.verticalProgressBarRightMotor.Name = "verticalProgressBarRightMotor";
+            this.verticalProgressBarRightMotor.Size = new System.Drawing.Size(39, 285);
+            this.verticalProgressBarRightMotor.TabIndex = 11;
             // 
-            // verticalProgressBarLeft
+            // verticalProgressBarLeftMotor
             // 
-            this.verticalProgressBarLeft.Location = new System.Drawing.Point(53, 52);
-            this.verticalProgressBarLeft.Name = "verticalProgressBarLeft";
-            this.verticalProgressBarLeft.Size = new System.Drawing.Size(30, 249);
-            this.verticalProgressBarLeft.TabIndex = 5;
-            this.verticalProgressBarLeft.Value = 50;
+            this.verticalProgressBarLeftMotor.Location = new System.Drawing.Point(25, 47);
+            this.verticalProgressBarLeftMotor.Name = "verticalProgressBarLeftMotor";
+            this.verticalProgressBarLeftMotor.Size = new System.Drawing.Size(38, 285);
+            this.verticalProgressBarLeftMotor.TabIndex = 10;
             // 
-            // BaseStationGui
+            // BaseStationGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(429, 536);
-            this.Controls.Add(this.label17);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.verticalProgressBarIris);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.verticalProgressBarArm);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.verticalProgressBarRight);
-            this.Controls.Add(this.verticalProgressBarLeft);
+            this.ClientSize = new System.Drawing.Size(321, 453);
             this.Controls.Add(this.rightMotorLabel);
             this.Controls.Add(this.leftMotorLabel);
-            this.Name = "BaseStationGui";
-            this.Text = "KSURCT Mercury Robot Base Station";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BaseStationGui_FormClosing);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BaseStationGui_KeyDown);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.BaseStationGui_KeyUp);
+            this.Controls.Add(this.RightMotorNameLabel);
+            this.Controls.Add(this.LeftMotorNameLabel);
+            this.Controls.Add(this.Iris);
+            this.Controls.Add(this.Armerature);
+            this.Controls.Add(this.ZeroDegreeIris);
+            this.Controls.Add(this.NinetyDegreeIris);
+            this.Controls.Add(this.MaxDegreeIris);
+            this.Controls.Add(this.ZeroDegreeArm);
+            this.Controls.Add(this.NinetyDegreeArm);
+            this.Controls.Add(this.MaxDegreeArm);
+            this.Controls.Add(this.verticalProgressBarIris);
+            this.Controls.Add(this.verticalProgressBarArmerature);
+            this.Controls.Add(this.verticalProgressBarRightMotor);
+            this.Controls.Add(this.verticalProgressBarLeftMotor);
+            this.Controls.Add(this.HeadLightsState);
+            this.Controls.Add(this.RightSensorReading);
+            this.Controls.Add(this.LeftSensorReading);
+            this.Controls.Add(this.RearSensorReading);
+            this.Controls.Add(this.FrontSensorReading);
+            this.Controls.Add(this.HeadLights);
+            this.Controls.Add(this.RightSensor);
+            this.Controls.Add(this.LeftSensor);
+            this.Controls.Add(this.RearSensor);
+            this.Controls.Add(this.FrontSensor);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Name = "BaseStationGUI";
+            this.Text = "Form1";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BaseStationGUI_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.BaseStationGUI_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -316,28 +326,32 @@
 
         #endregion
 
+        private System.Windows.Forms.Label FrontSensor;
+        private System.Windows.Forms.Label RearSensor;
+        private System.Windows.Forms.Label LeftSensor;
+        private System.Windows.Forms.Label RightSensor;
+        private System.Windows.Forms.Label HeadLights;
+        private System.Windows.Forms.Label FrontSensorReading;
+        private System.Windows.Forms.Label RearSensorReading;
+        private System.Windows.Forms.Label LeftSensorReading;
+        private System.Windows.Forms.Label RightSensorReading;
+        private System.Windows.Forms.Label HeadLightsState;
+        private VerticalProgressBar verticalProgressBarLeftMotor;
+        private VerticalProgressBar verticalProgressBarRightMotor;
+        private VerticalProgressBar verticalProgressBarArmerature;
+        private VerticalProgressBar verticalProgressBarIris;
+        private System.Windows.Forms.Label MaxDegreeArm;
+        private System.Windows.Forms.Label NinetyDegreeArm;
+        private System.Windows.Forms.Label ZeroDegreeArm;
+        private System.Windows.Forms.Label MaxDegreeIris;
+        private System.Windows.Forms.Label NinetyDegreeIris;
+        private System.Windows.Forms.Label ZeroDegreeIris;
+        private System.Windows.Forms.Label Armerature;
+        private System.Windows.Forms.Label Iris;
+        private System.Windows.Forms.Label LeftMotorNameLabel;
+        private System.Windows.Forms.Label RightMotorNameLabel;
         private System.Windows.Forms.Label leftMotorLabel;
         private System.Windows.Forms.Label rightMotorLabel;
-        private VerticalProgressBar verticalProgressBarLeft;
-        private VerticalProgressBar verticalProgressBarRight;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private VerticalProgressBar verticalProgressBarArm;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private VerticalProgressBar verticalProgressBarIris;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
     }
 }
+

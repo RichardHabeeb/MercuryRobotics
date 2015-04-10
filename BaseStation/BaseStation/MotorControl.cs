@@ -20,11 +20,11 @@ namespace BaseStation
             public byte Led_toggle;          /* Holds a 0 or 1 for disable/enable Led*/
         }
 
-        public float LeftDriveThrottle {get; set;}   /* Value from -1 -> 1 (-100% to 100%) */
-        public float RightDriveThrottle {get; set;}  /* Value from -1 -> 1 (-100% to 100%) */
-        public float irisAngle {get; set;}
-        public float armAngle {get; set;}
-        public byte Led_State {get; set;}  /* Holds a 0 or 1 for disable/enable LED */
+        public float LeftDriveThrottle { get; set; }   /* Value from -1 -> 1 (-100% to 100%) */
+        public float RightDriveThrottle { get; set; }  /* Value from -1 -> 1 (-100% to 100%) */
+        public float irisAngle { get; set; }
+        public float armAngle { get; set; }
+        public byte Led_State { get; set; }  /* Holds a 0 or 1 for disable/enable LED */
         private bool isLedOn;               /* Holds true is leds are on false otherwise*/
 
         public MotorControl()
@@ -36,7 +36,7 @@ namespace BaseStation
             Led_State = 0;
             isLedOn = false;
         }
-        
+
         public void Update(KeyCommand commands)
         {
             irisAngle = commands.open ? 180.0f : 0.0f;
@@ -108,7 +108,7 @@ namespace BaseStation
             isLedOn = (xboxController.A ^ isLedOn);
             Led_State = Convert.ToByte(isLedOn);
 
-        } 
+        }
 
         public byte[] ToArray()
         {

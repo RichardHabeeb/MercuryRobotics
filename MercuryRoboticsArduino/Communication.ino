@@ -71,8 +71,5 @@ void Communication::sendSensorDataPacket(SensorData *sDataPacket)
 {
 	char buf[sizeof(SensorData)];
 	memcpy(buf, (void*)&sDataPacket,sizeof(SensorData));
-	if (!Serial.available())
-	{
-		Serial.print(buf);
-	}
+	Serial.print(buf);
 }

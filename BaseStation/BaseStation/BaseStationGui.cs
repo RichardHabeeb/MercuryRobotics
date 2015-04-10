@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 
 namespace BaseStation
 {
-    public partial class BaseStationGui : Form
+    public partial class BaseStationGUI : Form
     {
         KeyCommand commands;
         UdpClient robotConnection;
@@ -23,13 +23,13 @@ namespace BaseStation
 
         GamepadState xboxController;
 
-        public BaseStationGui()
+        public BaseStationGUI()
         {
             InitializeComponent();
 
             commands = new KeyCommand();
             robotConnection = new UdpClient(4444);
-            robotConnection.Connect(IPAddress.Parse("10.131.190.214"), 4444);
+            robotConnection.Connect(IPAddress.Parse("10.131.230.193"), 4444);
             xboxController = new GamepadState(SlimDX.XInput.UserIndex.One);
             xboxController.ControllerUpdate += xboxController_ControllerUpdate;
             xcontroller = new MotorControl();
@@ -42,19 +42,19 @@ namespace BaseStation
 
             SendMotorControllerPacket(xcontroller);
 
-            UpdateGui(xcontroller.LeftDriveThrottle, xcontroller.RightDriveThrottle, xcontroller.armAngle, xcontroller.irisAngle,  xcontroller.Led_State);
+            UpdateGui(xcontroller.LeftDriveThrottle, xcontroller.RightDriveThrottle, xcontroller.armAngle, xcontroller.irisAngle, xcontroller.Led_State);
         }
 
 
-        private void BaseStationGui_KeyDown(object sender, KeyEventArgs e)
+        private void BaseStationGUI_KeyDown(object sender, KeyEventArgs e)
         {
             bool commandChanged = commands.HandleKeyPress(e.KeyCode, true);
 
-            if(commandChanged) ProcessKeyBoardUpdate();
-            
+            if (commandChanged) ProcessKeyBoardUpdate();
+
         }
 
-        private void BaseStationGui_KeyUp(object sender, KeyEventArgs e)
+        private void BaseStationGUI_KeyUp(object sender, KeyEventArgs e)
         {
             commands.HandleKeyPress(e.KeyCode, false);
 
@@ -65,7 +65,7 @@ namespace BaseStation
         private void ProcessKeyBoardUpdate()
         {
             kcontroller.Update(commands);
-            
+
             SendMotorControllerPacket(kcontroller);
 
             UpdateGui(kcontroller.LeftDriveThrottle, kcontroller.RightDriveThrottle, kcontroller.armAngle, kcontroller.irisAngle, kcontroller.Led_State);
@@ -87,21 +87,26 @@ namespace BaseStation
             }
             rightMotorLabel.Text = right.ToString();
             leftMotorLabel.Text = left.ToString();
-            verticalProgressBarLeft.Value = (int)Math.Floor(left * 50) + 50;
-            verticalProgressBarRight.Value = (int)Math.Floor(right * 50) + 50;
-            verticalProgressBarArm.Value = (int)arm;
+            verticalProgressBarLeftMotor.Value = (int)Math.Floor(left * 50) + 50;
+            verticalProgressBarRightMotor.Value = (int)Math.Floor(right * 50) + 50;
+            verticalProgressBarArmerature.Value = (int)arm;
             verticalProgressBarIris.Value = (int)iris;
-            if (led.ToString().Equals("1")) label17.Text = "LED ON";
-            else label17.Text = "LED OFF";
+            if (led.ToString().Equals("1")) HeadLightsState.Text = "LED ON";
+            else HeadLightsState.Text = "LED OFF";
         }
 
 
-        private void BaseStationGui_FormClosing(object sender, FormClosingEventArgs e)
+        private void BaseStationGUI_FormClosing(object sender, FormClosingEventArgs e)
         {
             robotConnection.Close();
         }
 
         private void verticalProgressBarArm_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
