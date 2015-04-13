@@ -20,7 +20,7 @@ namespace BaseStation
         {
             get
             {
-                return IPAddressTextbox.ToString().Trim();
+                return IPAddressTextbox.Text.ToString();
             }
         }
     }
