@@ -317,7 +317,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "BaseStationGUI";
-            this.Text = "Form1";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BaseStationGUI_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.BaseStationGUI_KeyUp);
             this.ResumeLayout(false);

@@ -27,21 +27,33 @@ namespace BaseStation
         public BaseStationGUI()
         {
             InitializeComponent();
+            IPModeWindow ipMode = new IPModeWindow();
             robotConnection = new UdpClient(4444);
             commands = new KeyCommand();
-            getIP = new GetRobotIP(robotConnection);
-            robotConnection.Connect(IPAddress.Parse(getIP.GetIP()), 4444);
             xboxController = new GamepadState(SlimDX.XInput.UserIndex.One);
             xboxController.ControllerUpdate += xboxController_ControllerUpdate;
             xcontroller = new MotorControl();
             kcontroller = new MotorControl();
+            if (ipMode.ShowDialog() != DialogResult.OK) System.Environment.Exit(0);
+            else
+            {
+                if (ipMode.check == 1)
+                {
+                    getIP = new GetRobotIP(robotConnection);
+                    robotConnection.Connect(IPAddress.Parse(getIP.GetIP()), 4444);
+                }
+                else
+                {
+                    robotConnection.Connect(IPAddress.Parse(ipMode.IP), 4444);
+                }
+            }     
         }
 
         private void xboxController_ControllerUpdate(object sender, EventArgs e)
         {
             xcontroller.Update(xboxController);
 
-            SendMotorControllerPacket(xcontroller);
+            //SendMotorControllerPacket(xcontroller);
 
             UpdateGui(xcontroller.LeftDriveThrottle, xcontroller.RightDriveThrottle, xcontroller.armAngle, xcontroller.irisAngle, xcontroller.Led_State);
         }
@@ -67,7 +79,7 @@ namespace BaseStation
         {
             kcontroller.Update(commands);
 
-            SendMotorControllerPacket(kcontroller);
+            //SendMotorControllerPacket(kcontroller);
 
             UpdateGui(kcontroller.LeftDriveThrottle, kcontroller.RightDriveThrottle, kcontroller.armAngle, kcontroller.irisAngle, kcontroller.Led_State);
         }
