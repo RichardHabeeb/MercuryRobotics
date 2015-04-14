@@ -72,6 +72,7 @@
     <Compile Include="IPModeWindow.Designer.cs">
       <DependentUpon>IPModeWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="SensorData.cs" />
     <Compile Include="VerticalProgressBar.cs">
       <SubType>Component</SubType>
     </Compile>

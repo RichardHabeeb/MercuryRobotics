@@ -106,36 +106,32 @@
             this.FrontLeftSensorReading.AutoSize = true;
             this.FrontLeftSensorReading.Location = new System.Drawing.Point(42, 379);
             this.FrontLeftSensorReading.Name = "FrontLeftSensorReading";
-            this.FrontLeftSensorReading.Size = new System.Drawing.Size(58, 13);
+            this.FrontLeftSensorReading.Size = new System.Drawing.Size(0, 13);
             this.FrontLeftSensorReading.TabIndex = 5;
-            this.FrontLeftSensorReading.Text = "0 cm away";
             // 
             // FrontRightSensorReading
             // 
             this.FrontRightSensorReading.AutoSize = true;
             this.FrontRightSensorReading.Location = new System.Drawing.Point(202, 379);
             this.FrontRightSensorReading.Name = "FrontRightSensorReading";
-            this.FrontRightSensorReading.Size = new System.Drawing.Size(58, 13);
+            this.FrontRightSensorReading.Size = new System.Drawing.Size(0, 13);
             this.FrontRightSensorReading.TabIndex = 6;
-            this.FrontRightSensorReading.Text = "0 cm away";
             // 
             // RearLeftSensorReading
             // 
             this.RearLeftSensorReading.AutoSize = true;
             this.RearLeftSensorReading.Location = new System.Drawing.Point(42, 427);
             this.RearLeftSensorReading.Name = "RearLeftSensorReading";
-            this.RearLeftSensorReading.Size = new System.Drawing.Size(58, 13);
+            this.RearLeftSensorReading.Size = new System.Drawing.Size(0, 13);
             this.RearLeftSensorReading.TabIndex = 7;
-            this.RearLeftSensorReading.Text = "0 cm away";
             // 
             // RearRightSensorReading
             // 
             this.RearRightSensorReading.AutoSize = true;
             this.RearRightSensorReading.Location = new System.Drawing.Point(202, 427);
             this.RearRightSensorReading.Name = "RearRightSensorReading";
-            this.RearRightSensorReading.Size = new System.Drawing.Size(58, 13);
+            this.RearRightSensorReading.Size = new System.Drawing.Size(0, 13);
             this.RearRightSensorReading.TabIndex = 8;
-            this.RearRightSensorReading.Text = "0 cm away";
             // 
             // HeadLightsState
             // 
@@ -178,9 +174,9 @@
             this.MaxDegreeIris.AutoSize = true;
             this.MaxDegreeIris.Location = new System.Drawing.Point(283, 47);
             this.MaxDegreeIris.Name = "MaxDegreeIris";
-            this.MaxDegreeIris.Size = new System.Drawing.Size(29, 13);
+            this.MaxDegreeIris.Size = new System.Drawing.Size(23, 13);
             this.MaxDegreeIris.TabIndex = 17;
-            this.MaxDegreeIris.Text = "180°";
+            this.MaxDegreeIris.Text = "90°";
             // 
             // NinetyDegreeIris
             // 
@@ -189,7 +185,7 @@
             this.NinetyDegreeIris.Name = "NinetyDegreeIris";
             this.NinetyDegreeIris.Size = new System.Drawing.Size(23, 13);
             this.NinetyDegreeIris.TabIndex = 18;
-            this.NinetyDegreeIris.Text = "90°";
+            this.NinetyDegreeIris.Text = "45°";
             // 
             // ZeroDegreeIris
             // 
