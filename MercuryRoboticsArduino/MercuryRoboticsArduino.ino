@@ -37,8 +37,11 @@ RobotControl *controller;
 void setup()
 {
   	Serial.begin(115200);
+  
+        #ifdef DEBUG_SERIAL_OUT
 	Serial.println("Kansas State University Robotics Competition Team");
-	Serial.println("Mercury Robot (2015)");
+	Serial.println("Mercury Robot (2015) DEBUG MODE");
+        #endif
 }
 
 void loop()

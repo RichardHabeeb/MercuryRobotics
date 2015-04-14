@@ -118,10 +118,10 @@ void RobotControl::runRobot()
 
 	while (1)
 	{
-        Serial.println("Waiting...");
         
         comm->waitForNextPacket(packet);
         
+        #ifdef DEBUG_SERIAL_OUT
         Serial.print("Recieved packet: ");
         Serial.print(packet.left_drive_throttle);
         Serial.print(", ");
@@ -130,13 +130,14 @@ void RobotControl::runRobot()
         Serial.println(packet.iris_angle_deg);
         Serial.print(", ");
         Serial.print(packet.arm_angle_deg);
-
-		sdata->front_sensor = front_sensor->GetSensorData();
-		sdata->rear_sensor = rear_senor->GetSensorData();
-		sdata->left_sensor = left_sensor->GetSensorData();
-		sdata->rear_sensor = right_sensor->GetSensorData();
-		
-		comm->sendSensorDataPacket(sdata);
+        #endif
+        
+	sdata->front_sensor = front_sensor->GetSensorData();
+	sdata->rear_sensor = rear_senor->GetSensorData();
+	sdata->left_sensor = left_sensor->GetSensorData();
+	sdata->rear_sensor = right_sensor->GetSensorData();
+	
+	comm->sendSensorDataPacket(sdata);
 
         led1->setState(packet.led_on);
         led2->setState(packet.led_on);
@@ -144,10 +145,10 @@ void RobotControl::runRobot()
         arm.write(map(packet.arm_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
         iris.write(map(packet.iris_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
         
-		left->setTargetVelocity(fabs(packet.left_drive_throttle));
-		right->setTargetVelocity(fabs(packet.right_drive_throttle));
+        left->setTargetVelocity(fabs(packet.left_drive_throttle));
+	right->setTargetVelocity(fabs(packet.right_drive_throttle));
         left->setRotationDirection(signbit(packet.left_drive_throttle) ? REVERSE : FORWARD);
-		right->setRotationDirection(signbit(packet.right_drive_throttle) ? REVERSE : FORWARD);
+	right->setRotationDirection(signbit(packet.right_drive_throttle) ? REVERSE : FORWARD);
         timer->update();
 
 	}

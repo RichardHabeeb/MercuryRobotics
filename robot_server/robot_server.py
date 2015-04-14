@@ -1,99 +1,66 @@
 #!/usr/bin/env python
+#--------------------------------------------------------------------------------------------------
+# Kansas State University Robotic Competition Team
+# robot_server.py
+#--------------------------------------------------------------------------------------------------
+
+#------------------------------------------------
+# Imports
+#------------------------------------------------
 import serial
-import struct
 import thread
-
+import struct
+import base64
+import time
 from discover_addr import handshake
-
 from socket import socket, AF_INET, SOCK_DGRAM
 
+#-----------------------------------------------
+# Parameters
+#-----------------------------------------------
+motor_packet_string = "ffffI"
+sensor_packet_string = "ffff"
+baseStationListener = socket(AF_INET, SOCK_DGRAM)
+baseStationListener.bind(('', 4444))
+baseStationSender = socket(AF_INET, SOCK_DGRAM)
+baseStationIP = ""
+quitThreads = False
+arduino = None#serial.Serial('/dev/ttyACM0', 115200)
 
-class BaseConn(object):
-	packet_format = None
-	_lock = thread.allocate_lock()
+#-----------------------------------------------
+# Functions
+#-----------------------------------------------
+def main():
+	print "Waiting for BaseStation IP Address..."
+	while(True):
+		baseStationIP = baseStationListener.recv(16)
+		if(len(baseStationIP) > 0):
+			break
+	print "Connected to ", baseStationIP, "\nStarting threads..."
+	thread.start_new_thread(wait_motor_packet, ())
+	thread.start_new_thread(wait_sensor_packet, tuple([baseStationIP]))
+	print "Press enter to quit."
+	raw_input() or ""
+	quitThreads = True
+		
+	
+def wait_motor_packet():
+	while(not quitThreads):
+		data = baseStationListener.recv(struct.calcsize(motor_packet_string))
+		if(len(data) == struct.calcsize(motor_packet_string)):
+			#arduino.write(base64.b64encode(data))
+			print "Recieved motor packet ", struct.unpack(motor_packet_string, data)
 
-	def __init__(self):
-		self.conn = self.create_conn()
+def wait_sensor_packet(ip):
+	while(not quitThreads):
+		#data = arduino.readline()
+		data = "MTIzNDEyMzQxMjM0MTIzNA=="
+		time.sleep(1)
+		if(len(data) == 24):
+			baseStationSender.sendto(base64.b64decode(data), (ip, 4445))
+			print "Sending sensor packet to ", ip, struct.unpack(sensor_packet_string, base64.b64decode(data))
 
-		self.callbacks = []
-
-		self._thread = None
-		self._size = struct.calcsize(self.packet_format)
-
-	def create_conn(self):
-		pass
-
-	def readline(self):
-		pass
-
-	def writeline(self):
-		pass
-
-	def start(self):
-		self._thread = thread.start_new_thread(self.tick, ())
-
-	def tick(self):
-		while True:
-			data = self.readline()
-			data_unpacked = struct.unpack(self.packet_format, data)
-			for calbk in self.callbacks:
-				with self._lock:
-					calbk(data_unpacked)
-
-	def bind(self, func):
-		self.callbacks.append(func)
-
-
-class NetworkConn(BaseConn):
-	packet_format = 'ffff'
-	def __init__(self):
-		self.addr = handshake()
-		super(self.__class__, self).__init__()
-
-	def create_conn(self):
-		conn = socket(AF_INET, SOCK_DGRAM)
-		conn.bind(('', 4444))
-
-		return conn
-
-	def readline(self):
-		return self.conn.recv(self._size)
-
-	def writeline(self, data):
-		conn.sendto(data, (self.addr, 4444))
-
-
-class ArduinoConn(BaseConn):
-	packet_format = 's'
-	def create_conn(self):
-		return serial.Serial('/dev/ttyACM0', 115200)
-
-	def readline(self):
-	 	return self.conn.readline()
-
-	def writeline(self, data):
-		self.conn.write(data)
-
-def _a_print(stuff):
-	print "Arduino: ", stuff
-
-
-def _n_print(stuff):
-	print "Network: ", stuff
-
-
-nconn = NetworkConn()
-nconn.bind(_n_print)
-nconn.start()
-
-aconn = ArduinoConn()
-aconn.bind(_a_print)
-def _write_a_data(data):
-	aconn.writeline(struct.pack('ffff', *data))
-nconn.bind(_write_a_data)
-aconn.start()
-
-nconn.writeline('Foo')
-
-print "Enter to quit."
-raw_input()
+#-----------------------------------------------
+# Initialization
+#-----------------------------------------------
+main()

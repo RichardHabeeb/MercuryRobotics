@@ -54,6 +54,8 @@ void Communication::waitForNextPacket(motor_control_packet_t &packet)
   /* Declare variables */
   char buff[sizeof(motor_control_packet_t)];
   
+  do
+  {
   /* Initialize */
   memset(buff, 0, sizeof(motor_control_packet_t));
   
@@ -61,10 +63,10 @@ void Communication::waitForNextPacket(motor_control_packet_t &packet)
   while(Serial.available() < sizeof(motor_control_packet_t));
   
   /* Read serial & parse*/
-  if(Serial.readBytes(buff, sizeof(motor_control_packet_t)) == sizeof(motor_control_packet_t));
-  {
-    memcpy((void*)&packet, buff, sizeof(motor_control_packet_t));
-  }
+  } while(Serial.readBytes(buff, sizeof(motor_control_packet_t)) != sizeof(motor_control_packet_t));
+  
+  memcpy((void*)&packet, buff, sizeof(motor_control_packet_t));
+  
 }
 
 void Communication::sendSensorDataPacket(SensorData *sDataPacket)
