@@ -33,10 +33,10 @@
             this.RearLeftSensor = new System.Windows.Forms.Label();
             this.RearRightSensor = new System.Windows.Forms.Label();
             this.HeadLights = new System.Windows.Forms.Label();
-            this.FrontSensorReading = new System.Windows.Forms.Label();
-            this.RearSensorReading = new System.Windows.Forms.Label();
-            this.LeftSensorReading = new System.Windows.Forms.Label();
-            this.RightSensorReading = new System.Windows.Forms.Label();
+            this.FrontLeftSensorReading = new System.Windows.Forms.Label();
+            this.FrontRightSensorReading = new System.Windows.Forms.Label();
+            this.RearLeftSensorReading = new System.Windows.Forms.Label();
+            this.RearRightSensorReading = new System.Windows.Forms.Label();
             this.HeadLightsState = new System.Windows.Forms.Label();
             this.MaxDegreeArm = new System.Windows.Forms.Label();
             this.NinetyDegreeArm = new System.Windows.Forms.Label();
@@ -101,41 +101,41 @@
             this.HeadLights.TabIndex = 4;
             this.HeadLights.Text = "Head Lights";
             // 
-            // FrontSensorReading
+            // FrontLeftSensorReading
             // 
-            this.FrontSensorReading.AutoSize = true;
-            this.FrontSensorReading.Location = new System.Drawing.Point(42, 379);
-            this.FrontSensorReading.Name = "FrontSensorReading";
-            this.FrontSensorReading.Size = new System.Drawing.Size(58, 13);
-            this.FrontSensorReading.TabIndex = 5;
-            this.FrontSensorReading.Text = "0 cm away";
+            this.FrontLeftSensorReading.AutoSize = true;
+            this.FrontLeftSensorReading.Location = new System.Drawing.Point(42, 379);
+            this.FrontLeftSensorReading.Name = "FrontLeftSensorReading";
+            this.FrontLeftSensorReading.Size = new System.Drawing.Size(58, 13);
+            this.FrontLeftSensorReading.TabIndex = 5;
+            this.FrontLeftSensorReading.Text = "0 cm away";
             // 
-            // RearSensorReading
+            // FrontRightSensorReading
             // 
-            this.RearSensorReading.AutoSize = true;
-            this.RearSensorReading.Location = new System.Drawing.Point(202, 379);
-            this.RearSensorReading.Name = "RearSensorReading";
-            this.RearSensorReading.Size = new System.Drawing.Size(58, 13);
-            this.RearSensorReading.TabIndex = 6;
-            this.RearSensorReading.Text = "0 cm away";
+            this.FrontRightSensorReading.AutoSize = true;
+            this.FrontRightSensorReading.Location = new System.Drawing.Point(202, 379);
+            this.FrontRightSensorReading.Name = "FrontRightSensorReading";
+            this.FrontRightSensorReading.Size = new System.Drawing.Size(58, 13);
+            this.FrontRightSensorReading.TabIndex = 6;
+            this.FrontRightSensorReading.Text = "0 cm away";
             // 
-            // LeftSensorReading
+            // RearLeftSensorReading
             // 
-            this.LeftSensorReading.AutoSize = true;
-            this.LeftSensorReading.Location = new System.Drawing.Point(42, 427);
-            this.LeftSensorReading.Name = "LeftSensorReading";
-            this.LeftSensorReading.Size = new System.Drawing.Size(58, 13);
-            this.LeftSensorReading.TabIndex = 7;
-            this.LeftSensorReading.Text = "0 cm away";
+            this.RearLeftSensorReading.AutoSize = true;
+            this.RearLeftSensorReading.Location = new System.Drawing.Point(42, 427);
+            this.RearLeftSensorReading.Name = "RearLeftSensorReading";
+            this.RearLeftSensorReading.Size = new System.Drawing.Size(58, 13);
+            this.RearLeftSensorReading.TabIndex = 7;
+            this.RearLeftSensorReading.Text = "0 cm away";
             // 
-            // RightSensorReading
+            // RearRightSensorReading
             // 
-            this.RightSensorReading.AutoSize = true;
-            this.RightSensorReading.Location = new System.Drawing.Point(202, 427);
-            this.RightSensorReading.Name = "RightSensorReading";
-            this.RightSensorReading.Size = new System.Drawing.Size(58, 13);
-            this.RightSensorReading.TabIndex = 8;
-            this.RightSensorReading.Text = "0 cm away";
+            this.RearRightSensorReading.AutoSize = true;
+            this.RearRightSensorReading.Location = new System.Drawing.Point(202, 427);
+            this.RearRightSensorReading.Name = "RearRightSensorReading";
+            this.RearRightSensorReading.Size = new System.Drawing.Size(58, 13);
+            this.RearRightSensorReading.TabIndex = 8;
+            this.RearRightSensorReading.Text = "0 cm away";
             // 
             // HeadLightsState
             // 
@@ -243,7 +243,6 @@
             this.leftMotorLabel.Name = "leftMotorLabel";
             this.leftMotorLabel.Size = new System.Drawing.Size(0, 13);
             this.leftMotorLabel.TabIndex = 24;
-            this.leftMotorLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // rightMotorLabel
             // 
@@ -305,10 +304,10 @@
             this.Controls.Add(this.verticalProgressBarRightMotor);
             this.Controls.Add(this.verticalProgressBarLeftMotor);
             this.Controls.Add(this.HeadLightsState);
-            this.Controls.Add(this.RightSensorReading);
-            this.Controls.Add(this.LeftSensorReading);
-            this.Controls.Add(this.RearSensorReading);
-            this.Controls.Add(this.FrontSensorReading);
+            this.Controls.Add(this.RearRightSensorReading);
+            this.Controls.Add(this.RearLeftSensorReading);
+            this.Controls.Add(this.FrontRightSensorReading);
+            this.Controls.Add(this.FrontLeftSensorReading);
             this.Controls.Add(this.HeadLights);
             this.Controls.Add(this.RearRightSensor);
             this.Controls.Add(this.RearLeftSensor);
@@ -331,10 +330,10 @@
         private System.Windows.Forms.Label RearLeftSensor;
         private System.Windows.Forms.Label RearRightSensor;
         private System.Windows.Forms.Label HeadLights;
-        private System.Windows.Forms.Label FrontSensorReading;
-        private System.Windows.Forms.Label RearSensorReading;
-        private System.Windows.Forms.Label LeftSensorReading;
-        private System.Windows.Forms.Label RightSensorReading;
+        private System.Windows.Forms.Label FrontLeftSensorReading;
+        private System.Windows.Forms.Label FrontRightSensorReading;
+        private System.Windows.Forms.Label RearLeftSensorReading;
+        private System.Windows.Forms.Label RearRightSensorReading;
         private System.Windows.Forms.Label HeadLightsState;
         private VerticalProgressBar verticalProgressBarLeftMotor;
         private VerticalProgressBar verticalProgressBarRightMotor;
