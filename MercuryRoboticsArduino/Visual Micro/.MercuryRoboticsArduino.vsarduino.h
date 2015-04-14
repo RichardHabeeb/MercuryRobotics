@@ -68,6 +68,8 @@ extern "C" void __cxa_pure_virtual() {;}
 #define portInputRegister(P)
 #define portModeRegister(P)
 #include <MercuryRoboticsArduino.ino>
+#include <Base64.h>
+#include <Base64.ino>
 #include <Communication.h>
 #include <Communication.ino>
 #include <CommunicationTesting.h>

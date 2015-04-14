@@ -18,6 +18,14 @@
 *------------------------------------------------------------------------------------------------*/
 
 /*-------------------------------------------------------------------------------------------------
+*                                           Constants
+*------------------------------------------------------------------------------------------------*/
+#define MOTOR_STRUCT_SIZE 20
+#define ENCODED_MOTOR_STRUCT_SIZE 28
+#define SENSOR_STRUCT_SIZE 16
+#define ENCODED_SENSOR_STRUCT_SIZE 24
+
+/*-------------------------------------------------------------------------------------------------
 *                                           Variables
 *------------------------------------------------------------------------------------------------*/
 
@@ -52,26 +60,31 @@ Communication::~Communication()
 void Communication::waitForNextPacket(motor_control_packet_t &packet)
 {
   /* Declare variables */
-  char buff[sizeof(motor_control_packet_t)];
+  char buff[MOTOR_STRUCT_SIZE];
+  char encoded_buff[ENCODED_MOTOR_STRUCT_SIZE];
   
   do
   {
   /* Initialize */
-  memset(buff, 0, sizeof(motor_control_packet_t));
+  memset(buff, 0, MOTOR_STRUCT_SIZE);
+  memset(encoded_buff, 0, ENCODED_MOTOR_STRUCT_SIZE);
   
   /* Hang until correct amount of bytes are on serial line */
-  while(Serial.available() < sizeof(motor_control_packet_t));
+  while(Serial.available() < ENCODED_MOTOR_STRUCT_SIZE);
   
   /* Read serial & parse*/
-  } while(Serial.readBytes(buff, sizeof(motor_control_packet_t)) != sizeof(motor_control_packet_t));
+  } while(Serial.readBytes(encoded_buff, MOTOR_STRUCT_SIZE) != MOTOR_STRUCT_SIZE);
   
+  base64_decode(buff, encoded_buff, ENCODED_MOTOR_STRUCT_SIZE);
   memcpy((void*)&packet, buff, sizeof(motor_control_packet_t));
   
 }
 
 void Communication::sendSensorDataPacket(SensorData *sDataPacket)
 {
-	char buf[sizeof(SensorData)];
-	memcpy(buf, (void*)&sDataPacket,sizeof(SensorData));
-	Serial.print(buf);
+	char buff[SENSOR_STRUCT_SIZE];
+	char encoded_buff[ENCODED_SENSOR_STRUCT_SIZE];
+	memcpy(buff, (void*)&sDataPacket,SENSOR_STRUCT_SIZE);
+	base64_encode(encoded_buff, buff, SENSOR_STRUCT_SIZE);
+	Serial.print(encoded_buff);
 }
