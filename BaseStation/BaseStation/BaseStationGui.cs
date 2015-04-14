@@ -21,20 +21,68 @@ namespace BaseStation
         MotorControl xcontroller;
         MotorControl kcontroller;
         GetRobotIP getIP;
+        IPHostEntry host;
+        string robotIP;
+        SensorDataPacket sensorPacket;
+        Thread sensorData;
 
         GamepadState xboxController;
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct SensorDataPacket
+        {
+            public float LeftFront;     //Each value holds
+            public float LeftBack;      //distance from the
+            public float RightFront;    //wall in cm.
+            public float RightBack;
+        }
 
         public BaseStationGUI()
         {
             InitializeComponent();
+            IPModeWindow ipMode = new IPModeWindow();
             robotConnection = new UdpClient(4444);
-            commands = new KeyCommand(); 
-            getIP = new GetRobotIP(robotConnection);
-            robotConnection.Connect(IPAddress.Parse(getIP.GetIP()), 4444);
+            commands = new KeyCommand();
             xboxController = new GamepadState(SlimDX.XInput.UserIndex.One);
             xboxController.ControllerUpdate += xboxController_ControllerUpdate;
             xcontroller = new MotorControl();
             kcontroller = new MotorControl();
+            sensorPacket = new SensorDataPacket();
+
+            sensorData = new Thread(GetSensorData);
+            sensorData.IsBackground = false;//May be wrong
+            sensorData.Start();
+
+            if (ipMode.ShowDialog() != DialogResult.OK) System.Environment.Exit(0);
+            else
+            {
+                if (ipMode.check == 1)
+                {
+                    getIP = new GetRobotIP(robotConnection);
+                    robotIP = getIP.GetIP();
+                    robotConnection.Connect(IPAddress.Parse(robotIP), 4444);
+                }
+                else
+                {
+                    robotIP = ipMode.IP;
+                    robotConnection.Connect(IPAddress.Parse(robotIP), 4444);
+                }
+            }
+
+            string baseip = "";
+            host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (IPAddress ip in host.AddressList)
+            {
+                if (ip.AddressFamily.ToString() == "InterNetwork")
+                {
+                    baseip = ip.ToString();
+                }
+            }
+            byte[] buff = Encoding.ASCII.GetBytes(baseip);
+            robotConnection.Send(buff, buff.Length);
+
+
+
         }
 
         private void xboxController_ControllerUpdate(object sender, EventArgs e)
@@ -67,7 +115,7 @@ namespace BaseStation
         {
             kcontroller.Update(commands);
 
-            SendMotorControllerPacket(kcontroller);
+            //SendMotorControllerPacket(kcontroller);
 
             UpdateGui(kcontroller.LeftDriveThrottle, kcontroller.RightDriveThrottle, kcontroller.armAngle, kcontroller.irisAngle, kcontroller.Led_State);
         }
@@ -92,20 +140,35 @@ namespace BaseStation
             verticalProgressBarRightMotor.Value = (int)Math.Floor(right * 50) + 50;
             verticalProgressBarArmerature.Value = (int)arm;
             verticalProgressBarIris.Value = (int)iris;
-            if (led.ToString().Equals("1")) HeadLightsState.Text = "LED ON";
-            else HeadLightsState.Text = "LED OFF";
+            if (led.ToString().Equals("1")) HeadLightsState.Text = "ON";
+            else HeadLightsState.Text = "OFF";
+
+            //TODO: Make SensorDataRead use an event handler to reset itself
+            if (sensorData.ThreadState == ThreadState.Stopped)
+            {
+                sensorData.Start();
+            }
         }
 
+        private void GetSensorData()
+        {
+            IPEndPoint robot = new IPEndPoint(IPAddress.Parse(robotIP), 4444);
+            byte[] data = robotConnection.Receive(ref robot);
+            
+            sensorPacket.LeftFront = System.BitConverter.ToSingle(data, 0);
+            sensorPacket.LeftBack = System.BitConverter.ToSingle(data, 4);
+            sensorPacket.RightFront = System.BitConverter.ToSingle(data, 8);
+            sensorPacket.RightBack = System.BitConverter.ToSingle(data, 12);
+
+            FrontLeftSensor.Text = (sensorPacket.LeftFront.ToString() + " cm away");
+            FrontRightSensor.Text = (sensorPacket.RightFront.ToString() + " cm away");
+            RearLeftSensor.Text = (sensorPacket.LeftBack.ToString() + " cm away");
+            RearRightSensor.Text = (sensorPacket.RightBack.ToString() + " cm away");
+        }
 
         private void BaseStationGUI_FormClosing(object sender, FormClosingEventArgs e)
         {
             robotConnection.Close();
-        }
-
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -54,18 +54,33 @@
     <Compile Include="BaseStationGUI.Designer.cs">
       <DependentUpon>BaseStationGUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="EnterIPAddressWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterIPAddressWindow.Designer.cs">
+      <DependentUpon>EnterIPAddressWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="GamepadState.cs" />
     <Compile Include="GetRobotIP.cs" />
     <Compile Include="KeyCommand.cs" />
     <Compile Include="MotorControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IPModeWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IPModeWindow.Designer.cs">
+      <DependentUpon>IPModeWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="VerticalProgressBar.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="VerticalProgressBar.Designer.cs" />
     <EmbeddedResource Include="BaseStationGUI.resx">
       <DependentUpon>BaseStationGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnterIPAddressWindow.resx">
+      <DependentUpon>EnterIPAddressWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -76,6 +91,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="IPModeWindow.resx">
+      <DependentUpon>IPModeWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
