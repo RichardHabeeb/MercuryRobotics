@@ -21,6 +21,7 @@ namespace BaseStation
         MotorControl xcontroller;
         MotorControl kcontroller;
         GetRobotIP getIP;
+        IPHostEntry host;
 
         GamepadState xboxController;
 
@@ -46,14 +47,29 @@ namespace BaseStation
                 {
                     robotConnection.Connect(IPAddress.Parse(ipMode.IP), 4444);
                 }
-            }     
+            }
+
+            string baseip = "";
+            host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (IPAddress ip in host.AddressList)
+            {
+                if (ip.AddressFamily.ToString() == "InterNetwork")
+                {
+                    baseip = ip.ToString();
+                }
+            }
+            byte[] buff = Encoding.ASCII.GetBytes(baseip);
+            robotConnection.Send(buff, buff.Length);
+
+
+
         }
 
         private void xboxController_ControllerUpdate(object sender, EventArgs e)
         {
             xcontroller.Update(xboxController);
 
-            //SendMotorControllerPacket(xcontroller);
+            SendMotorControllerPacket(xcontroller);
 
             UpdateGui(xcontroller.LeftDriveThrottle, xcontroller.RightDriveThrottle, xcontroller.armAngle, xcontroller.irisAngle, xcontroller.Led_State);
         }
