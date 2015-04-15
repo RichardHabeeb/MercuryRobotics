@@ -44,7 +44,7 @@ public:  /* Methods */
 	CommunicationTesting();
 	~CommunicationTesting();
 	void waitForNextPacket(motor_control_packet_t &packet);
-
+        void sendSensorDataPacket(SensorData *sDataPacket);
 private: /* Methods */
 public:  /* Fields */
 private: /* Fields */

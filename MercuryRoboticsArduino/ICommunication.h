@@ -37,10 +37,10 @@ typedef struct
 
 typedef struct
 {
-	float front_sensor;
-	float rear_sensor;
-	float left_sensor;
-	float right_sensor;
+	float front_left_sensor;
+	float front_right_sensor;
+	float rear_left_sensor;
+	float rear_right_sensor;
 }SensorData;
 
 /*-------------------------------------------------------------------------------------------------

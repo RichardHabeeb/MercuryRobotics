@@ -67,7 +67,7 @@ private: /* Fields */
 	MotorTimer *timer;
 	Led *led1, *led2;
 	Servo iris, arm;
-	Sensor *left_sensor, *right_sensor, *front_sensor, *rear_senor;
+	Sensor *rear_left_sensor, *front_right_sensor, *front_left_sensor, *rear_right_sensor;
 	SensorData *sdata;
 };
 

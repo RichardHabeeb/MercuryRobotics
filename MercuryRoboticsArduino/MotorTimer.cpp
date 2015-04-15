@@ -96,7 +96,6 @@ void MotorTimer::update()
 	{
 		leftTimer->setPeriod(leftMotor->getStepPeriodMicroSeconds());
 		leftTimer->start();
-		Serial.println("Starting!");
 	}
 	
 	if (rightMotor->isStopped())

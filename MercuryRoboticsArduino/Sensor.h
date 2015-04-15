@@ -27,11 +27,6 @@
 *                                           Constants
 *------------------------------------------------------------------------------------------------*/
 
-//#define a  -.00000020356		// Values used convert sensor
-//#define b  .00029411			// reading into distance
-//#define c  -.152859				// measured in centimeters
-//#define d  33.29				//
-
 /*-------------------------------------------------------------------------------------------------
 *                                             Types
 *------------------------------------------------------------------------------------------------*/
@@ -57,6 +52,8 @@ public:  /* Methods */
 private: /* Methods */
 public:  /* Fields */
 private: /* Fields */
+        float SensorValue;
+        pin_t pin;
 	float a = -.00000020356;		// Values used convert sensor
 	float b = .00029411;			// reading into distance
 	float c = -.152859;				// measured in centimeters

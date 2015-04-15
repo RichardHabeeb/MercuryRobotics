@@ -53,10 +53,10 @@ RobotControl::RobotControl()
 	led1 = new Led(LED_PIN_1);
 	led2 = new Led(LED_PIN_2);
 
-	left_sensor = new Sensor(IR_SENSOR_1_PIN);
-	right_sensor = new Sensor(IR_SENSOR_2_PIN);
-	front_sensor = new Sensor(IR_SENSOR_3_PIN);
-	rear_senor = new Sensor(IR_SENSOR_4_PIN);
+	front_left_sensor= new Sensor(IR_SENSOR_1_PIN);
+	front_right_sensor = new Sensor(IR_SENSOR_2_PIN);
+	rear_left_sensor = new Sensor(IR_SENSOR_3_PIN);
+	rear_right_sensor = new Sensor(IR_SENSOR_4_PIN);
 	sdata = new SensorData();
 
 	left = new StepperMotor
@@ -122,26 +122,27 @@ void RobotControl::runRobot()
         comm->waitForNextPacket(packet);
         
         #ifdef DEBUG_SERIAL_OUT
-        Serial.print("Recieved packet: ");
+        Serial.print("Received packet: ");
         Serial.print(packet.left_drive_throttle);
         Serial.print(", ");
         Serial.print(packet.right_drive_throttle);
         Serial.print(", ");
         Serial.println(packet.iris_angle_deg);
         Serial.print(", ");
-        Serial.print(packet.arm_angle_deg);
+        Serial.println(packet.arm_angle_deg);
         #endif
         
-	sdata->front_sensor = front_sensor->GetSensorData();
-	sdata->rear_sensor = rear_senor->GetSensorData();
-	sdata->left_sensor = left_sensor->GetSensorData();
-	sdata->rear_sensor = right_sensor->GetSensorData();
+        #ifdef ENABLE_ACTUATION
+	sdata->front_left_sensor = front_left_sensor->GetSensorData();
+	sdata->front_right_sensor = front_right_sensor->GetSensorData();
+	sdata->rear_left_sensor = rear_left_sensor->GetSensorData();
+	sdata->rear_right_sensor = rear_right_sensor->GetSensorData();
 	
 	comm->sendSensorDataPacket(sdata);
-
+        
         led1->setState(packet.led_on);
         led2->setState(packet.led_on);
-        
+
         arm.write(map(packet.arm_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
         iris.write(map(packet.iris_angle_deg, 0.0f, 180.0f, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH));
         
@@ -149,7 +150,9 @@ void RobotControl::runRobot()
 	right->setTargetVelocity(fabs(packet.right_drive_throttle));
         left->setRotationDirection(signbit(packet.left_drive_throttle) ? REVERSE : FORWARD);
 	right->setRotationDirection(signbit(packet.right_drive_throttle) ? REVERSE : FORWARD);
+        
         timer->update();
+        #endif
 
 	}
 }

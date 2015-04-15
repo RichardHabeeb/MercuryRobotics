@@ -20,6 +20,7 @@
 #include <DueTimer.h>
 #include "Pin.h"
 #include "RobotControl.h"
+#include "Config.h"
 
 
 /*-------------------------------------------------------------------------------------------------
@@ -37,9 +38,9 @@ RobotControl *controller;
 void setup()
 {
   	Serial.begin(115200);
-  
+
         #ifdef DEBUG_SERIAL_OUT
-	Serial.println("Kansas State University Robotics Competition Team");
+        Serial.println("Kansas State University Robotics Competition Team");
 	Serial.println("Mercury Robot (2015) DEBUG MODE");
         #endif
 }

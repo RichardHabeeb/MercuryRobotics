@@ -20,8 +20,6 @@
 /*-------------------------------------------------------------------------------------------------
 *                                           Variables
 *------------------------------------------------------------------------------------------------*/
-float SensorValue;
-pin_t pin;
 
 /*-------------------------------------------------------------------------------------------------
 *                                           Constants
@@ -49,11 +47,13 @@ Sensor::Sensor(pin_t p)
 
 float Sensor::GetSensorData()
 {
-	for (int i = 0; i < 40; i++)
+  SensorValue = analogRead(pin);
+      
+	for (int i = 0; i < 100; i++)
 	{
 		SensorValue += analogRead(pin);
 	}
-	SensorValue /= 40;
-
+	SensorValue /= 100;
+      
 	return (a * pow(SensorValue, 3) + b * pow(SensorValue, 2) + c * SensorValue + d);
 }

@@ -45,7 +45,7 @@ class Communication : public ICommunication
     Communication();
     ~Communication();
     void waitForNextPacket(motor_control_packet_t &packet);
-	void sendSensorDataPacket(SensorData *sDataPakect);
+    void sendSensorDataPacket(SensorData *sDataPacket);
     
   private: /* Methods */
   public:  /* Fields */

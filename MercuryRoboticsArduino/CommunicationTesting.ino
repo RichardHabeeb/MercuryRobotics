@@ -107,3 +107,26 @@ void CommunicationTesting::waitForNextPacket(motor_control_packet_t &packet)
 	i++;
 	if (i == 12) i = 0;
 }
+
+/*-----------------------------------------------------------------------------------
+* Function: sendSensorDataPacket
+*
+* Description:
+*------------------------------------------------------------------------------------*/
+void CommunicationTesting::sendSensorDataPacket(SensorData *sDataPacket)
+{       
+        Serial.flush();
+        char buff[SENSOR_STRUCT_SIZE];
+        for (int i = 0; i < (SENSOR_STRUCT_SIZE / 4); i +=4)
+        {
+           buff[i] = 0;
+           buff[i+1] = 0;
+           buff[i+2] = 0;
+           buff[i+3] = 63; 
+        }
+        char encoded_buff[ENCODED_SENSOR_STRUCT_SIZE];
+	memcpy(buff, (void*)&sDataPacket,SENSOR_STRUCT_SIZE);
+	base64_encode(encoded_buff, buff, SENSOR_STRUCT_SIZE);   
+	Serial.print(encoded_buff);  
+}  
+
