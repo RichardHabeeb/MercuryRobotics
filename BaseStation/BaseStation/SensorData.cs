@@ -21,14 +21,15 @@ namespace BaseStation
         private BackgroundWorker worker;
         UdpClient robotConnection;
         IPEndPoint server;
+        int theta;
 
         [StructLayout(LayoutKind.Sequential)]
         private struct MotorControlPacket
         {
-            public float FrontLeftSensorData;  /* Value from 4cm -> 30cm */
-            public float FrontRightSensorData; /* Value from 4cm -> 30cm */
-            public float RearLeftSensorData;   /* Value from 4cm -> 30cm */
-            public float RearRightSensorData;  /* Value from 4cm -> 30cm */
+            public float FrontLeftSensorData;  
+            public float FrontRightSensorData; 
+            public float RearLeftSensorData;   
+            public float RearRightSensorData;  
         }
 
         public float FrontLeftSensorData { get; set; }
@@ -49,16 +50,17 @@ namespace BaseStation
             worker.DoWork += SensorDataThread;
             worker.WorkerSupportsCancellation = true;
             worker.RunWorkerAsync();
+            theta = 90;
         }
 
         public bool updateData()
         {
                 byte[] data = robotConnection.Receive(ref server);
                 if (data == null || data.Length == 0) return false;
-                FrontLeftSensorData = System.BitConverter.ToSingle(data, 0);
-                FrontRightSensorData = System.BitConverter.ToSingle(data, 4);
-                RearLeftSensorData = System.BitConverter.ToSingle(data, 8);
-                RearRightSensorData = System.BitConverter.ToSingle(data, 12);
+                FrontLeftSensorData = System.BitConverter.ToSingle(data, 0) * (float)Math.Sin(theta);
+                FrontRightSensorData = System.BitConverter.ToSingle(data, 4) * (float)Math.Sin(theta);
+                RearLeftSensorData = System.BitConverter.ToSingle(data, 8) * (float)Math.Sin(theta);
+                RearRightSensorData = System.BitConverter.ToSingle(data, 12) * (float)Math.Sin(theta);
                 return true;
         }
 

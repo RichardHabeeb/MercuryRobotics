@@ -59,6 +59,7 @@ namespace BaseStation
                     baseip = ip.ToString();
                 }
             }
+
             byte[] buff = Encoding.ASCII.GetBytes(baseip);
             robotConnection.Send(buff, buff.Length);
             sensorData = new SensorData(robotIP);
@@ -145,10 +146,10 @@ namespace BaseStation
                 return;
             }
 
-            FrontLeftSensorReading.Text = fls.ToString() + " cm away";
-            FrontRightSensorReading.Text = frs.ToString() + " cm away";
-            RearLeftSensorReading.Text = rls.ToString() + " cm away";
-            RearRightSensorReading.Text = rrs.ToString() + " cm away";
+            FrontLeftSensorReading.Text = fls.ToString("F") + " cm away";
+            FrontRightSensorReading.Text = frs.ToString("F") + " cm away";
+            RearLeftSensorReading.Text = rls.ToString("F") + " cm away";
+            RearRightSensorReading.Text = rrs.ToString("F") + " cm away";
         }
 
         private void BaseStationGUI_FormClosing(object sender, FormClosingEventArgs e)

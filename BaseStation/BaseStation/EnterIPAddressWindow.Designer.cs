@@ -32,6 +32,7 @@
             this.IPAddressTextbox = new System.Windows.Forms.TextBox();
             this.EnterButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
+            this.PrevIPBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -53,7 +54,7 @@
             // EnterButton
             // 
             this.EnterButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.EnterButton.Location = new System.Drawing.Point(67, 71);
+            this.EnterButton.Location = new System.Drawing.Point(56, 277);
             this.EnterButton.Name = "EnterButton";
             this.EnterButton.Size = new System.Drawing.Size(75, 23);
             this.EnterButton.TabIndex = 2;
@@ -63,24 +64,36 @@
             // CancelButton
             // 
             this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelButton.Location = new System.Drawing.Point(148, 71);
+            this.CancelButton.Location = new System.Drawing.Point(148, 277);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(75, 23);
             this.CancelButton.TabIndex = 3;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
             // 
+            // PrevIPBox
+            // 
+            this.PrevIPBox.FormattingEnabled = true;
+            this.PrevIPBox.Location = new System.Drawing.Point(56, 73);
+            this.PrevIPBox.Name = "PrevIPBox";
+            this.PrevIPBox.Size = new System.Drawing.Size(146, 21);
+            this.PrevIPBox.TabIndex = 4;
+            this.PrevIPBox.Text = "Previous Ip Address select";
+            this.PrevIPBox.SelectedValueChanged += new System.EventHandler(this.PrevIPBox_SelectedValueChanged);
+            // 
             // EnterIPAddressWindow
             // 
             this.AcceptButton = this.EnterButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.CancelButton;
-            this.ClientSize = new System.Drawing.Size(284, 107);
+            this.ClientSize = new System.Drawing.Size(284, 312);
+            this.Controls.Add(this.PrevIPBox);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.EnterButton);
             this.Controls.Add(this.IPAddressTextbox);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "EnterIPAddressWindow";
             this.Text = "Enter IP Address";
             this.ResumeLayout(false);
@@ -94,5 +107,6 @@
         private System.Windows.Forms.TextBox IPAddressTextbox;
         private System.Windows.Forms.Button EnterButton;
         private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.ComboBox PrevIPBox;
     }
 }
