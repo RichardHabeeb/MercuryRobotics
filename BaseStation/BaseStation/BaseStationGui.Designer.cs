@@ -70,9 +70,9 @@
             this.FrontRightSensor.AutoSize = true;
             this.FrontRightSensor.Location = new System.Drawing.Point(202, 366);
             this.FrontRightSensor.Name = "FrontRightSensor";
-            this.FrontRightSensor.Size = new System.Drawing.Size(87, 13);
+            this.FrontRightSensor.Size = new System.Drawing.Size(95, 13);
             this.FrontRightSensor.TabIndex = 1;
-            this.FrontRightSensor.Text = "front right Sensor";
+            this.FrontRightSensor.Text = "Front Right Sensor";
             // 
             // RearLeftSensor
             // 

@@ -60,6 +60,7 @@
             this.EnterButton.TabIndex = 2;
             this.EnterButton.Text = "Enter";
             this.EnterButton.UseVisualStyleBackColor = true;
+            this.EnterButton.Click += new System.EventHandler(this.EnterButton_Click);
             // 
             // CancelButton
             // 

@@ -18,7 +18,7 @@ namespace BaseStation
         public EnterIPAddressWindow()
         {
             InitializeComponent();
-            PopulatePrevIPS(sr);
+            PopulatePrevIPS();
         }
         public string GetIPAddress
         {
@@ -27,15 +27,33 @@ namespace BaseStation
                 return IPAddressTextbox.Text.ToString();
             }
         }
-        private void PopulatePrevIPS(StreamReader st)
+
+        private void PopulatePrevIPS()
         {
-            st = new StreamReader("Previous IPS.txt");
-            PrevIPBox.Items.Add(st.ReadLine());
+            sr = new StreamReader("Previous IPS.txt");
+            while (!sr.EndOfStream)
+            {
+                PrevIPBox.Items.Add(sr.ReadLine());
+            }
+
+            sr.Close();
         }
 
         private void PrevIPBox_SelectedValueChanged(object sender, EventArgs e)
         {
             IPAddressTextbox.Text = PrevIPBox.SelectedItem.ToString();
+        }
+
+
+        private void EnterButton_Click(object sender, EventArgs e)
+        {
+            sw = new StreamWriter("Previous IPS.txt");
+            foreach (String s in PrevIPBox.Items)
+            {
+                if (s != "") sw.WriteLine(s);
+            }
+            sw.WriteLine(IPAddressTextbox.Text);
+            sw.Close();
         }
     }
 }
