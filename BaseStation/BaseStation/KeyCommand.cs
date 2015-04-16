@@ -18,6 +18,12 @@ namespace BaseStation
         public bool lower = false;
         public bool led = false;
 
+        /// <summary>
+        /// Handles a change in the keyboard presses (new button pressed/released).
+        /// </summary>
+        /// <param name="key">Keyboard key to check.</param>
+        /// <param name="KeyPressed">Whether the key was pressed.</param>
+        /// <returns></returns>
         public bool HandleKeyPress(Keys key, bool KeyPressed)
         {
             bool commandChanged = false;

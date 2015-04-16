@@ -27,6 +27,10 @@ namespace BaseStation
 
         GamepadState xboxController;
 
+        /// <summary>
+        /// Initializes the BaseStation GUI.
+        /// Attempts to connect to the Python server.  If successful, the GUI opens up for use.
+        /// </summary>
         public BaseStationGUI()
         {
             InitializeComponent();
@@ -71,6 +75,11 @@ namespace BaseStation
             kcontroller = new MotorControl();
         }
 
+        /// <summary>
+        /// Handles updates to the GUI from the Xbox controller.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void xboxController_ControllerUpdate(object sender, EventArgs e)
         {
             xcontroller.Update(xboxController);
@@ -81,6 +90,11 @@ namespace BaseStation
         }
 
 
+        /// <summary>
+        /// Handles updates to the GUI from the Keyboard press down.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BaseStationGUI_KeyDown(object sender, KeyEventArgs e)
         {
             bool commandChanged = commands.HandleKeyPress(e.KeyCode, true);
@@ -89,6 +103,11 @@ namespace BaseStation
 
         }
 
+        /// <summary>
+        /// Handles updates to the GUI from the Keyboard releases.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BaseStationGUI_KeyUp(object sender, KeyEventArgs e)
         {
             commands.HandleKeyPress(e.KeyCode, false);
@@ -96,6 +115,11 @@ namespace BaseStation
             ProcessKeyBoardUpdate();
         }
 
+        /// <summary>
+        /// Updates the sensor data labels on the GUI with the most recent data.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SensorData_SensorDataUpdate(object sender, EventArgs e)
         {
             UpdateGui(sensorData.FrontLeftSensorData, sensorData.FrontRightSensorData,
@@ -103,6 +127,9 @@ namespace BaseStation
         }
 
 
+        /// <summary>
+        /// Processes a keyboard press update for the GUI.
+        /// </summary>
         private void ProcessKeyBoardUpdate()
         {
             kcontroller.Update(commands);
@@ -112,6 +139,10 @@ namespace BaseStation
             UpdateGui(kcontroller.LeftDriveThrottle, kcontroller.RightDriveThrottle, kcontroller.armAngle, kcontroller.irisAngle, kcontroller.Led_State);
         }
 
+        /// <summary>
+        /// Sends a Motor Control packet to the Python Server
+        /// </summary>
+        /// <param name="controller">Packet to send.</param>
         private void SendMotorControllerPacket(MotorControl controller)
         {
             byte[] dataBuffer = controller.ToArray();
@@ -119,6 +150,14 @@ namespace BaseStation
         }
 
         delegate void threadSafeGuiUpdate(double left, double right, double arm, double iris, byte led);
+        /// <summary>
+        /// Updates the GUI LED labels and VerticalProgressBars.
+        /// </summary>
+        /// <param name="left">Left motor reading.</param>
+        /// <param name="right">Right motor reading.</param>
+        /// <param name="arm">Armeture value.</param>
+        /// <param name="iris">Iris value.</param>
+        /// <param name="led">Led toggle.</param>
         private void UpdateGui(double left, double right, double arm, double iris, byte led)
         {
             if (rightMotorLabel.InvokeRequired)
@@ -138,6 +177,13 @@ namespace BaseStation
         }
 
         delegate void threadSafeSensorGuiUpdate(float fls, float frs,  float rls, float rrs);
+        /// <summary>
+        /// Updates the GUI sensor labels.
+        /// </summary>
+        /// <param name="fls">Front left sensor reading.</param>
+        /// <param name="frs">Front right sensor reading.</param>
+        /// <param name="rls">Rear left sensor reading.</param>
+        /// <param name="rrs">Rear right sensor reading.</param>
         private void UpdateGui(float fls, float frs, float rls, float rrs)
         {
             if (FrontLeftSensor.InvokeRequired)
@@ -152,6 +198,11 @@ namespace BaseStation
             RearRightSensorReading.Text = rrs.ToString("F") + " cm away";
         }
 
+        /// <summary>
+        /// When the GUI exits, the connection to the Python server is closed.+--7
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BaseStationGUI_FormClosing(object sender, FormClosingEventArgs e)
         {
             robotConnection.Close();

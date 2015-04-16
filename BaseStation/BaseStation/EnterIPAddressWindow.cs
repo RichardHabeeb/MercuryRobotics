@@ -15,11 +15,18 @@ namespace BaseStation
     {
         private StreamReader sr;
         private StreamWriter sw;
+
+        /// <summary>
+        /// Instantiates a new IPAddressWindow and populates the previously used IPs on startup.
+        /// </summary>
         public EnterIPAddressWindow()
         {
             InitializeComponent();
             PopulatePrevIPS();
         }
+        /// <summary>
+        /// Returns the IP address entered into the textbox.
+        /// </summary>
         public string GetIPAddress
         {
             get
@@ -28,23 +35,48 @@ namespace BaseStation
             }
         }
 
+        /// <summary>
+        /// Populates the combobox with the previously entered IPs.
+        /// </summary>
         private void PopulatePrevIPS()
         {
             sr = new StreamReader("Previous IPS.txt");
             while (!sr.EndOfStream)
-            {
-                PrevIPBox.Items.Add(sr.ReadLine());
+            { 
+                string str = sr.ReadLine();
+                bool check = false;
+                foreach(String s in PrevIPBox.Items)
+                {
+                    if(str == s)
+                    {
+                        check = true;
+                    }
+                }
+                if(!check)
+                {
+                    PrevIPBox.Items.Add(str);
+                }
+                
             }
 
             sr.Close();
         }
 
+        /// <summary>
+        /// When an IP is selected from the combobox, it places it into the textbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PrevIPBox_SelectedValueChanged(object sender, EventArgs e)
         {
             IPAddressTextbox.Text = PrevIPBox.SelectedItem.ToString();
         }
 
-
+        /// <summary>
+        /// When connecting to an IP, the entered IP is added to the file of previous IPs if it is not already in the list.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EnterButton_Click(object sender, EventArgs e)
         {
             sw = new StreamWriter("Previous IPS.txt");

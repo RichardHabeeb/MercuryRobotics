@@ -38,6 +38,10 @@ namespace BaseStation
         public float RearLeftSensorData { get; set; }
 
 
+        /// <summary>
+        /// Creates a new SensorData object associated with the robot's IP.
+        /// </summary>
+        /// <param name="robotip">IP address of the robot.</param>
         public SensorData(string robotip)
         {
             FrontLeftSensorData = 0;
@@ -53,17 +57,37 @@ namespace BaseStation
             theta = 90;
         }
 
+        /// <summary>
+        /// Takes the sensor data received from the Python server and averages the readings.
+        /// </summary>
+        /// <returns>True if the data was valid.</returns>
         public bool updateData()
         {
-                byte[] data = robotConnection.Receive(ref server);
-                if (data == null || data.Length == 0) return false;
-                FrontLeftSensorData = System.BitConverter.ToSingle(data, 0) * (float)Math.Sin(theta);
-                FrontRightSensorData = System.BitConverter.ToSingle(data, 4) * (float)Math.Sin(theta);
-                RearLeftSensorData = System.BitConverter.ToSingle(data, 8) * (float)Math.Sin(theta);
-                RearRightSensorData = System.BitConverter.ToSingle(data, 12) * (float)Math.Sin(theta);
+                var startTime = DateTime.UtcNow;
+                float count = 0;
+                while (DateTime.UtcNow - startTime < TimeSpan.FromMilliseconds(250))
+                {
+                    count++;
+                    byte[] data = robotConnection.Receive(ref server);
+                    if (data == null || data.Length == 0) return false;
+                    FrontLeftSensorData += System.BitConverter.ToSingle(data, 0) * (float)Math.Sin(theta);
+                    FrontRightSensorData += System.BitConverter.ToSingle(data, 4) * (float)Math.Sin(theta);
+                    RearLeftSensorData += System.BitConverter.ToSingle(data, 8) * (float)Math.Sin(theta);
+                    RearRightSensorData += System.BitConverter.ToSingle(data, 12) * (float)Math.Sin(theta);
+                }
+
+                FrontLeftSensorData /= count;
+                FrontRightSensorData /= count;
+                RearLeftSensorData /= count;
+                RearRightSensorData /= count;
                 return true;
         }
 
+        /// <summary>
+        /// Invokes a new SensorDataThread.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SensorDataThread(object sender, DoWorkEventArgs e)
         {
             while (!worker.CancellationPending)

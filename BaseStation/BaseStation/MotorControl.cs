@@ -27,6 +27,9 @@ namespace BaseStation
         public byte Led_State { get; set; }  /* Holds a 0 or 1 for disable/enable LED */
         private bool isLedOn;               /* Holds true is leds are on false otherwise*/
 
+        /// <summary>
+        /// Creates a new MotorControl object, instantiating everything.
+        /// </summary>
         public MotorControl()
         {
             irisAngle = 0;
@@ -37,9 +40,13 @@ namespace BaseStation
             isLedOn = false;
         }
 
+        /// <summary>
+        /// Updates the status of the robot's parts with the new keyboard commands received.
+        /// </summary>
+        /// <param name="commands">Keyboard state.</param>
         public void Update(KeyCommand commands)
         {
-            irisAngle = commands.open ? 180.0f : 0.0f;
+            irisAngle = commands.open ? 0.0f : 180.0f;
             armAngle = commands.lower ? 180.0f : 0.0f;
             LeftDriveThrottle = 0.0f;
             RightDriveThrottle = 0.0f;
@@ -92,6 +99,10 @@ namespace BaseStation
             }
         }
 
+        /// <summary>
+        /// Updates the status of the robot's parts with the new Xbox controller commands received.
+        /// </summary>
+        /// <param name="xboxController">State of the Xbox controller.</param>
         public void Update(GamepadState xboxController)
         {
             LeftDriveThrottle = Math.Max(-1.0f, Math.Min(1.0f, (xboxController.LeftStick.Clicked ? 1.0f : 0.5f) *
@@ -110,6 +121,10 @@ namespace BaseStation
 
         }
 
+        /// <summary>
+        /// Converts the motor packet into a byte array to send to the Python server.
+        /// </summary>
+        /// <returns>Byte array of the motor packet.</returns>
         public byte[] ToArray()
         {
             MotorControlPacket packet = new MotorControlPacket()

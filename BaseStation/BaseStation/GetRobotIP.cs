@@ -15,6 +15,10 @@ namespace BaseStation
         UdpClient Server;
         byte[] ResponseData;
 
+        /// <summary>
+        /// Creates a new GetRobotIP object associated with the server.
+        /// </summary>
+        /// <param name="robotServer">Python server connected to the robot.</param>
         public GetRobotIP(UdpClient robotServer)
         {
            Server = robotServer;
@@ -31,6 +35,10 @@ namespace BaseStation
            ResponseData = Encoding.ASCII.GetBytes(localIP);
         }
         
+        /// <summary>
+        /// Obtains the IP address of the Python server.
+        /// </summary>
+        /// <returns>The Python server's IP.</returns>
         public string GetIP()
         {
             IPEndPoint SenderEp = new IPEndPoint(IPAddress.Broadcast, 4444);

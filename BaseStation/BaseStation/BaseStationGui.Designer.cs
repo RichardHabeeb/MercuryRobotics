@@ -174,18 +174,18 @@
             this.MaxDegreeIris.AutoSize = true;
             this.MaxDegreeIris.Location = new System.Drawing.Point(283, 47);
             this.MaxDegreeIris.Name = "MaxDegreeIris";
-            this.MaxDegreeIris.Size = new System.Drawing.Size(23, 13);
+            this.MaxDegreeIris.Size = new System.Drawing.Size(29, 13);
             this.MaxDegreeIris.TabIndex = 17;
-            this.MaxDegreeIris.Text = "90°";
+            this.MaxDegreeIris.Text = "360°";
             // 
             // NinetyDegreeIris
             // 
             this.NinetyDegreeIris.AutoSize = true;
             this.NinetyDegreeIris.Location = new System.Drawing.Point(283, 177);
             this.NinetyDegreeIris.Name = "NinetyDegreeIris";
-            this.NinetyDegreeIris.Size = new System.Drawing.Size(23, 13);
+            this.NinetyDegreeIris.Size = new System.Drawing.Size(29, 13);
             this.NinetyDegreeIris.TabIndex = 18;
-            this.NinetyDegreeIris.Text = "45°";
+            this.NinetyDegreeIris.Text = "180°";
             // 
             // ZeroDegreeIris
             // 
