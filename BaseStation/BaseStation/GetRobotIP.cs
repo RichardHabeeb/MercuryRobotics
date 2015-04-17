@@ -1,4 +1,15 @@
-﻿using System;
+﻿/*
+ * Kansas State University Robotics Team
+ * Mecury Robotics Competition
+ * 
+ * Base Station Get Robot IP class
+ * 
+ * This class searches for and finds baseStations IP then broadcasts the IP over the subnet for the robot to get, the waits for the robot to send its IP back and establish a handshake.
+ *  
+ * Author's: Richard Habeeb, Brandon Dunn, Daniel Marts, Daniel Wagner and Doug Anjard.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
