@@ -57,7 +57,6 @@ RobotControl::RobotControl()
 	front_right_sensor = new Sensor(IR_SENSOR_2_PIN);
 	rear_left_sensor = new Sensor(IR_SENSOR_3_PIN);
 	rear_right_sensor = new Sensor(IR_SENSOR_4_PIN);
-	sdata = new SensorData();
 
 	left = new StepperMotor
 		(
@@ -82,6 +81,9 @@ RobotControl::RobotControl()
 	
 	timer = MotorTimer::getInstance();
 	timer->setup(left, right);
+
+	sTimer = SensorTimer::getInstance();
+	sTimer->setup(rear_left_sensor, front_right_sensor, front_left_sensor, rear_right_sensor, comm);
 }
 
 /*-----------------------------------------------------------------------------------
@@ -118,7 +120,6 @@ void RobotControl::runRobot()
 
 	while (1)
 	{
-        
         comm->waitForNextPacket(packet);
         
         #ifdef DEBUG_SERIAL_OUT
@@ -133,12 +134,6 @@ void RobotControl::runRobot()
         #endif
         
         #ifdef ENABLE_ACTUATION
-	sdata->front_left_sensor = front_left_sensor->GetSensorData();
-	sdata->front_right_sensor = front_right_sensor->GetSensorData();
-	sdata->rear_left_sensor = rear_left_sensor->GetSensorData();
-	sdata->rear_right_sensor = rear_right_sensor->GetSensorData();
-	
-	comm->sendSensorDataPacket(sdata);
         
         led1->setState(packet.led_on);
         led2->setState(packet.led_on);

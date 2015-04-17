@@ -87,6 +87,8 @@ extern "C" void __cxa_pure_virtual() {;}
 #include <Sensor.h>
 #include <Sensor.ino>
 #include <SensorTesting.h>
+#include <SensorTimer.h>
+#include <SensorTimer.ino>
 #include <StepperMotor.cpp>
 #include <StepperMotor.h>
 #endif
