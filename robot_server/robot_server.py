@@ -13,6 +13,7 @@ import struct
 import base64
 import time
 import socket
+import os
 from discover_addr import handshake
 
 
@@ -26,7 +27,16 @@ baseStationListener.bind(('', 4444))
 baseStationSender = socket. socket( socket.AF_INET,  socket.SOCK_DGRAM)
 baseStationIP = ""
 quitThreads = False
-arduino = serial.Serial('/dev/ttyACM0', 115200)
+
+arduino = None
+for i in range(3):
+	path = '/dev/ttyACM{}'.format(i)
+	try:
+		arduino = serial.Serial('/dev/ttyACM0', 115200)
+		break
+	except:
+		pass
+assert not arduino is None, 'Could not connect to socket.'
 
 #-----------------------------------------------
 # Functions
@@ -36,7 +46,7 @@ def main():
 	while(True):
 		baseStationIP = baseStationListener.recv(16)
 		if(len(baseStationIP) > 0):
-			break	
+			break
 	print "Connected to ", baseStationIP, "\nStarting threads..."
 	#baseStationSender.sendto(socket.gethostbyname(socket.gethostname()), (baseStationIP, 4445))
 	thread.start_new_thread(wait_motor_packet, ())
@@ -44,8 +54,8 @@ def main():
 	print "Press enter to quit."
 	raw_input() or ""
 	quitThreads = True
-		
-	
+
+
 def wait_motor_packet():
 	while(not quitThreads):
 		data = baseStationListener.recv(struct.calcsize(motor_packet_string))
