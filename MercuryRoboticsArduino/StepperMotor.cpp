@@ -39,8 +39,10 @@ StepperMotor::StepperMotor
 	pin_t direction_pin,
 	pin_t microSelect1Pin,
 	pin_t microSelect2Pin,
-	pin_t microSelect3Pin
-
+	pin_t microSelect3Pin,
+	pin_t enableVar,
+	pin_t resetVar,
+	pin_t sleepVar
 	)
 {
 	this->stepPin = stepPin;
@@ -51,6 +53,13 @@ StepperMotor::StepperMotor
 	pinMode(microSelect1Pin, OUTPUT);
 	pinMode(microSelect2Pin, OUTPUT);
 	pinMode(microSelect3Pin, OUTPUT);
+	pinMode(enableVar, OUTPUT);
+	pinMode(resetVar, OUTPUT);
+	pinMode(sleepVar, OUTPUT);
+
+	digitalWrite(enableVar, LOW);
+	digitalWrite(resetVar, HIGH);
+	digitalWrite(sleepVar, HIGH);
 }
 
 /*-----------------------------------------------------------------------------------

@@ -66,7 +66,10 @@ public:  /* Methods */
 		pin_t directionPin,
 		pin_t microSelect1Pin,
 		pin_t microSelect2Pin,
-		pin_t microSelect3Pin
+		pin_t microSelect3Pin,
+		pin_t enableVar,
+		pin_t resetVar,
+		pin_t sleepVar
 		);
 	~StepperMotor(void);
 	void setTargetVelocity(float v);

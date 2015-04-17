@@ -29,6 +29,10 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="Sensor.ino" />
+    <None Include="Base64.ino" />
+    <None Include="SensorTimer.ino">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visual Micro\.MercuryRoboticsArduino.vsarduino.h">
@@ -68,6 +72,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Led.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Base64.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SensorTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
