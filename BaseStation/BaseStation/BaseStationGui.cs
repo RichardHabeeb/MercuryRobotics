@@ -22,6 +22,7 @@ using System.Threading;
 using System.Net.Sockets;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace BaseStation
 {
@@ -35,8 +36,8 @@ namespace BaseStation
         IPHostEntry host;
         string robotIP { get; set; }
         SensorData sensorData;
-
         GamepadState xboxController;
+        Process ffplay;
 
         /// <summary>
         /// Initializes the BaseStation GUI.
@@ -84,6 +85,11 @@ namespace BaseStation
             xboxController.ControllerUpdate += xboxController_ControllerUpdate;
             xcontroller = new MotorControl();
             kcontroller = new MotorControl();
+            ffplay = new Process();
+            ffplay.StartInfo.Arguments = "http://192.168.2.29:8090/live.mpg";
+            ffplay.StartInfo.FileName = "ffplay.exe";
+            ffplay.Start();
+            this.Activate();
         }
 
         /// <summary>

@@ -282,7 +282,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(321, 453);
+            this.ClientSize = new System.Drawing.Size(341, 453);
             this.Controls.Add(this.rightMotorLabel);
             this.Controls.Add(this.leftMotorLabel);
             this.Controls.Add(this.RightMotorNameLabel);
@@ -311,6 +311,7 @@
             this.Controls.Add(this.FrontLeftSensor);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "BaseStationGUI";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BaseStationGUI_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.BaseStationGUI_KeyUp);
