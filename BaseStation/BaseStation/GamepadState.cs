@@ -1,4 +1,15 @@
-﻿using System;
+﻿/*
+ * Kansas State University Robotics Team
+ * Mecury Robotics Competition
+ * 
+ * Base Station Game Pad State class
+ * 
+ * This class handles reading the state of the game pad plugged.
+ *  
+ * Author's: Richard Habeeb, Brandon Dunn, Daniel Marts, Daniel Wagner and Doug Anjard.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +28,10 @@ namespace BaseStation
 
         public EventHandler ControllerUpdate;
 
-
+        /// <summary>
+        /// Constructor for GamepadState
+        /// </summary>
+        /// <param name="userIndex"></param>
         public GamepadState(UserIndex userIndex)
         {
             UserIndex = userIndex;
@@ -53,6 +67,11 @@ namespace BaseStation
         public float RightTrigger { get; private set; }
         public float LeftTrigger { get; private set; }
 
+        /// <summary>
+        /// Background thread for updating the gui with the updated gamepad state.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void XboxWorkerThread(object sender, DoWorkEventArgs e)
         {
             while (!xboxWorker.CancellationPending)
@@ -74,6 +93,10 @@ namespace BaseStation
             }
         }
 
+
+        /// <summary>
+        /// Method for seeing it the controller is plugged in.
+        /// </summary>
         public bool Connected
         {
             get
@@ -88,6 +111,11 @@ namespace BaseStation
             }
         }
 
+        /// <summary>
+        /// Method for handling vibration controls on the gamepad.
+        /// </summary>
+        /// <param name="leftMotor"></param>
+        /// <param name="rightMotor"></param>
         public void Vibrate(float leftMotor, float rightMotor)
         {
             Controller.SetVibration(new Vibration
@@ -97,6 +125,10 @@ namespace BaseStation
             });
         }
 
+        /// <summary>
+        /// Method for checking the current state of the gamepad.
+        /// </summary>
+        /// <returns></returns>
         public bool CheckControlerState()
         {
             // If not connected, nothing to update
@@ -143,6 +175,7 @@ namespace BaseStation
             return true;
 
         }
+
 
         static Vector2 Normalize(short rawX, short rawY, short threshold)
         {

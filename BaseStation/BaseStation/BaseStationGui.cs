@@ -1,4 +1,15 @@
-﻿using System;
+﻿/*
+ * Kansas State University Robotics Team
+ * Mecury Robotics Competition
+ * 
+ * Base Station Base Station GUi form class
+ * 
+ * This class creates a the main GUI that the robot opertator will see while controlling the robot.
+ *  
+ * Author's: Richard Habeeb, Brandon Dunn, Daniel Marts, Daniel Wagner and Doug Anjard.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;

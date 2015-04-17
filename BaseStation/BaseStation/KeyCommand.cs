@@ -1,4 +1,15 @@
-﻿using System;
+﻿/*
+ * Kansas State University Robotics Team
+ * Mecury Robotics Competition
+ * 
+ * Base Station Key Command class
+ * 
+ * This class Handles reading keyboard input for processing.
+ *  
+ * Author's: Richard Habeeb, Brandon Dunn, Daniel Marts, Daniel Wagner and Doug Anjard.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

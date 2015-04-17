@@ -1,4 +1,15 @@
-﻿using System;
+﻿/*
+ * Kansas State University Robotics Team
+ * Mecury Robotics Competition
+ * 
+ * Base Station Motor Control class
+ * 
+ * This CLass handles the processing of recived keyboard keys or xbox contrller button presses and makes a motor contorl packet that wil be sent over the server to the robot.
+ *  
+ * Author's: Richard Habeeb, Brandon Dunn, Daniel Marts, Daniel Wagner and Doug Anjard.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;

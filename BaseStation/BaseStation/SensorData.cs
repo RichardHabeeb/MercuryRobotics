@@ -1,4 +1,15 @@
-﻿using System;
+﻿/*
+ * Kansas State University Robotics Team
+ * Mecury Robotics Competition
+ * 
+ * Base Station Sensor Data class
+ * 
+ * This class creates a background thread that handles the reciving of sensor data from the server and taking an average then updating the GUI with this average.
+ *  
+ * Author's: Richard Habeeb, Brandon Dunn, Daniel Marts, Daniel Wagner and Doug Anjard.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
